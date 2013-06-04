@@ -2,6 +2,7 @@
 
 namespace Dominio\IDaos;
 
+use Dominio\Clases\Nota;
 use Dominio\Clases\GrupoDeNotas;
 
 interface IDaoNota

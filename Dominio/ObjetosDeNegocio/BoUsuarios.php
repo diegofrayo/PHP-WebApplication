@@ -6,15 +6,15 @@
  * Usuario. Va a servir para hacer el login, registro, y busqueda
  */
 
+namespace Dominio\ObjetosDeNegocio;
+
+require_once '/../Daos/DaoUsuario.php';
+require_once '/../Excepciones/BusinessLogicException.php';
+
 use Dominio\Excepciones\BusinessLogicException;
-use Dominio\Daos\DaoGrupoDeNotas;
-use Dominio\Daos\DaoUsuario;
-use Dominio\Daos\DaoNota;
-use Dominio\Daos\DaoAsignatura;
-use Dominio\Clases\GrupoDeNotas;
 use Dominio\Clases\Usuario;
-use Dominio\Clases\Asignatura;
-use Dominio\Clases\Nota;
+use Dominio\Daos\DaoUsuario;
+
 
 class BoUsuarios
 {
@@ -34,7 +34,7 @@ class BoUsuarios
 	public function registrarUsuario(Usuario $usuario)
 	{
 		if($this->obtenerUsuarioPorEmail($usuario->getEmail()) == null){
-			if($this->comprarDisponibilidadNick($usuario->getNick()) == false){
+			if($this->comprarDisponibilidadNick($usuario->getNick()) == true){
 				return $this->_usuarioDao->crear($usuario);
 			}
 			throw new BusinessLogicException("El nick no esta disponible");
@@ -85,7 +85,7 @@ class BoUsuarios
 	{
 		return $this->_usuarioDao->comprarDisponibilidadNick($nick);
 	}
-	
+
 	/**
 	 * Metodo para buscar usuarios por nombre
 	 * @param unknown_type $nombre
@@ -93,5 +93,19 @@ class BoUsuarios
 	public function buscarUsuariosPorNombre($nombre)
 	{
 		return $this->_usuarioDao->buscarUsuariosPorNombre($nombre);
+	}
+
+	public function iniciarSesionUsuario($email, $password)
+	{
+		$usuarioBD = $this->obtenerUsuarioPorEmail($email);
+
+		if($usuarioBD !=null){
+			if($usuarioBD->getPassword() == $password){
+				return $usuarioBD;
+			}
+			throw new BusinessLogicException("El password ingresado es incorrecto");
+		}
+		throw new BusinessLogicException("El email ingresado no existe");
+
 	}
 }

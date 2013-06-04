@@ -20,9 +20,10 @@ class DaoUsuario implements IDaoUsuario
 	public function crear(Usuario $usuario)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "insert into usuario (email, nick, password, foto)
-				" . " values (?,?,?,?)";
-		$arrayDatos = array($usuario -> getEmail(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto());
+		$consultaSQL = "insert into usuario (email, nombre, nick, password, foto)
+				" . " values (?,?,?,?,?)";
+		$arrayDatos = array($usuario -> getEmail(), $usuario->getNombre(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto());
+		var_dump($arrayDatos);
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -35,8 +36,8 @@ class DaoUsuario implements IDaoUsuario
 	public function editar(Usuario $usuario)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update usuario set nick=?, password=?, foto=? where email = ?" ;
-		$arrayDatos = array($usuario -> getEmail(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto());
+		$consultaSQL = "update usuario set nick=?, password=?, foto=?, nombre=? where email = ?" ;
+		$arrayDatos = array($usuario -> getEmail(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto(), $usuario->getNombre());
 
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos);
 
@@ -51,7 +52,7 @@ class DaoUsuario implements IDaoUsuario
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
 		$consultaSQL = "select * from usuario where email = ?";
-		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($id));
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($email));
 
 		if(count($resultados)==1){
 			$nuevoUsuario = $resultados[0];
@@ -83,7 +84,7 @@ class DaoUsuario implements IDaoUsuario
 		return null;
 	}
 
-	public function recuperarContrasenia(Usuario $usuario)
+	public function recuperarPassword(Usuario $usuario)
 	{
 
 	}

@@ -1,0 +1,75 @@
+<div class="span6">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="moduloApp" id="divListaPeriodos">
+				<div class="divTituloModulo">
+					<h1>
+						<a data-toggle="collapse" href="#collapse1" class="linkCollapse">Mis
+							periodos <i class="icon-chevron-down"></i>
+						</a>
+					</h1>
+				</div>
+				<div class="divContenidoModulo" id="collapse1">
+					<!--{Lista De Periodos}-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="divFormularios moduloApp" id="divCrearPeriodo">
+				<form id="formCrearPeriodo" enctype="multipart/form-data" method="post"
+					action="modules/Home/ControladorHome.php">
+
+					<div class="divTituloModulo">
+						<h1>
+							<a data-toggle="collapse" href="#collapse2" class="linkCollapse">Crear
+								periodo <i class="icon-chevron-down"></i>
+							</a>
+						</h1>
+						<p></p>
+					</div>
+					<div class="divInputsFormularios" id="collapse2">
+						<label>Nombre</label>
+						<div>
+							<input name="nombre" type="text" maxlength="15" required />
+						</div>
+						<label>Fecha de inicio </label>
+						<div>
+							<input type="text" class="inputCalendars" name="fechaInicio"
+								required />
+						</div>
+						<label>Fecha de finalizacion </label>
+						<div>
+							<input type="text" class="inputCalendars" name="fechaFinal"
+								required />
+						</div>
+						<label>Descripci&oacute;n </label>
+						<div>
+							<textarea maxlength="30" name="descripcion"></textarea>
+						</div>
+						<input class="btn btn-primary" type="submit" name="action"
+							value="Crear Periodo" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="moduloApp" id="divEstadisticas">
+				<!--{Estadisticas}-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="span6">
+	<div class="row-fluid">
+		<div class="span12">
+			<div id="divFeed" class="moduloApp">
+				<!--{Feed de noticias}-->
+			</div>
+		</div>
+	</div>
+</div>

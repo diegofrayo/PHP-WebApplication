@@ -12,8 +12,8 @@ class NullException extends \Exception
 	
 	public function __construct($objetoEsperado)
 	{
-		$this->_mensaje = "<b>".$this->obtenerClase($this)."</b><br />El objeto ingresado no es valido (null).<br />Se esperaba un objeto de tipo: "
-				.$this->obtenerClase($objetoEsperado) ;
+		$this->_mensaje = "<div class='divTextoMensajes'><b>".$this->obtenerClase($this)."</b><br />El objeto ingresado no es valido (null).<br />Se esperaba un objeto de tipo: "
+				.$this->obtenerClase($objetoEsperado)."</div>" ;
 	}
 
 	public function __toString()

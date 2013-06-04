@@ -22,7 +22,7 @@ class GrupoDeNotas
 	 */
 	private $_esGrupoDefecto;
 
-	public function __construct($id, $nombre, $porcentajesIguales,$_esGrupoDefecto)
+	public function __construct($id, $nombre, $porcentajesIguales, $esGrupoDefecto)
 	{
 		$this->_id = $id;
 		$this->_nombre= $nombre;

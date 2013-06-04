@@ -2,6 +2,9 @@
 
 namespace Dominio\IDaos;
 
+use Dominio\Clases\Noticia;
+use Dominio\Clases\Usuario;
+
 interface IDaoNoticia
 {
 	public function crear(Noticia $noticia);

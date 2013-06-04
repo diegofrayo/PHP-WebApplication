@@ -22,7 +22,7 @@ class DaoAsignatura implements IDaoAsignatura
 		$manejadorBD = BDFactory::crearManejadorBD();
 		$consultaSQL = "insert into asignatura (id, nombre, numero_de_notas, periodo, nota_final)
 				" . " values (?,?,?,?,?)";
-		$arrayDatos = array($asignatura -> getId(),$asignatura -> getNombre(), $asignatura -> getNumeroDeNotas(), $asignatura->getPeriodo()->getId(), $asignatura -> getNotaFinal());
+		$arrayDatos = array(0,$asignatura -> getNombre(), $asignatura -> getNumeroDeNotas(), $asignatura->getPeriodo()->getId(), 0);
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -72,14 +72,14 @@ class DaoAsignatura implements IDaoAsignatura
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevaAsignatura = $resultados[$i];
 				$asignaturaLeida = new Asignatura($nuevaAsignatura['id'],$nuevaAsignatura['nombre'],
-						$nuevaAsignatura['numero_de_notas'], $nuevaAsignatura['nota_final']);
+						$nuevaAsignatura['numero_de_notas']);
+				$asignaturaLeida->setNotaFinal($nuevaAsignatura['nota_final']);
 				$asignaturaLeida->setPeriodo($periodo);
 				$listaAsignatura[] = $asignaturaLeida;
 			}
-			return $listaAsignatura;
-		}
 
-		return null;
+		}
+		return $listaAsignatura;
 	}
 
 	public function obtenerAsignaturaPorId($id)
@@ -91,7 +91,7 @@ class DaoAsignatura implements IDaoAsignatura
 		if(count($resultados)==1){
 			$nuevaAsignatura = $resultados[0];
 			return new Asignatura($nuevaAsignatura['id'],$nuevaAsignatura['nombre'],
-					$nuevaAsignatura['numero_de_notas'],$nuevaAsignatura['nota_final']);
+					$nuevaAsignatura['numero_de_notas']);
 		}
 
 		return null;

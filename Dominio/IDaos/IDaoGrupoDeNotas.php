@@ -2,6 +2,8 @@
 
 namespace Dominio\IDaos;
 
+use Dominio\Clases\GrupoDeNotas;
+
 use Dominio\Clases\Asignatura;
 
 interface IDaoGrupoDeNotas

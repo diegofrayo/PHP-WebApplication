@@ -2,6 +2,7 @@
 
 namespace Dominio\IDaos;
 
+use Dominio\Clases\Comentario;
 use Dominio\Clases\Noticia;
 
 interface IDaoComentario

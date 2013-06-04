@@ -2,6 +2,7 @@
 
 namespace Dominio\Daos;
 
+use Dominio\Clases\Usuario;
 use Dominio\Excepciones\DBTransactionException;
 use Dominio\Clases\Periodo;
 use Dominio\BaseDeDatos\BDFactory;
@@ -19,11 +20,12 @@ class DaoPeriodo implements IDaoPeriodo
 	public function crear(Periodo $periodo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "insert into periodo (id, fecha_inicio, fecha_final, descripcion, usuario)
-				" . " values (?,?,?,?,?)";
-		$arrayDatos = array($periodo -> getId(),$periodo -> getFechaInicio(), 
-							$periodo -> getFechaFinal(), $periodo->getDescripcion(), 
-							$periodo -> getUsuario()->getEmail());
+		$consultaSQL = "insert into periodo (id, fecha_inicio, fecha_final, descripcion, usuario, nombre)"
+				. " values (?,?,?,?,?,?)";
+
+		$arrayDatos = array(0, date('Y-m-d', strtotime($periodo -> getFechaInicio())),
+				date('Y-m-d', strtotime($periodo -> getFechaFinal())), $periodo->getDescripcion(),
+				$periodo -> getUsuario()->getEmail(), $periodo->getNombre());
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -50,10 +52,10 @@ class DaoPeriodo implements IDaoPeriodo
 	public function editar(Periodo $periodo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update periodo set fecha_inicio=?, fecha_final=?, descripcion=? where id = ?" ;
-		$arrayDatos = array($periodo -> getFechaInicio(), 
-							$periodo -> getFechaFinal(), 
-							$periodo->getDescripcion(),$periodo -> getId());
+		$consultaSQL = "update periodo set fecha_inicio=?, fecha_final=?, descripcion=?, nombre=? where id = ?" ;
+		$arrayDatos = array($periodo -> getFechaInicio(),
+				$periodo -> getFechaFinal(),  $periodo->getNombre(),
+				$periodo->getDescripcion(),$periodo -> getId());
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos );
 
 		if ($exitoConsulta ==true){
@@ -62,7 +64,7 @@ class DaoPeriodo implements IDaoPeriodo
 
 		throw new DBTransactionException();
 	}
-		
+
 	public function obtenerPeriodoPorId($id)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
@@ -72,7 +74,7 @@ class DaoPeriodo implements IDaoPeriodo
 		if(count($resultados)==1){
 			$nuevoPeriodo = $resultados[0];
 			return new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion']);
+					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion'],$nuevoPeriodo['nombre']);
 		}
 
 		return null;
@@ -90,13 +92,25 @@ class DaoPeriodo implements IDaoPeriodo
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevoPeriodo = $resultados[$i];
 				$periodoLeido = new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion']);
+						$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion'],$nuevoPeriodo['nombre']);
 				$periodoLeido->setUsuario($usuario);
-				$listaPeriodos[] = $notificacionLeido;
+				$listaPeriodos[] = $periodoLeido;
 			}
-			return $listaPeriodos;
 		}
-		return null;
+		return $listaPeriodos;
+	}
+
+	public function comprobarSiUnPeriodoPerteneceAUnUsuario($idPeriodo, $email)
+	{
+		$manejadorBD = BDFactory::crearManejadorBD();
+		$consultaSQL = "select * from periodo where usuario = ? and id = ?";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($email, $idPeriodo));
+
+		if(count($resultados)==1){
+			return  true;
+		}
+
+		return false;
 	}
 
 }

@@ -1,0 +1,318 @@
+/*Variables y mixins*/
+/*1*/
+/*5*/
+/*4*/
+/*2*/
+/*3*/
+/*Negro*/
+/*-----------------------*/
+
+/*----------Maquetacion-------------*/
+
+/*Contenedor Principal (Tabla)*/
+
+#contenedorGlobal {
+  width: 90%;
+  margin: 15px auto;
+  display: table;
+  border-radius: 10px;
+}
+/*Div lateral con argollas (Celda)*/
+
+#divArgollas {
+  background-image: url('../img/argolla.png');
+  background-repeat: repeat-y;
+  background-size: 100% ;
+  display: table-cell;
+  width: 3%;
+  border-right: 3px solid #2d4051;
+}
+/*Div lateral con toda la interfaz (Celda)*/
+
+#contenedorCuaderno {
+  display: table-cell;
+  width: 90%;
+  overflow: hidden;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-top: 0;
+}
+#header {
+  height: 150px;
+  background-color: #1c2f40;
+  /*Centrado vertical*/
+
+}
+#header .row-fluid {
+  margin-top: 4%;
+  text-align: center;
+}
+/*Contiene la info generado por PHP*/
+
+#contenedorInformacion {
+  border-right: 1px solid #d9d1ba;
+  border-bottom: 1px solid #d9d1ba;
+  background-color: #fffae9;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#nav-excepciones-buttons {
+  border-top: 1px solid #d9d1ba;
+  border-right: 1px solid #d9d1ba;
+  border-bottom: 1px solid #d9d1ba;
+  background-color: #fffae9;
+}
+#divNavMensajes {
+  border-left: 1px solid #e1d8c7;
+}
+#footer {
+  height: 50px;
+  background-color: #1c2f40;
+}
+/*-----------------------*/
+
+/*----------Sprites-------------*/
+
+.sprite,
+#botonSalir {
+  background: url('../img/sprite.png');
+  display: block;
+}
+#botonSalir {
+  background-position: -486px -12px;
+  width: 43px;
+  height: 69px;
+  border: none;
+}
+#button-home {
+  background-position: -296px -10px;
+  width: 46px;
+  height: 70px;
+}
+#button-alertas {
+  background-position: -422px -10px;
+  width: 54px;
+  height: 71px;
+}
+#button-perfil {
+  background-position: -356px -8px;
+  width: 49px;
+  height: 72px;
+}
+#logo-header {
+  background-position: 1px 0;
+  width: 246px;
+  height: 71px;
+}
+#button-left {
+  background-position: -12px -98px;
+  width: 23px;
+  height: 32px;
+}
+#button-right {
+  background-position: -44px -98px;
+  width: 22px;
+  height: 32px;
+}
+/*-----------------------*/
+
+/*----------Estilos de textos-------------*/
+
+body {
+  margin: 0;
+  font-size: 1em;
+  line-height: 20px;
+  color: black;
+  font-weight: bold;
+  font-family: 'Coda', sans-serif;
+  background-image: url('../img/bg.png');
+}
+p {
+  margin: 5px;
+}
+a {
+  color: #5e7284;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #3c5062;
+}
+h1,
+h2 {
+  color: #0b1e2f;
+  font-size: 2em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 5px;
+  line-height: 100%;
+}
+h1 a,
+h2 a {
+  color: #0b1e2f;
+}
+h2 {
+  font-size: 1.5em;
+}
+ul {
+  list-style-image: url('../img/list-type.png');
+}
+ul li {
+  margin: 5px;
+}
+/*-----------------------*/
+
+/*----------Estilos formularios-------------*/
+
+.divFormularios .descripcionFormularios {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #d9d1ba;
+}
+.divFormularios .divInputsFormularios * {
+  margin: 5px;
+}
+.divFormularios .divInputsFormularios div {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.divFormularios .divInputsFormularios .error {
+  color: #b94a48;
+}
+/*-----------------------*/
+
+/*----------Estilos divs de la pagina-------------*/
+
+#divButtonsHeader span,
+#divNavButtonsPHP span {
+  display: inline-block;
+  margin: 5px;
+}
+#divButtonsHeader a,
+#divNavButtonsPHP a {
+  text-decoration: none;
+}
+.divTextoMensajesError {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  padding: 5px;
+  margin: 0;
+}
+.divTextoMensajesError b {
+  text-decoration: underline;
+  font-style: italic;
+}
+.divTextoMensajesExito {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  padding: 5px;
+  margin: 0;
+}
+.divTextoMensajesExito b {
+  text-decoration: underline;
+  font-style: italic;
+}
+#divNombreProfile {
+  background-color: #1c2f40;
+  border-top: 3px solid #2d4051;
+}
+#divNombreProfile a {
+  color: white;
+}
+#divNombreProfile div {
+  float: right;
+  margin-right: 5px;
+}
+/*Es un div, con informacion generada por php. Es una seccion con contenido*/
+
+.moduloApp {
+  border: 1px solid #d9d1ba;
+  border-radius: 5px;
+  width: 98%;
+  margin: 5px;
+}
+.moduloApp .divTituloModulo {
+  border-bottom: 1px solid #d9d1ba;
+  background-color: #f2e9d8;
+  padding: 5px;
+}
+.moduloApp .divTituloModulo h1 {
+  margin: 0;
+}
+.moduloApp .divTituloModulo i {
+  float: right;
+}
+.moduloApp .linkCollapse {
+  width: 100%;
+  display: block;
+}
+/*-----------------------*/
+
+/*----------Componentes y elementos particulares-------------*/
+
+.tablaInformacion {
+  width: 100%;
+}
+.tablaInformacion td:first-child {
+  color: #1c2f40;
+}
+.tablaInformacion td {
+  width: 50%;
+}
+.tablaInformacion tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.tablaInformacion tr:nth-child(odd) {
+  background-color: #eeeeee;
+}
+.objetosCentrados {
+  text-align: center;
+}
+/*-----------------------*/
+
+/*----------Media Queries-------------*/
+
+/*Pantallas pequeñas*/
+
+@media (max-width: 767px) {
+  body {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+  /*Contenedor Principal (Tabla)*/
+  
+  #contenedorGlobal {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+  /*Div lateral con argollas (Celda)*/
+  
+  #divArgollas {
+    display: none;
+  }
+  /*Div lateral con toda la interfaz (Celda)*/
+  
+  #contenedorCuaderno {
+    display: block;
+    width: 100%;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 0;
+  }
+  #header .row-fluid {
+    margin-top: 0;
+  }
+  #header #logo-header {
+    margin: 0 auto;
+    text-align: center;
+  }
+  h1,
+  h2 {
+    font-size: 1.2em;
+    line-height: 100%;
+  }
+}
+/*-----------------------*/
+

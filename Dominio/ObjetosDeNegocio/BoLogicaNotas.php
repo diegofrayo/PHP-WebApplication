@@ -1,7 +1,8 @@
 <?php
 
-use Dominio\Clases\Usuario;
+namespace Dominio\ObjetosDeNegocio;
 
+use Dominio\Clases\Usuario;
 use Dominio\Excepciones\BusinessLogicException;
 use Dominio\Daos\DaoGrupoDeNotas;
 use Dominio\Daos\DaoPeriodo;
@@ -11,6 +12,16 @@ use Dominio\Clases\GrupoDeNotas;
 use Dominio\Clases\Periodo;
 use Dominio\Clases\Asignatura;
 use Dominio\Clases\Nota;
+
+require_once '/../Daos/DaoPeriodo.php';
+require_once '/../Daos/DaoAsignatura.php';
+require_once '/../Daos/DaoNota.php';
+require_once '/../Daos/DaoGrupoDeNotas.php';
+require_once '/../Clases/Periodo.php';
+require_once '/../Clases/Asignatura.php';
+require_once '/../Clases/Nota.php';
+require_once '/../Clases/GrupoDeNotas.php';
+require_once '/../Excepciones/BusinessLogicException.php';
 
 /**
  * Esta clase es un objeto de negocio.
@@ -114,7 +125,7 @@ class BoLogicaNotas
 	public function obtenerListaDeAsignaturasDeUnPeriodo(Periodo $periodo)
 	{
 		if($this->obtenerPeriodoPorId($periodo->getId())!=null ){
-			return $this->_grupoDeNotasDao->obtenerListaDeAsignaturasDeUnPeriodo($periodo);
+			return $this->_asignaturaDao->obtenerListaDeAsignaturasDeUnPeriodo($periodo);
 		}
 		throw new BusinessLogicException("El periodo no existe");
 	}
@@ -232,9 +243,18 @@ class BoLogicaNotas
 	 * @param unknown_type $id
 	 * @return Ambigous <NULL, \Dominio\Clases\Periodo>
 	 */
-	private function obtenerPeriodoPorId($id)
+	public function obtenerPeriodoPorId($id)
 	{
 		return $this->_periodoDao->obtenerPeriodoPorId($id);
+	}
+
+	/**
+	 * Metodo para comprobar si un usuario es dueño de un periodo
+	 * @param unknown_type $email
+	 * @return boolean
+	 */
+	public function comprobarSiUnPeriodoPerteneceAUnUsuario($idPeriodo, $email){
+		return $this->_periodoDao->comprobarSiUnPeriodoPerteneceAUnUsuario($idPeriodo,$email);
 	}
 
 	/**
@@ -248,13 +268,17 @@ class BoLogicaNotas
 		if($this->obtenerPeriodoPorId($periodo->getId()) != null){
 			$listaAsignaturas = $this->obtenerListaDeAsignaturasDeUnPeriodo($periodo);
 			$promedioFinal = 0;
-			foreach ($listaAsignaturas as $asignatura){
-				$promedioFinal = $promedioFinal +  $this->calcularNotaFinalDeUnaAsignatura($asignatura);
+			$numeroAsignaturas = count($listaAsignaturas);
+			if($numeroAsignaturas>0){
+				foreach ($listaAsignaturas as $asignatura){
+					//$promedioFinal = $promedioFinal +  $this->calcularNotaFinalDeUnaAsignatura($asignatura);
+					$promedioFinal = $promedioFinal +  $asignatura->getNotaFinal();
+				}
+				$promedioFinal = $promedioFinal / $numeroAsignaturas;
 			}
-			$promedioFinal = $promedioFinal / count($listaAsignaturas);
 			return $promedioFinal;
 		}
-		throw new BusinessLogicException("El periodo que quiere borrar no existe");
+		throw new BusinessLogicException("El periodo no existe");
 	}
 
 	/**
@@ -320,7 +344,7 @@ class BoLogicaNotas
 	 * @param unknown_type $id
 	 * @return Ambigous <NULL, \Dominio\Clases\GrupoDeNotas>
 	 */
-	private function obtenerGrupoDeNotasPorId($id)
+	public function obtenerGrupoDeNotasPorId($id)
 	{
 		return $this->_grupoDeNotasDao->obtenerGrupoPorId($id);
 	}
@@ -351,16 +375,17 @@ class BoLogicaNotas
 		if($this->obtenerGrupoDeNotasPorId($grupoDeNotas->getId()) != null ){
 			$listaNotas = $this->obtenerListaDeNotasDeUnGrupo($grupoDeNotas);
 			$notaFinal  = 0;
-			if($grupoDeNotas->getPorcentajesIguales() == true){
-				foreach ($listaNotas as $nota){
-					$notaFinal = $notaFinal +  $nota->getValor();
+			if(count($listaNotas)>0){
+				if($grupoDeNotas->getPorcentajesIguales() == true){
+					foreach ($listaNotas as $nota){
+						$notaFinal = $notaFinal +  $nota->getValor();
+					}
+				}else{
+					foreach ($listaNotas as $nota){
+						$notaFinal = $notaFinal +  (($nota->getValor() /100) * $nota->getPorcentaje() );
+					}
 				}
 				$notaFinal = $notaFinal / count($listaNotas);
-			}else{
-				foreach ($listaNotas as $nota){
-					$notaFinal = $notaFinal +  (($nota->getValor() /100) * $nota->getPorcentaje() );
-				}
-				$notaFinal = $notaFinal;
 			}
 			return $notaFinal;
 		}

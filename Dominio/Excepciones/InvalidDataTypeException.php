@@ -16,8 +16,8 @@ class ObjectNotFoundException extends \Exception
 
 	public function __construct()
 	{
-		$this->_mensaje = "<b>".$this->obtenerClase($this).
-		"</b><br />El tipo de dato ingresado no es valido";
+		$this->_mensaje = "<div class='divTextoMensajes'><b>".$this->obtenerClase($this).
+		"</b><br />El tipo de dato ingresado no es valido</div>";
 	}
 
 	public function __toString()

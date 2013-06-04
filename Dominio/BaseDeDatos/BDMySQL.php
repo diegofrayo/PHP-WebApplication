@@ -8,7 +8,7 @@ require_once 'IBaseDeDatos.php';
 class BDMySQL implements IBaseDeDatos {
 
 	const USUARIO = 'root';
-	const CLAVE = '';
+	const CLAVE = '12345';
 	const BD = 'project_php';
 	const SERVIDOR = 'localhost';
 

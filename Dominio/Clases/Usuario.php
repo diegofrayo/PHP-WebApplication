@@ -56,5 +56,12 @@ class Usuario
 		 $this -> _foto = $foto;
 	}
 	
+	public function setPassword($password) {
+		$this -> _password = $password;
+	}
+	
+	public function __toString(){
+		return $this->getEmail();
+	}
 
 }

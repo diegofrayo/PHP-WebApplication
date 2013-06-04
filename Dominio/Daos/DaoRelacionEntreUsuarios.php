@@ -2,6 +2,8 @@
 
 namespace Dominio\Daos;
 
+use Dominio\Clases\Usuario;
+
 use Dominio\Excepciones\DBTransactionException;
 use Dominio\Clases\RelacionEntreUsuarios;
 use Dominio\BaseDeDatos\BDFactory;

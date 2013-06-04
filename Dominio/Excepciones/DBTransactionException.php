@@ -13,8 +13,8 @@ class DBTransactionException extends \Exception
 
 	public function __construct()
 	{
-		$this->_mensaje = "<b>".$this->obtenerClase($this).
-		"</b><br />La transaccion solicitada ha fallado, revise los parametros ingresados";
+		$this->_mensaje = "<div class='divTextoMensajesError'><b>".$this->obtenerClase($this).
+		"</b><br />La transaccion solicitada ha fallado, revise los parametros ingresados</div>";
 	}
 
 	public function __toString()

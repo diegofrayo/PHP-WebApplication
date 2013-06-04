@@ -2,6 +2,9 @@
 
 namespace Dominio\IDaos;
 
+use Dominio\Clases\Usuario;
+use Dominio\Clases\RelacionEntreUsuarios;
+
 interface IDaoRelacionEntreUsuarios
 {
 	public function crear(RelacionEntreUsuarios $relacion);

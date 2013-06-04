@@ -26,13 +26,12 @@ class Asignatura
 	private $_notaFinal;
 
 
-	public function __construct($id, $nombre, $numeroDeNotas, $notaFinal)
+	public function __construct($id, $nombre, $numeroDeNotas)
 	{
 
 		$this -> _id = $id;
 		$this -> _nombre = $nombre;
 		$this -> _numeroDeNotas = $numeroDeNotas;
-		$this -> _notaFinal = $notaFinal;
 
 	}
 
@@ -69,6 +68,11 @@ class Asignatura
 	public function getNotaFinal()
 	{
 		return $this -> _notaFinal;
+	}
+
+	public function setNotaFinal($notaFinal)
+	{
+		$this -> _notaFinal = $notaFinal;
 	}
 
 	public function __toString()

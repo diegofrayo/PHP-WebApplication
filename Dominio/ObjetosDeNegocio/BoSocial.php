@@ -1,6 +1,6 @@
 <?php
 
-use Dominio\Daos\DaoNoticia;
+namespace Dominio\ObjetosDeNegocio;
 
 /**
  * Esta clase es un objeto de negocio.
@@ -8,15 +8,24 @@ use Dominio\Daos\DaoNoticia;
  * Notificaciones, RelacionesEntreUsuario, Comentarios, noticias
  */
 
-
+use Dominio\Daos\DaoNoticia;
 use Dominio\Excepciones\BusinessLogicException;
 use Dominio\Daos\DaoRelacionEntreUsuarios;
 use Dominio\Daos\DaoComentario;
 use Dominio\Daos\DaoNotificacion;
-use Dominio\Clases\GrupoDeComentarios;
 use Dominio\Clases\RelacionEntreUsuarios;
 use Dominio\Clases\Notificacion;
 use Dominio\Clases\Comentario;
+
+require_once '/../Daos/DaoRelacionEntreUsuarios.php';
+require_once '/../Daos/DaoComentario.php';
+require_once '/../Daos/DaoNotificacion.php';
+require_once '/../Daos/DaoNoticia.php';
+require_once '/../Clases/Notificacion.php';
+require_once '/../Clases/Comentario.php';
+require_once '/../Clases/RelacionEntreUsuarios.php';
+require_once '/../Clases/Noticia.php';
+require_once '/../Excepciones/BusinessLogicException.php';
 
 class BoSocial
 {

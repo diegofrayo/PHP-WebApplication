@@ -3,7 +3,6 @@
 namespace Dominio\Daos;
 
 use Dominio\Clases\GrupoDeNotas;
-
 use Dominio\Excepciones\DBTransactionException;
 use Dominio\Clases\Nota;
 use Dominio\BaseDeDatos\BDFactory;

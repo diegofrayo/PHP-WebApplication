@@ -14,8 +14,8 @@ class BusinessLogicException extends \Exception
 
 	public function __construct($mensaje)
 	{
-		$this->_mensaje = "<b>".$this->obtenerClase($this).
-		"</b><br />".$mensaje;
+		$this->_mensaje = "<div class='divTextoMensajesError'><b>".$this->obtenerClase($this).
+		"</b><br />".$mensaje."</div>";
 	}
 
 	public function __toString()

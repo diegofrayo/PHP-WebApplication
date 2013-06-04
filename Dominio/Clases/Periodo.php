@@ -27,13 +27,16 @@ class Periodo
 	 * Atributo de tipo Usuario. Es el usuario propietario del periodo
 	 */
 	private $_usuario;
+	
+	private $_nombre;
 
-	public function __construct($id, $fechaInicio, $fechaFinal, $descripcion)
+	public function __construct($id, $fechaInicio, $fechaFinal, $descripcion, $nombre)
 	{
 		$this->_id = $id;
 		$this->_fechaInicio= $fechaInicio;
 		$this->_fechaFinal = $fechaFinal;
 		$this->_descripcion = $descripcion;
+		$this->_nombre = $nombre;
 	}
 
 	public function getId()
@@ -59,6 +62,10 @@ class Periodo
 	public function getUsuario()
 	{
 		return $this->_usuario;
+	}
+	public function getNombre()
+	{
+		return $this->_nombre;
 	}
 	public function setUsuario(Usuario $usuario)
 	{
