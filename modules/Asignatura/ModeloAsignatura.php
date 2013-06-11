@@ -2,6 +2,8 @@
 
 namespace modules\Asignatura;
 
+use Dominio\Clases\GrupoDeNotas;
+
 use Dominio\Clases\Nota;
 
 use Dominio\Clases\Asignatura;
@@ -27,16 +29,23 @@ class ModeloAsignatura
 	{
 		return $this->_boLogicaNotas->obtenerGrupoDeNotasPorId($id);
 	}
-	
+
 	public function crearNota(Nota $nota)
 	{
 		return $this->_boLogicaNotas->crearNota($nota);
 	}
-	
+
 	public function editarAsignatura(Asignatura $asignatura)
 	{
 		return $this->_boLogicaNotas->editarAsignatura($asignatura);
 	}
 
-
+	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura){
+		return $this->_boLogicaNotas->obtenerListaDeGruposDeUnaAsignatura($asignatura);
+	}
+	
+	public function obtenerListaDeNotasDeUnGrupo(GrupoDeNotas $grupo)
+	{
+		return $this->_boLogicaNotas->obtenerListaDeNotasDeUnGrupo($grupo);
+	}
 }

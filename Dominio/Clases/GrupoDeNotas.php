@@ -34,7 +34,7 @@ class GrupoDeNotas
 	{
 		return $this->_id;
 	}
-	public function setId($id) 
+	public function setId($id)
 	{
 		$this -> _id = $id;
 	}

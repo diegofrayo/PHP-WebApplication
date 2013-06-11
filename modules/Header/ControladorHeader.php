@@ -1,5 +1,7 @@
 <?php
 
+use Dominio\DTO\DTOModuloHeader;
+
 use modules\HelperModules;
 
 use modules\HelperModule;
@@ -9,11 +11,22 @@ use modules\Header\VistaHeader;
 use Dominio\Clases\Usuario;
 use modules\Header\ModeloHeader;
 
-require_once 'VistaHeader.php';
-require_once 'ModeloHeader.php';
-require_once '/../HelperModules.php';
-require_once '/../../Dominio/Excepciones/BusinessLogicException.php';
-require_once '/../../Dominio/Excepciones/DBTransactionException.php';
+// require_once 'VistaHeader.php';
+// require_once 'ModeloHeader.php';
+// require_once '/../HelperModules.php';
+// require_once '/../../Dominio/Excepciones/BusinessLogicException.php';
+// require_once '/../../Dominio/Excepciones/DBTransactionException.php';
+// require_once '/../../Dominio/DTO/DTOModuloHeader.php';
+
+require_once 'modules/Header/VistaHeader.php';
+require_once 'modules/Header/ModeloHeader.php';
+require_once 'modules/HelperModules.php';
+require_once 'Dominio/Excepciones/BusinessLogicException.php';
+require_once 'Dominio/Excepciones/DBTransactionException.php';
+require_once 'Dominio/DTO/DTOModuloHeader.php';
+
+//Como sería utilizando $_SERVER['DOCUMENT_ROOT']
+
 
 $modeloHeader = new ModeloHeader();
 $vistaHeader = new VistaHeader();
@@ -46,8 +59,9 @@ if(isset($_POST["action"])){
 	if($usuarioApp == "Visitante"){
 		$vistaHeader->imprimirHTML_UsuarioNoLogueado();
 	}else{
-		$datos = array (1=> $usuarioApp->getNick(), 2 => $modeloHeader->obtenerNotificacionesDelUsuario($usuarioApp)
-		);
-		$vistaHeader->imprimirHTML_UsuarioLogueado($datos);
+		$dtoHeader = new DTOModuloHeader();
+		$dtoHeader->setNickUsuario( $usuarioApp->getNick());
+		$dtoHeader->setListaNotificacionesUsuario($modeloHeader->obtenerNotificacionesDelUsuario($usuarioApp));
+		$vistaHeader->imprimirHTML_UsuarioLogueado($dtoHeader);
 	}
 }

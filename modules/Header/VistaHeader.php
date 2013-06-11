@@ -2,20 +2,18 @@
 
 namespace modules\Header;
 
+use Dominio\DTO\DTOModuloHeader;
+
 use modules\HelperModules;
 
 class VistaHeader
 {
 
-	/**
-	 * Datos es un array, con la informacion del usuario que se va a colocar en la plantilla
-	 * @param unknown_type $datos
-	 */
-	public function imprimirHTML_UsuarioLogueado($datos){
+	public function imprimirHTML_UsuarioLogueado(DTOModuloHeader $dtoHeader){
 		$html = HelperModules::leerPlantillaHTML("Header","Header_User_Logueado");
 
-		$linkUsuario = $this->crearLinkUsuario($datos[1]);
-		//$listaDeNoticias = $this->crearFeedDeNoticias($datos[2]);
+		$linkUsuario = $this->crearLinkUsuario($dtoHeader->getNickUsuario());
+		//$listaDeNoticias = $this->crearFeedDeNoticias($dtoHeader->getListaNotificacionesUsuario());
 
 		$html = str_replace("<!--{Link Usuario}-->", $linkUsuario, $html);
 
@@ -24,10 +22,6 @@ class VistaHeader
 
 	public function imprimirHTML_UsuarioNoLogueado(){
 		echo HelperModules::leerPlantillaHTML("Header","Header_User_No_Logueado");
-	}
-
-	public function leerPlantillaHTML($nombreFile){
-		return file_get_contents("html/".$nombreFile.".phtml", true);
 	}
 
 	private function crearLinkUsuario($nick){

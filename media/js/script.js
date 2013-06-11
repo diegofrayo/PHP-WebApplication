@@ -18,8 +18,7 @@ $(document).ready(function() {
 	});
 
 	// Inicio collapse
-	// $(".collapse").collapse();
-	// $(".collapseHidden").collapse('hide');
+	//$(".collapse").collapse();
 
 	// Validar formularios
 	$("#formRegistro").validate();
@@ -31,12 +30,14 @@ $(document).ready(function() {
 
 });
 
-// function ajax(idElemento, filePHP) {
-function ajax(filePHP, idElemento, nombreAccion) {
+// El parametro a veces se va a utilizar
+function ajax(filePHP, idElemento, nombreAccion, id) {
 
 	var parametros = {
 		action : nombreAccion,
-		ajax : "ajax"
+		ajax : "ajax",
+		id : id,
+
 	};
 
 	$.ajax({
@@ -54,14 +55,10 @@ function ajax(filePHP, idElemento, nombreAccion) {
 }
 
 function desplazarCarousel(indice) {
-
-	for ( var int = 0; int < indice; int++) {
-		setTimeout('moverCarousel()', 1000);
-		alert("probando");
-		$('.carousel').carousel('next');
-	}
+	$('.carousel').carousel(indice);
+	$('.carousel').carousel('pause');
 }
 
-function moverCarousel() {
-	$('.carousel').carousel('next');
+function modificarTituloApp(titulo) {
+	document.title = "@" + titulo + " - Qualify";
 }

@@ -30,30 +30,12 @@ if(isset($_POST["action"])){
 	$action = $_POST["action"];
 	session_start();
 	$usuarioApp = $_SESSION["usuario"];
-	$idPeriodoRequerido = $_SESSION["idPeriodo"];
-	$periodoRequerido = $modeloPeriodo->obtenerPeriodoPorId($idPeriodoRequerido);
 
 	//Si el evento, es ajax
 	if(isset($_POST["ajax"])){
 
 		switch ($action){
 
-			case 'Calcular Promedio':
-
-				try{
-					$promedio = $modeloAsignatura->calcularPromedioFinalDeUnAsignatura($asignaturaRequerida);
-					echo "El promedio del asignatura es de: ".$promedio;
-				}catch (BusinessLogicException $e1){
-
-					$_SESSION["mensajes"] = $e1->__toString();
-
-				}catch (DBTransactionException $e2){
-
-					$_SESSION["mensajes"] = $e2->__toString();
-
-				}
-
-				break;
 		}
 
 	}else{
@@ -68,7 +50,7 @@ if(isset($_POST["action"])){
 						$nuevaNota = new Nota(0, $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
 						$nuevaNota->setGrupo($grupo);
 						$modeloAsignatura->crearNota($nuevaNota);
-						$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha creado la nota con éxito");
+						$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha creado la nota con &eacute;xito");
 					}else{
 						$_SESSION["mensajes"] = HelperModules::crearMensajeError("El grupo de notas seleccionado no existe");
 					}
@@ -82,18 +64,18 @@ if(isset($_POST["action"])){
 					$_SESSION["mensajes"] = $e2->__toString();
 
 				}
-				HelperModules::redireccionar("periodo/".$idPeriodoRequerido);
+				header("Location: " . $_SERVER['HTTP_REFERER']);
 				break;
 
 			case 'Editar Asignatura':
 
 				try{
-					$asignaturaEditada= new Asignatura( $_POST['idAsignatura'], $_POST['nombre'],  $_POST['notas']);
-					$asignaturaEditada->setNotaFinal($notaFinal);
+					$asignaturaEditada= new Asignatura($_POST['idAsignatura'], $_POST['nombre'],  $_POST['notas']);
+					$asignaturaEditada->setNotaFinal(0);
 					$periodoAsignatura = $modeloPeriodo->obtenerPeriodoPorId($_POST['periodo']);
 					$asignaturaEditada->setPeriodo($periodoAsignatura);
 					$modeloAsignatura->editarAsignatura($asignaturaEditada);
-					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("La asignatura se ha editado con éxito");
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("La asignatura se ha editado con &eacute;xito");
 				}catch (BusinessLogicException $e1){
 
 					$_SESSION["mensajes"] = $e1->__toString();
@@ -103,7 +85,7 @@ if(isset($_POST["action"])){
 					$_SESSION["mensajes"] = $e2->__toString();
 
 				}
-				HelperModules::redireccionar("periodo/".$idPeriodoRequerido);
+				header("Location: " . $_SERVER['HTTP_REFERER']);
 				break;
 
 		}

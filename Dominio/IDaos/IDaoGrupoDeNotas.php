@@ -12,5 +12,6 @@ interface IDaoGrupoDeNotas
 	public function borrar(GrupoDeNotas $grupoDeNotas);
 	public function editar(GrupoDeNotas $grupoDeNotas);
 	public function obtenerGrupoDefectoDeUnaAsignatura(Asignatura $asignatura);
+	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura);
 	public function obtenerGrupoPorId($id);
 }

@@ -72,14 +72,14 @@ class DaoNota implements IDaoNota
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevaNota = $resultados[$i];
 				$notaLeida = new Nota($nuevaNota['id'],$nuevaNota['nombre'],
-						$nuevaNota['valor'], $nuevaNota['fecha']);
+						$nuevaNota['valor'],$nuevaNota['porcentaje'] ,$nuevaNota['fecha']);
 				$notaLeida->setGrupo($grupo);
 				$listaNotas[] = $notaLeida;
 			}
 			return $listaNotas;
 		}
 
-		return null;
+		return $listaNotas;
 	}
 
 	public function obtenerNotaPorId($id){
@@ -91,7 +91,7 @@ class DaoNota implements IDaoNota
 		if(count($resultados)==1){
 			$notaLeida = $resultados[0];
 			$notaLeida = new Nota($nuevaNota['id'],$nuevaNota['nombre'],
-					$nuevaNota['valor'], $nuevaNota['fecha']);
+					$nuevaNota['valor'], $nuevaNota['porcentaje'] ,$nuevaNota['fecha']);
 		}
 
 		return null;

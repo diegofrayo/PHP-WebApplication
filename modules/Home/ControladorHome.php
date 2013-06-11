@@ -1,5 +1,7 @@
 <?php
 
+use Dominio\DTO\DTOModuloHome;
+
 use Dominio\Excepciones\DBTransactionException;
 use Dominio\Clases\Periodo;
 use modules\HelperModules;
@@ -14,6 +16,7 @@ require_once '/../../Dominio/Clases/Usuario.php';
 require_once '/../../Dominio/Excepciones/BusinessLogicException.php';
 require_once '/../../Dominio/Excepciones/DBTransactionException.php';
 require_once '/../HelperModules.php';
+require_once '/../../Dominio/DTO/DTOModuloHome.php';
 
 $modeloHome = new ModeloHome();
 $vistaHome = new VistaHome();
@@ -33,7 +36,7 @@ if(isset($_POST["action"])){
 				$usuarioRegistrado = $modeloHome->registrarUsuario(new Usuario($_POST["email"],$_POST["nombre"], $_POST["nick"], $_POST["password"],"foto"));
 				$_SESSION["usuario"] = null;
 				$_SESSION["usuario"] = $usuarioRegistrado;
-				$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha registrador con éxito");
+				$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha registrador con &eacute;xito");
 			}catch (BusinessLogicException $e1){
 
 				$_SESSION["mensajes"] = $e1->__toString();
@@ -73,7 +76,7 @@ if(isset($_POST["action"])){
 				$periodoNuevo = new Periodo(0, $_POST['fechaInicio'], $_POST['fechaFinal'], $_POST['descripcion'], $_POST['nombre']);
 				$periodoNuevo->setUsuario($usuarioApp);
 				$usuarioLogueado = $modeloHome->crearPeriodo($periodoNuevo);
-				$_SESSION["mensajes"] = HelperModules::crearMensajeExito("El periodo ha sido creado con éxito");
+				$_SESSION["mensajes"] = HelperModules::crearMensajeExito("El periodo ha sido creado con &eacute;xito");
 			}catch (BusinessLogicException $e1){
 					
 				$_SESSION["mensajes"] = $e1->__toString();
@@ -94,8 +97,9 @@ if(isset($_POST["action"])){
 	if($usuarioApp == "Visitante"){
 		$vistaHome->imprimirHTML_UsuarioNoLogueado();
 	}else{
-		$datos = array (1 => $modeloHome->obtenerListaDePeriodosDeUnUsuario($usuarioApp),
-				2=> "Feed de noticias");
-		$vistaHome->imprimirHTML_UsuarioLogueado($datos);
+		$dtoHome = new DTOModuloHome();
+		//$dtoHome->setFeedNoticias($feedNoticias);
+		$dtoHome->setListaDePeriodosDeUnUsuario($modeloHome->obtenerListaDePeriodosDeUnUsuario($usuarioApp));
+		$vistaHome->imprimirHTML_UsuarioLogueado($dtoHome);
 	}
 }

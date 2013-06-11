@@ -2,6 +2,8 @@
 
 namespace modules\Home;
 
+use Dominio\DTO\DTOModuloHome;
+
 use modules\HelperModules;
 
 use Dominio\Clases\Periodo;
@@ -9,14 +11,10 @@ use Dominio\Clases\Periodo;
 class VistaHome
 {
 
-	/**
-	 * Datos es un array, con la informacion del usuario que se va a colocar en la plantilla
-	 * @param unknown_type $datos
-	 */
-	public function imprimirHTML_UsuarioLogueado($datos){
+	public function imprimirHTML_UsuarioLogueado(DTOModuloHome $dtoHome){
 		$html= HelperModules::leerPlantillaHTML("Home","Home_User_Logueado");
 
-		$listaDePeriodos = $this->crearListaDePeriodos($datos[1]);
+		$listaDePeriodos = $this->crearListaDePeriodos($dtoHome->getListaDePeriodosDeUnUsuario());
 		//$listaDeNoticias = $this->crearFeedDeNoticias($datos[2]);
 		$listaDeNoticias = "";
 
@@ -27,7 +25,7 @@ class VistaHome
 	}
 
 	public function imprimirHTML_UsuarioNoLogueado(){
-		echo $this->leerPlantillaHTML("Home_User_No_Logueado");
+		echo HelperModules::leerPlantillaHTML("Home","Home_User_No_Logueado");
 	}
 
 	private function crearListaDePeriodos($listaDePeriodos){
@@ -50,9 +48,4 @@ class VistaHome
 		$html+="</ul>";
 		return $html;
 	}
-
-	public function leerPlantillaHTML($nombreFile){
-		return file_get_contents("html/".$nombreFile.".phtml", true);
-	}
-
 }

@@ -9,8 +9,12 @@ class BDMySQL implements IBaseDeDatos {
 
 	const USUARIO = 'root';
 	const CLAVE = '12345';
-	const BD = 'project_php';
+	const BD = '675899';
 	const SERVIDOR = 'localhost';
+	// 	const USUARIO = '675899';
+	// 	const CLAVE = 'clmyis93';
+	// 	const BD = '675899';
+	// 	const SERVIDOR = 'localhost';
 
 	/**
 	 * Conexion a base de exitoConsulta

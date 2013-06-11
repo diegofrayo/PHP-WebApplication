@@ -1,5 +1,13 @@
 <?php
 
+use modules\Home\ModeloHome;
+
+use modules\Asignatura\ModeloAsignatura;
+
+use Dominio\DTO\DTOModuloAsignatura;
+
+use Dominio\DTO\DTOModuloPeriodo;
+
 use Dominio\Clases\Asignatura;
 
 use Dominio\Excepciones\DBTransactionException;
@@ -16,9 +24,15 @@ require_once '/../../Dominio/Clases/Usuario.php';
 require_once '/../../Dominio/Excepciones/BusinessLogicException.php';
 require_once '/../../Dominio/Excepciones/DBTransactionException.php';
 require_once '/../HelperModules.php';
+require_once '/../../Dominio/DTO/DTOModuloPeriodo.php';
+require_once '/../../Dominio/DTO/DTOModuloAsignatura.php';
+require_once '/../Asignatura/ModeloAsignatura.php';
+require_once '/../Home/ModeloHome.php';
 
 $modeloPeriodo = new ModeloPeriodo();
 $vistaPeriodo = new VistaPeriodo();
+$modeloAsignatura = new ModeloAsignatura();
+$modeloHome = new ModeloHome();
 //$usuarioApp = $_SESSION["usuario"];
 
 //Si se pulsó algun boton
@@ -27,7 +41,7 @@ if(isset($_POST["action"])){
 	$action = $_POST["action"];
 	session_start();
 	$usuarioApp = $_SESSION["usuario"];
-	$idPeriodoRequerido = $_SESSION["idPeriodo"];
+	$idPeriodoRequerido = $_POST["id"];
 	$periodoRequerido = $modeloPeriodo->obtenerPeriodoPorId($idPeriodoRequerido);
 
 	//Si el evento, es ajax
@@ -101,7 +115,7 @@ if(isset($_POST["action"])){
 
 	//Si no es un evento, entonces se imprime la informacion del modulo
 
-	$idPeriodoRequerido = $_SESSION["idPeriodo"];
+	$idPeriodoRequerido = $_GET["id"];
 	$periodoRequerido = $modeloPeriodo->obtenerPeriodoPorId($idPeriodoRequerido);
 
 	//Si el periodo existe
@@ -110,9 +124,34 @@ if(isset($_POST["action"])){
 		//Si el usuario actual es dueño del periodo
 		if($modeloPeriodo->comprobarSiUnPeriodoPerteneceAUnUsuario($idPeriodoRequerido, $usuarioApp->getEmail())){
 
-			$datos = array (1 => $periodoRequerido,
-					2=> $modeloPeriodo->obtenerListaDeAsignaturasDeUnPeriodo($periodoRequerido));
-			$vistaPeriodo->imprimirHTML_Periodo($datos);
+			//Datos DTO Periodo
+			$dtoPeriodo = new DTOModuloPeriodo();
+			$listaAsignaturasDeUnPeriodo = $modeloPeriodo->obtenerListaDeAsignaturasDeUnPeriodo($periodoRequerido);
+			$listaDePeriodosDeUnUsuario = $modeloHome->obtenerListaDePeriodosDeUnUsuario($usuarioApp);
+			$dtoPeriodo->setListaAsignaturasDeUnPeriodo($listaAsignaturasDeUnPeriodo);
+			$dtoPeriodo->setPeriodo($periodoRequerido);
+
+			//Datos Lista DTO Asignaturas
+			$listaDtoAsignaturas = array();
+			$indiceAsignaturas = 1;
+			foreach ($listaAsignaturasDeUnPeriodo as $asignatura){
+				$listaDeGrupos = $modeloAsignatura->obtenerListaDeGruposDeUnaAsignatura($asignatura);
+				$dtoAsignatura = new DTOModuloAsignatura();
+				$dtoAsignatura->setAsignatura($asignatura);
+				$dtoAsignatura->setListaDeGrupos($listaDeGrupos);
+				$dtoAsignatura->setListaDePeriodosDeUnUsuario($listaDePeriodosDeUnUsuario);
+				$dtoAsignatura->setIndice($indiceAsignaturas);
+
+				$matrizListaDeNotasDeUnGrupo = array();
+				foreach($listaDeGrupos as $grupo){
+					$matrizListaDeNotasDeUnGrupo[] = $modeloAsignatura->obtenerListaDeNotasDeUnGrupo($grupo);
+				}
+				$dtoAsignatura->setMatrizListaDeNotasDeUnGrupo($matrizListaDeNotasDeUnGrupo);
+				$listaDtoAsignaturas[] = $dtoAsignatura;
+				$indiceAsignaturas += 1;
+			}
+
+			$vistaPeriodo->imprimirHTML_Periodo($dtoPeriodo, $listaDtoAsignaturas);
 		}else{
 			$_SESSION["mensajes"] = HelperModules::crearMensajeError("No esta autorizado para vistar la seccion a la cual estaba intentado acceder");
 			HelperModules::redireccionarAlInicio();

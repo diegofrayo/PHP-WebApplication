@@ -25,7 +25,8 @@
   background-size: 100% ;
   display: table-cell;
   width: 3%;
-  border-right: 3px solid #2d4051;
+  /*border-right: 3px solid @colorBordes;*/
+
 }
 /*Div lateral con toda la interfaz (Celda)*/
 
@@ -39,7 +40,7 @@
 }
 #header {
   height: 150px;
-  background-color: #1c2f40;
+  background-color: #222222;
   /*Centrado vertical*/
 
 }
@@ -50,24 +51,24 @@
 /*Contiene la info generado por PHP*/
 
 #contenedorInformacion {
-  border-right: 1px solid #d9d1ba;
-  border-bottom: 1px solid #d9d1ba;
-  background-color: #fffae9;
+  border-right: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+  background-color: #333333;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 #nav-excepciones-buttons {
-  border-top: 1px solid #d9d1ba;
-  border-right: 1px solid #d9d1ba;
-  border-bottom: 1px solid #d9d1ba;
-  background-color: #fffae9;
+  border-top: 1px solid #444444;
+  border-right: 1px solid #444444;
+  border-bottom: 1px solid #444444;
+  background-color: #333333;
 }
-#divNavMensajes {
-  border-left: 1px solid #e1d8c7;
+#divNavButtons {
+  border-right: 1px solid #444444;
 }
 #footer {
   height: 50px;
-  background-color: #1c2f40;
+  background-color: #222222;
 }
 /*-----------------------*/
 
@@ -114,6 +115,11 @@
   width: 22px;
   height: 32px;
 }
+#button-home-periodo {
+  background-position: -73px -98px;
+  width: 32px;
+  height: 32px;
+}
 /*-----------------------*/
 
 /*----------Estilos de textos-------------*/
@@ -122,7 +128,7 @@ body {
   margin: 0;
   font-size: 1em;
   line-height: 20px;
-  color: black;
+  color: white;
   font-weight: bold;
   font-family: 'Coda', sans-serif;
   background-image: url('../img/bg.png');
@@ -131,16 +137,16 @@ p {
   margin: 5px;
 }
 a {
-  color: #5e7284;
+  color: white;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #3c5062;
+  color: #0084dd;
 }
 h1,
 h2 {
-  color: #0b1e2f;
+  color: #00a6ff;
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 5px;
@@ -148,7 +154,7 @@ h2 {
 }
 h1 a,
 h2 a {
-  color: #0b1e2f;
+  color: #00a6ff;
 }
 h2 {
   font-size: 1.5em;
@@ -159,13 +165,25 @@ ul {
 ul li {
   margin: 5px;
 }
+textarea {
+  max-width: 90%;
+}
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+textarea {
+  border: none;
+  background: #555555;
+  color: white;
+}
 /*-----------------------*/
 
 /*----------Estilos formularios-------------*/
 
 .divFormularios .descripcionFormularios {
   margin-bottom: 15px;
-  border-bottom: 1px solid #d9d1ba;
+  border-bottom: 1px solid #444444;
 }
 .divFormularios .divInputsFormularios * {
   margin: 5px;
@@ -213,8 +231,7 @@ ul li {
   font-style: italic;
 }
 #divNombreProfile {
-  background-color: #1c2f40;
-  border-top: 3px solid #2d4051;
+  background-color: #222222;
 }
 #divNombreProfile a {
   color: white;
@@ -226,14 +243,14 @@ ul li {
 /*Es un div, con informacion generada por php. Es una seccion con contenido*/
 
 .moduloApp {
-  border: 1px solid #d9d1ba;
+  border: 1px solid #444444;
   border-radius: 5px;
   width: 98%;
   margin: 5px;
 }
 .moduloApp .divTituloModulo {
-  border-bottom: 1px solid #d9d1ba;
-  background-color: #f2e9d8;
+  border-bottom: 1px solid #444444;
+  background-color: #222222;
   padding: 5px;
 }
 .moduloApp .divTituloModulo h1 {
@@ -253,17 +270,28 @@ ul li {
 .tablaInformacion {
   width: 100%;
 }
-.tablaInformacion td:first-child {
-  color: #1c2f40;
+.tablaInformacion td {
+  color: white;
 }
 .tablaInformacion td {
   width: 50%;
 }
 .tablaInformacion tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: #444444;
 }
 .tablaInformacion tr:nth-child(odd) {
-  background-color: #eeeeee;
+  background-color: #555555;
+}
+.tablaNotas .filaNotas .celdaNotas {
+  margin: 0;
+}
+.tablaNotas .filaNotas .celdaNotas input[type="text"],
+.tablaNotas .filaNotas .celdaNotas input[type="number"],
+.tablaNotas .filaNotas .celdaNotas input[type="password"],
+.tablaNotas .filaNotas .celdaNotas input[type="email"] {
+  width: 90%;
+  border-radius: 0;
+  margin: 0;
 }
 .objetosCentrados {
   text-align: center;
@@ -278,28 +306,28 @@ ul li {
   body {
     margin: 0;
     padding: 0;
-    background: none;
+    /*background: none;*/
+  
   }
   /*Contenedor Principal (Tabla)*/
   
   #contenedorGlobal {
     width: 100%;
     margin: 0 auto;
-    display: block;
+    /*display: block;*/
+  
   }
   /*Div lateral con argollas (Celda)*/
   
-  #divArgollas {
-    display: none;
-  }
   /*Div lateral con toda la interfaz (Celda)*/
   
   #contenedorCuaderno {
-    display: block;
-    width: 100%;
+    /*	display: block;
+  		width: 100%;*/
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     padding: 0;
+    width: 97%;
   }
   #header .row-fluid {
     margin-top: 0;

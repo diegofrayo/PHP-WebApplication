@@ -1,22 +1,22 @@
 /*Variables y mixins*/
 
 /*1*/
-@colorFondoHeader: #1c2f40; 
+@colorFondoHeader: #222; 
 
 /*5*/
-@colorFondoBase: #f2e9d8 + #111;
+@colorFondoBase: #333;
 
 /*4*/
-@colorBordes: #d9d1ba;
+@colorBordes: #444;
 
 /*2*/
-@colorTitulos: #1c2f40 - #111;
+@colorTitulos: #00A6FF;
 
 /*3*/
-@colorLinks: #8094a6 - #222;
+@colorLinks: #fff;
 
 /*Negro*/
-@colorTexto: #000000;
+@colorTexto: #fff;
 
 .bordesRedondos (@borde) {
 	border-radius: @borde;
@@ -41,7 +41,7 @@
 	background-size:100% ;
 	display: table-cell;
 	width: 3%;
-	border-right: 3px solid @colorFondoHeader + #111;
+	/*border-right: 3px solid @colorBordes;*/
 }
 
 /*Div lateral con toda la interfaz (Celda)*/
@@ -81,8 +81,8 @@
 	background-color: @colorFondoBase;
 }
 
-#divNavMensajes{
-	border-left:1px solid @colorFondoBase - #222;
+#divNavButtons{
+	border-right:1px solid @colorBordes;
 }
 
 #footer{
@@ -142,6 +142,12 @@
 	height: 32px;
 }
 
+#button-home-periodo{
+	background-position: -73px -98px;
+	width: 32px; 
+	height: 32px;
+}
+
 /*-----------------------*/
 
 /*----------Estilos de textos-------------*/
@@ -166,7 +172,7 @@ a {
 }
 
 a:hover,a:focus {
-	color: @colorLinks - #222;
+	color: @colorTitulos - #222;
 }
 
 h1,h2{
@@ -189,6 +195,16 @@ ul{
 	li{
 		margin: 5px;
 	}
+}
+
+textarea{
+	max-width: 90%;
+}
+
+input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea {
+	border: none;
+	background: @colorFondoBase + #222;
+	color: @colorTexto;
 }
 
 /*-----------------------*/
@@ -260,7 +276,6 @@ ul{
 		color: white;
 	}
 	background-color: @colorFondoHeader;
-	border-top: 3px solid @colorFondoHeader + #111;
 	div{
 		float:right;
 		margin-right: 5px;
@@ -302,8 +317,8 @@ ul{
 
 .tablaInformacion{
 	width: 100%;
-	td:first-child{
-		color: @colorFondoHeader;
+	td{
+		color: @colorTexto;
 	}
 
 	td{
@@ -311,10 +326,24 @@ ul{
 	}
 
 	tr:nth-child(even){
-		background-color: #ddd;
+		background-color: #444;
 	}
 	tr:nth-child(odd){
-		background-color: #eee;
+		background-color: #555;
+	}
+}
+
+.tablaNotas{
+	.filaNotas{
+		.celdaNotas{
+			margin: 0;
+			input[type="text"], input[type="number"], input[type="password"], input[type="email"]{
+				width: 90%;
+				border-radius: 0; 
+				margin: 0;
+			}
+			
+		}
 	}
 }
 
@@ -333,28 +362,29 @@ ul{
 	body{
 		margin: 0;
 		padding: 0;
-		background: none;
+		/*background: none;*/
 	}
 
 	/*Contenedor Principal (Tabla)*/
 	#contenedorGlobal {
 		width: 100%;
 		margin: 0 auto;
-		display: block;
+		/*display: block;*/
 	}
 
 	/*Div lateral con argollas (Celda)*/
 	#divArgollas {
-		display: none;
+	/*display: none;*/
 	}
 
 	/*Div lateral con toda la interfaz (Celda)*/
 	#contenedorCuaderno {
-		display: block;
-		width: 100%;
+	/*	display: block;
+		width: 100%;*/
 		border-top-right-radius: 0px;
 		border-bottom-right-radius: 0px;
 		padding: 0;
+		width: 97%;
 	}
 
 	#header{

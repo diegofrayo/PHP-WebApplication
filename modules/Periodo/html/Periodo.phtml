@@ -1,9 +1,4 @@
-<div id="divNavButtonsPHP">
-	<a href="#divCarouselPeriodo" data-slide="prev"> <span id="button-left"
-		class="sprite"></span>
-	</a> <a href="#divCarouselPeriodo" data-slide="next"><span
-		id="button-right" class="sprite"></span> </a>
-</div>
+<!--{Navegacion Buttons}-->
 <div class="item active">
 	<div class="row-fluid">
 		<div class="span6">
@@ -68,7 +63,8 @@
 								<tbody>
 									<tr>
 										<td><a class="btn"
-											onclick="ajax('http://ProjectPHP/modules/Periodo/ControladorPeriodo.php' , '#divPromedioPeriodo', 'Calcular Promedio' );">
+											onclick="ajax('http://ProjectPHP/modules/Periodo/ControladorPeriodo.php' , 
+												'#divPromedioPeriodo', 'Calcular Promedio', <!--{Id Periodo}--> );">
 												Calcular Promedio </a></td>
 										<td><div id="divPromedioPeriodo"></div>
 										</td>
@@ -122,6 +118,7 @@
 								<div>
 									<input name="notas" type="number" maxlength="2" required />
 								</div>
+								<input type='hidden' name='id' value='<!--{Id Periodo}-->' />
 								<input class="btn btn-primary" type="submit" name="action"
 									value="Crear Asignatura" />
 							</div>

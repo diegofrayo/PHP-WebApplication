@@ -21,10 +21,6 @@
 <script src="http://ProjectPHP/media/js/script.js"></script>
 <script src="http://ProjectPHP/media/js/jquery-ui.js"></script>
 <script src="http://ProjectPHP/media/js/validation/jQuery.validate.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script>
-<script
-	src="http://ProjectPHP/media/js/validation/additional-methods.js"></script>
-<script src="http://ProjectPHP/media/js/validation/messages.js"></script>
 
 </head>
 <?php
@@ -34,7 +30,6 @@ require_once 'Dominio/Clases/Usuario.php';
 session_start();
 if (!isset($_SESSION["usuario"])) {
 	$_SESSION["usuario"] = "Visitante";
-	$_SESSION["id"] = null;
 }
 
 ?>
@@ -80,7 +75,6 @@ if (!isset($_SESSION["usuario"])) {
 
 									case 'periodo':
 										if(isset ($_GET['id'])){
-											$_SESSION["idPeriodo"] = $_GET['id'];
 											require_once 'modules/Periodo/ControladorPeriodo.php';
 										}else{
 											//Llamar a error
@@ -100,12 +94,14 @@ if (!isset($_SESSION["usuario"])) {
 							}else{
 								require_once 'modules/Home/ControladorHome.php';
 							}
+							echo "<script>modificarTituloApp('".$usuarioApp->getNick()."');</script>";
 						}
 
 						if (isset($_SESSION["mensajes"])) {
 							echo $_SESSION["mensajes"];
 						}
 						$_SESSION["mensajes"] = '';
+
 						?>
 
 						<!-- Termina el contenido generado por php -->

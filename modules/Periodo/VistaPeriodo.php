@@ -2,6 +2,8 @@
 
 namespace modules\Periodo;
 
+use Dominio\DTO\DTOModuloPeriodo;
+
 use modules\Asignatura\VistaAsignatura;
 
 use modules\HelperModules;
@@ -12,47 +14,37 @@ require_once '/../Asignatura/VistaAsignatura.php';
 class VistaPeriodo
 {
 
-	/**
-	 * Datos es un array, con la informacion del usuario que se va a colocar en la plantilla
-	 * @param unknown_type $datos
-	 */
-	public function imprimirHTML_Periodo($datos){
+	public function imprimirHTML_Periodo(DTOModuloPeriodo $dtoPeriodo, $arrayDTOAsignatura){
 
-		/**
-		 * 1 = Periodo
-		 * 2 = Lista de asignaturas
-		 */
-
-		// 		echo "<div class='row-fluid'>".
 		echo "<div id='divCarouselPeriodo' class='carousel slide'><div class='carousel-inner'>";
 		$html= HelperModules::leerPlantillaHTML("Periodo","Periodo");
+		$listaDeAsignaturas = $dtoPeriodo->getListaAsignaturasDeUnPeriodo();
 
-		//echo count($datos[2]);
 		//Informacion del periodo
-		$informacionPeriodoHTML = $this->crearInformacionPeriodo($datos[1]);
-		$editarPeriodoHTML = $this->crearEditarPeriodo($datos[1]);
-		$listaAsignaturasHTML = $this->crearListaDeAsignaturas($datos[2]);
+		$informacionPeriodoHTML = $this->crearInformacionPeriodo($dtoPeriodo->getPeriodo());
+		$editarPeriodoHTML = $this->crearEditarPeriodo($dtoPeriodo->getPeriodo());
+		$listaAsignaturasHTML = $this->crearListaDeAsignaturas($listaDeAsignaturas);
 
 		$html = str_replace("<!--{Informacion del periodo}-->", $informacionPeriodoHTML, $html);
 		$html = str_replace("<!--{Editar Periodo}-->", $editarPeriodoHTML, $html);
 		$html = str_replace("<!--{Lista de asignaturas}-->", $listaAsignaturasHTML, $html);
+		$html = str_replace("<!--{Id Periodo}-->", $dtoPeriodo->getPeriodo()->getId(), $html);
+		
+		if(count($listaDeAsignaturas)){
+			$html = str_replace("<!--{Navegacion Buttons}-->", $this->crearButtonsNavegacion(), $html);
+		}
 		echo $html;
 
 		//Asignaturas
 		$vistaAsignatura = new VistaAsignatura();
 		$htmlAsignatura= "";
-		$listaDeAsignaturas = $datos[2];
-		$i = 0;
-		foreach ($listaDeAsignaturas as $asignatura){
-			$i= $i+1;
-			$datosAsignatura =  array (1 => $asignatura,
-					2=>$datos[1] , 3=>$i);
-			$htmlAsignatura=$vistaAsignatura->imprimirHTML_Asignatura($datosAsignatura);
-			echo $htmlAsignatura;
 
+
+		foreach ($arrayDTOAsignatura as $dtoAsignatura){
+			$htmlAsignatura=$vistaAsignatura->imprimirHTML_Asignatura($dtoAsignatura);
+			echo $htmlAsignatura;
 		}
 
-		// 		echo "</div></div></div>";
 		echo "</div></div>";
 
 	}
@@ -94,12 +86,17 @@ class VistaPeriodo
 				"' name='fechaFinal' required />".
 				"</div><label>Descripci&oacute;n </label><div>".
 				"<textarea maxlength='30' name='descripcion'>".$periodo->getDescripcion()."</textarea>".
-				"</div>";
+				"<input type='hidden' name='id' value='".$periodo->getId()."' /></div>";
 		return $html;
 	}
 
-	public function leerPlantillaHTML($nombreFile){
-		return file_get_contents("html/".$nombreFile.".phtml", true);
+	private function crearButtonsNavegacion(){
+		$html = "<div id='divNavButtonsPHP'>
+				<a href='javascript:void(0)' onclick='desplazarCarousel(0);'> <span id='button-home-periodo'".
+				"class='sprite'></span></a><a href='#divCarouselPeriodo' data-slide='prev'> <span id='button-left'".
+				"class='sprite'></span></a> <a href='#divCarouselPeriodo' data-slide='next'><span".
+				" id='button-right' class='sprite'></span> </a></div>";
+		return $html;
 	}
 
 }

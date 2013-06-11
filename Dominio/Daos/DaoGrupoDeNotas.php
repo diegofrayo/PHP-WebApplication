@@ -91,4 +91,24 @@ class DaoGrupoDeNotas implements IDaoGrupoDeNotas
 		return null;
 	}
 
+	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura){
+		$manejadorBD = BDFactory::crearManejadorBD();
+		$consultaSQL = "select * from grupo_de_notas where asignatura = ?";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($asignatura->getId()));
+		$numeroResultados = count($resultados);
+		$listaGrupos = array();
+
+		if($numeroResultados!=0){
+			for ($i = 0; $i<$numeroResultados; $i++){
+				$grupoLeido = $resultados[$i];
+				$grupoNuevo = new GrupoDeNotas($grupoLeido['id'],$grupoLeido['nombre'],
+						$grupoLeido['porcentajes_iguales'],	$grupoLeido['es_grupo_defecto']);
+				$grupoNuevo->setAsignatura($asignatura);
+				$listaGrupos[] = $grupoNuevo;
+			}
+		}
+
+		return $listaGrupos;
+	}
+
 }

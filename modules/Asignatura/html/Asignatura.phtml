@@ -1,108 +1,77 @@
-<div class="item">
-	<div class="row-fluid">
-		<div class="span6">
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="moduloApp" id="divInfoAsignatura">
-						<div class="divTituloModulo">
-							<h1>
-								<a data-toggle="collapse"
-									href="#collapseInfoAsignatura<!--{Indice Asignatura}-->"
-									class="linkCollapse">Informaci&oacute;n de la asignatura <i
-									class="icon-chevron-down"></i>
-								</a>
-							</h1>
-						</div>
-						<div class="divContenidoModulo"
-							id="collapseInfoAsignatura<!--{Indice Asignatura}-->">
-							<!--{Informacion de la asignatura}-->
-						</div>
+<div class="row-fluid">
+	<div class="span6">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="moduloApp" id="divInfoAsignatura">
+					<div class="divTituloModulo">
+						<h1>
+							<a data-toggle="collapse"
+								href="#collapseInfoAsignatura<!--{Indice Asignatura}-->"
+								class="linkCollapse">Informaci&oacute;n de la asignatura <i
+								class="icon-chevron-down"></i>
+							</a>
+						</h1>
 					</div>
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="divFormularios moduloApp" id="divEditarAsignatura">
-						<form id="formEditarAsignatura" enctype="multipart/form-data"
-							method="post"
-							action="/../modules/Asignatura/ControladorAsignatura.php">
-
-							<div class="divTituloModulo">
-								<h1>
-									<a data-toggle="collapse"
-										href="#collapseEditar<!--{Indice Asignatura}-->"
-										class="linkCollapse">Editar asignatura <i
-										class="icon-chevron-down"></i>
-									</a>
-								</h1>
-								<p></p>
-							</div>
-							<div class="divInputsFormularios collapse"
-								id="collapseEditar<!--{Indice Asignatura}-->">
-								<!--{Editar Asignatura}-->
-
-								<input class="btn btn-primary" type="submit" name="action"
-									value="Editar Asignatura" />
-							</div>
-						</form>
+					<div class="divContenidoModulo"
+						id="collapseInfoAsignatura<!--{Indice Asignatura}-->">
+						<!--{Informacion de la asignatura}-->
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="divFormularios moduloApp" id="divEditarAsignatura">
+					<form id="formEditarAsignatura" enctype="multipart/form-data"
+						method="post"
+						action="/../modules/Asignatura/ControladorAsignatura.php">
 
-		<div class="span6">
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="divFormularios moduloApp" id="divCrearNota">
-						<form id="formCrearNota" enctype="multipart/form-data"
-							method="post"
-							action="/../modules/Asignatura/ControladorAsignatura.php">
-							<div class="divTituloModulo">
-								<h1>
-									<a 
-										href="#collapseCrear<!--{Indice Asignatura}-->" data-toggle="collapse"
-										class="linkCollapse">Crear Nota <i class="icon-chevron-down"></i>
-									</a>
-								</h1>
-								<p></p>
-							</div>
-							<div class="divInputsFormularios"
-								id="collapseCrear<!--{Indice Asignatura}-->">
+						<div class="divTituloModulo">
+							<h1>
+								<a data-toggle="collapse"
+									href="#collapseEditar<!--{Indice Asignatura}-->"
+									class="linkCollapse">Editar asignatura <i
+									class="icon-chevron-down"></i>
+								</a>
+							</h1>
+							<p></p>
+						</div>
+						<div class="divInputsFormularios collapse"
+							id="collapseEditar<!--{Indice Asignatura}-->">
+							<!--{Editar Asignatura}-->
 
-								<label>Nombre </label>
-								<div>
-									<input name="nombre" type="text" maxlength="10" required />
-								</div>
-								<label>Valor </label>
-								<div>
-									<input name="valor" type="number" required maxlength="4" />
-								</div>
-								<label>Porcentaje </label>
-								<div>
-									<input name="porcentaje" type="number" maxlength="3" required />
-								</div>
-								<label>Grupo </label>
-								<div>
-									<!-- Select Grupo Notas -->
-								</div>
-								<label>Fecha </label>
-								<div>
-									<input type="text" class="inputCalendars" name="fecha" required />
-								</div>
-
-								<input type="hidden" name='idAsignatura'
-									value="<!--{Id Asignatura}-->" /> <input
-									class="btn btn-primary" type="submit" name="action"
-									value="Crear Nota" />
-							</div>
-						</form>
-					</div>
+							<input class="btn btn-primary" type="submit" name="action"
+								value="Editar Asignatura" />
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="row-fluid">Los grupos</div>
-
-
+	<div class="span6">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="divFormularios moduloApp" id="divCrearNota">
+					<form id="formCrearNota" enctype="multipart/form-data"
+						method="post"
+						action="/../modules/Asignatura/ControladorAsignatura.php">
+						<div class="divTituloModulo">
+							<h1>
+								<a href="#collapseCrear<!--{Indice Asignatura}-->"
+									data-toggle="collapse" class="linkCollapse">Crear Nota <i
+									class="icon-chevron-down"></i>
+								</a>
+							</h1>
+							<p></p>
+						</div>
+						<div class="divInputsFormularios collapse"
+							id="collapseCrear<!--{Indice Asignatura}-->">
+							<!--{Crear Nota}-->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

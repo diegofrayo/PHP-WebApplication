@@ -55,8 +55,8 @@ class BoLogicaNotas
 	public function crearAsignatura(Asignatura $asignatura)
 	{
 		if($this->obtenerAsignaturaPorId($asignatura->getId()) == null ){
-			$this->_asignaturaDao->crear($asignatura);
-			$grupoNotasDefecto = new GrupoDeNotas(0, "Grupo Defecto: ".$asignatura->getNombre(), false, true);
+			$asignatura = $this->_asignaturaDao->crear($asignatura);
+			$grupoNotasDefecto = new GrupoDeNotas(0, "GD: ". $asignatura->getNombre(), false, true);
 			$grupoNotasDefecto->setAsignatura($asignatura);
 			$this->crearGrupoDeNotas($grupoNotasDefecto);
 			return $asignatura;
@@ -86,7 +86,7 @@ class BoLogicaNotas
 	 */
 	public function editarAsignatura(Asignatura $asignatura)
 	{
-		if($this->obtenerAsignaturaPorId($asignatura->getId()) == null ){
+		if($this->obtenerAsignaturaPorId($asignatura->getId()) != null ){
 			return $this->_asignaturaDao->editar($asignatura);
 		}
 		throw new BusinessLogicException("La asignatura que va a editar no existe");
@@ -416,5 +416,9 @@ class BoLogicaNotas
 			return "No se puede efectuar el calculo, para este grupo";
 		}
 		throw new BusinessLogicException("El grupo no existe");
+	}
+
+	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura){
+		return $this->_grupoDeNotasDao->obtenerListaDeGruposDeUnaAsignatura($asignatura);
 	}
 }
