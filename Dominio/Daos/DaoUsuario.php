@@ -8,11 +8,11 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoUsuario;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoUsuario.php';
-require_once '/../Clases/Usuario.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoUsuario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Usuario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoUsuario implements IDaoUsuario
 {
@@ -22,8 +22,7 @@ class DaoUsuario implements IDaoUsuario
 		$manejadorBD = BDFactory::crearManejadorBD();
 		$consultaSQL = "insert into usuario (email, nombre, nick, password, foto)
 				" . " values (?,?,?,?,?)";
-		$arrayDatos = array($usuario -> getEmail(), $usuario->getNombre(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto());
-		var_dump($arrayDatos);
+		$arrayDatos = array($usuario -> getEmail(), $usuario->getNombre(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto()->getId());
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -36,8 +35,8 @@ class DaoUsuario implements IDaoUsuario
 	public function editar(Usuario $usuario)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update usuario set nick=?, password=?, foto=?, nombre=? where email = ?" ;
-		$arrayDatos = array($usuario -> getEmail(), $usuario -> getNick(), $usuario->getPassword(), $usuario -> getFoto(), $usuario->getNombre());
+		$consultaSQL = "update usuario set nick=?, password=?,  nombre=? where email = ?" ;
+		$arrayDatos = array($usuario -> getNick(), $usuario->getPassword(), $usuario->getNombre(),$usuario -> getEmail());
 
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos);
 
@@ -55,9 +54,12 @@ class DaoUsuario implements IDaoUsuario
 		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($email));
 
 		if(count($resultados)==1){
+			$daoFoto = new DaoFoto();
 			$nuevoUsuario = $resultados[0];
-			return new Usuario($nuevoUsuario['email'],$nuevoUsuario['nick'],
-					$nuevoUsuario['nombre'],$nuevoUsuario['password'],$nuevoUsuario['foto']);
+			$usuario =new Usuario($nuevoUsuario['email'],$nuevoUsuario['nick'],
+					$nuevoUsuario['nombre'],$nuevoUsuario['password']);
+			$usuario->setFoto($daoFoto->obtenerFotoPorId($nuevoUsuario['foto']));
+			return $usuario;
 		}
 
 		return null;
@@ -75,7 +77,7 @@ class DaoUsuario implements IDaoUsuario
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevoUsuario = $resultados[$i];
 				$usuarioLeido = new Usuario($nuevoUsuario['email'],$nuevoUsuario['nick'],
-						$nuevoUsuario['nombre'],$nuevoUsuario['password'],$nuevoUsuario['foto']);
+						$nuevoUsuario['nombre'],$nuevoUsuario['password']);
 				$listaUsuario[] = $usuarioLeido;
 			}
 			return $listaUsuario;

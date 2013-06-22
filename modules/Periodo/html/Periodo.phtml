@@ -59,15 +59,15 @@
 							</h1>
 						</div>
 						<div class="divContenidoModulo collapse" id="collapsePromedio">
-							<table class="tablaInformacion objetosCentrados">
+							<table class="tablaInformacion" style="text-align: center">
 								<tbody>
 									<tr>
 										<td><a class="btn"
-											onclick="ajax('http://ProjectPHP/modules/Periodo/ControladorPeriodo.php' , 
-												'#divPromedioPeriodo', 'Calcular Promedio', <!--{Id Periodo}--> );">
+											onclick="calcularPromedioPeriodo(<!--{Id Periodo}-->);">
 												Calcular Promedio </a></td>
 										<td><div id="divPromedioPeriodo"></div>
 										</td>
+								
 								</tbody>
 							</table>
 						</div>
@@ -114,12 +114,8 @@
 								<div>
 									<input name="nombre" type="text" maxlength="20" required />
 								</div>
-								<label>Numero de notas principales </label>
-								<div>
-									<input name="notas" type="number" maxlength="2" required />
-								</div>
-								<input type='hidden' name='id' value='<!--{Id Periodo}-->' />
-								<input class="btn btn-primary" type="submit" name="action"
+								<input type='hidden' name='id' value='<!--{Id Periodo}-->' /> <input
+									class="btn btn-primary" type="submit" name="action"
 									value="Crear Asignatura" />
 							</div>
 						</form>

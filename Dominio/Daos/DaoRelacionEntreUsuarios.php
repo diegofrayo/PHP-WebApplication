@@ -10,11 +10,11 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoRelacionEntreUsuarios;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoRelacionEntreUsuarios.php';
-require_once '/../Clases/RelacionEntreUsuarios.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoRelacionEntreUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/RelacionEntreUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoRelacionEntreUsuarios implements IDaoRelacionEntreUsuarios
 {

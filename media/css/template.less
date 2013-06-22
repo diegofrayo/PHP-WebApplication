@@ -90,6 +90,10 @@
 	background-color: @colorFondoHeader;
 }
 
+.span6{
+	padding: 5px;
+}
+
 /*-----------------------*/
 
 /*----------Sprites-------------*/
@@ -148,6 +152,18 @@
 	height: 32px;
 }
 
+#button-remove{
+	background-position: -115px -106px;
+	width: 17px; 
+	height: 16px;
+}
+
+#button-editar{
+	background-position: -139px -106px; 
+	width: 16px;
+	height: 16px;
+}
+
 /*-----------------------*/
 
 /*----------Estilos de textos-------------*/
@@ -175,7 +191,7 @@ a:hover,a:focus {
 	color: @colorTitulos - #222;
 }
 
-h1,h2{
+h1,h2,h3{
 	color: @colorTitulos;
 	font-size: 2em;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -195,10 +211,6 @@ ul{
 	li{
 		margin: 5px;
 	}
-}
-
-textarea{
-	max-width: 90%;
 }
 
 input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea {
@@ -237,6 +249,7 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 /*----------Estilos divs de la pagina-------------*/
 
 #divButtonsHeader, #divNavButtonsPHP{
+	text-align: center;
 	span{
 		display: inline-block;
 		margin: 5px;
@@ -253,9 +266,8 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	color: #b94a48;
 	padding: 5px;
 	margin: 0;
-	b{
+	strong{
 		text-decoration: underline;
-		font-style: italic;
 	}
 }
 
@@ -265,20 +277,26 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	color: #468847;
 	padding: 5px;
 	margin: 0;
-	b{
+	strong{
 		text-decoration: underline;
-		font-style: italic;
 	}
 }
 
 #divNombreProfile{
-	a{
-		color: white;
-	}
 	background-color: @colorFondoHeader;
-	div{
-		float:right;
-		margin-right: 5px;
+	text-align: right;
+	#divImgProfile{
+		img{
+			width: 32px;
+			height: 32px;
+			vertical-align: middle;
+		}
+		a{
+			color: @colorTexto;
+		}
+		p{
+			display: inline;
+		}
 	}
 }
 
@@ -302,12 +320,24 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	}
 
 	.divContenidoModulo{
-		
+
 	}
 
 	.linkCollapse{
 		width: 100%;
 		display: block;
+	}
+}
+
+#divError404{
+	text-align: center;
+	img{
+		display: block;
+		margin: 0 auto;
+		border: 5px solid @colorBordes;
+	}
+	p{
+
 	}
 }
 
@@ -319,12 +349,16 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	width: 100%;
 	td{
 		color: @colorTexto;
-	}
-
-	td{
 		width: 50%;
 	}
 
+	td:last-child{
+		text-align: center;
+		span{
+			margin: 0 auto;
+		}
+	}
+	
 	tr:nth-child(even){
 		background-color: #444;
 	}
@@ -334,25 +368,23 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 }
 
 .tablaNotas{
-	.filaNotas{
-		.celdaNotas{
-			margin: 0;
-			input[type="text"], input[type="number"], input[type="password"], input[type="email"]{
-				width: 90%;
-				border-radius: 0; 
-				margin: 0;
-			}
-			
+	width: 100%;
+	td{
+		color: @colorTexto;
+		text-align: center;
+		background-color: #555;
+		span{
+			margin: 0 auto;
 		}
 	}
-}
 
-.objetosCentrados{
-	text-align: center;
+	th{
+		background-color: #444;
+	}
+
 }
 
 /*-----------------------*/
-
 
 /*----------Media Queries-------------*/
 
@@ -362,33 +394,31 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	body{
 		margin: 0;
 		padding: 0;
-		/*background: none;*/
+		background: none;
 	}
 
 	/*Contenedor Principal (Tabla)*/
 	#contenedorGlobal {
 		width: 100%;
 		margin: 0 auto;
-		/*display: block;*/
+		display: block;
 	}
 
 	/*Div lateral con argollas (Celda)*/
 	#divArgollas {
-	/*display: none;*/
+		display: none;
 	}
 
 	/*Div lateral con toda la interfaz (Celda)*/
 	#contenedorCuaderno {
-	/*	display: block;
-		width: 100%;*/
 		border-top-right-radius: 0px;
 		border-bottom-right-radius: 0px;
 		padding: 0;
-		width: 97%;
+		width: 100%;
+		display: block;
 	}
 
 	#header{
-		/*Centrado vertical*/
 		.row-fluid{
 			margin-top: 0;
 		}
@@ -401,6 +431,10 @@ input[type="text"], input[type="number"], input[type="password"], input[type="em
 	h1,h2{
 		font-size: 1.2em;
 		line-height: 100%;
+	}
+
+	#divNombreProfile{
+		text-align: center;
 	}
 
 }

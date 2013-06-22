@@ -6,12 +6,8 @@ use Dominio\ObjetosDeNegocio\BoSocial;
 use Dominio\Clases\Usuario;
 use Dominio\ObjetosDeNegocio\BoUsuarios;
 
-// require_once '/../../Dominio/ObjetosDeNegocio/BoUsuarios.php';
-// require_once '/../../Dominio/ObjetosDeNegocio/BoSocial.php';
-
-
-require_once 'Dominio/ObjetosDeNegocio/BoUsuarios.php';
-require_once 'Dominio/ObjetosDeNegocio/BoSocial.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoSocial.php';
 
 class ModeloHeader
 {

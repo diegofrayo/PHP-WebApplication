@@ -8,6 +8,7 @@ class GrupoDeNotas
 
 	private $_id;
 	private $_nombre;
+	
 	/**
 	 * Variable booleana, es true si el porcentaje de las notas contenidas en el grupo son iguales
 	 * y es falso si sucede lo contrario
@@ -15,6 +16,7 @@ class GrupoDeNotas
 	 */
 	private $_porcentajesIguales;
 	private $_asignatura;
+	
 	/**
 	 * Una asignatura puede tener muchos grupos, pero debe tener por lo menos 1, y es un grupo por defecto.
 	 * Esta variable dice si un grupo es el grupo por defecto de alguna asignatura

@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if (!isset($_SESSION["usuario"])) {
+	$_SESSION["usuario"] = "Visitante";
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,33 +14,25 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Qualify.com</title>
 <link rel="shortcut icon" href="http://ProjectPHP/media/img/favicon.png">
-<link href='http://fonts.googleapis.com/css?family=Coda&subset=latin'
-	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
 	href="http://ProjectPHP/media/css/reset-layout.css" type="text/css" />
 <link rel="stylesheet" href="http://ProjectPHP/media/css/bootstrap.css"
 	type="text/css" />
-<link rel="stylesheet" href="http://ProjectPHP/media/css/jquery-ui.css"
+<link rel="stylesheet"
+	href="http://ProjectPHP/media/css/bootstrap-responsive.css"
 	type="text/css" />
+<link rel="stylesheet" href="http://ProjectPHP/media/css/datepicker.css">
 <link rel="stylesheet" href="http://ProjectPHP/media/css/template.css"
 	type="text/css" />
+
 <script src="http://ProjectPHP/media/js/jquery.js"></script>
 <script src="http://ProjectPHP/media/js/bootstrap.js"></script>
-<script src="http://ProjectPHP/media/js/script.js"></script>
-<script src="http://ProjectPHP/media/js/jquery-ui.js"></script>
+<script src="http://ProjectPHP/media/js/bootstrap-datepicker.js"></script>
 <script src="http://ProjectPHP/media/js/validation/jQuery.validate.js"></script>
+<script src="http://ProjectPHP/media/js/script.js"></script>
 
 </head>
-<?php
-use Dominio\Clases\Usuario;
-require_once 'Dominio/Clases/Usuario.php';
 
-session_start();
-if (!isset($_SESSION["usuario"])) {
-	$_SESSION["usuario"] = "Visitante";
-}
-
-?>
 <body>
 
 	<!-- Contenedor Global -->
@@ -54,6 +54,7 @@ if (!isset($_SESSION["usuario"])) {
 
 			<!-- Contenedor con la informacion de la app -->
 			<div class="row-fluid">
+
 				<div id="contenedorInformacion" class="span12">
 					<div class="row-fluid">
 						<!-- Aqui va el contenido generado por php -->
@@ -63,10 +64,24 @@ if (!isset($_SESSION["usuario"])) {
 						$usuarioApp = $_SESSION["usuario"];
 
 						if($usuarioApp == 'Visitante'){
-							require_once 'modules/Home/ControladorHome.php';
+							if(isset ($_GET['section'])){
+								$controlador = strtolower($_GET['section']);
+								switch($controlador){
+									case 'home':
+										require_once 'modules/Home/ControladorHome.php';
+										break;
+
+									default:
+										require_once 'error404.html';
+										break;
+								}
+							}else{
+								require_once 'modules/Home/ControladorHome.php';
+							}
 						}else{
 							if(isset ($_GET['section'])){
 								$controlador = strtolower($_GET['section']);
+
 								switch($controlador){
 
 									case 'home':
@@ -77,7 +92,7 @@ if (!isset($_SESSION["usuario"])) {
 										if(isset ($_GET['id'])){
 											require_once 'modules/Periodo/ControladorPeriodo.php';
 										}else{
-											//Llamar a error
+											require_once 'error404.html';
 										}
 										break;
 
@@ -88,13 +103,13 @@ if (!isset($_SESSION["usuario"])) {
 										break;
 
 									default:
-										echo "error";
+										require_once 'error404.html';
 										break;
 								}
 							}else{
 								require_once 'modules/Home/ControladorHome.php';
 							}
-							echo "<script>modificarTituloApp('".$usuarioApp->getNick()."');</script>";
+							echo "<script>modificarTituloApp('".$usuarioApp['nick']."');</script>";
 						}
 
 						if (isset($_SESSION["mensajes"])) {

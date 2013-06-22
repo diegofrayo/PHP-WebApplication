@@ -3,18 +3,18 @@
 namespace Dominio\BaseDeDatos;
 use Dominio\DTO\DTOCrud;
 
-require_once 'IBaseDeDatos.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/IBaseDeDatos.php';
 
 class BDMySQL implements IBaseDeDatos {
 
-	const USUARIO = 'root';
-	const CLAVE = '12345';
-	const BD = '675899';
-	const SERVIDOR = 'localhost';
-	// 	const USUARIO = '675899';
-	// 	const CLAVE = 'clmyis93';
-	// 	const BD = '675899';
-	// 	const SERVIDOR = 'localhost';
+		const USUARIO = 'root';
+		const CLAVE = '12345';
+		const BD = '675899';
+		const SERVIDOR = 'localhost';
+		// 	const USUARIO = '675899';
+		// 	const CLAVE = 'clmyis93';
+		// 	const BD = '675899';
+		// 	const SERVIDOR = 'localhost';
 
 	/**
 	 * Conexion a base de exitoConsulta

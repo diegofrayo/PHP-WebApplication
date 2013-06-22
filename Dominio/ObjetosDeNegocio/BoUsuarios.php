@@ -8,8 +8,13 @@
 
 namespace Dominio\ObjetosDeNegocio;
 
-require_once '/../Daos/DaoUsuario.php';
-require_once '/../Excepciones/BusinessLogicException.php';
+use Dominio\Clases\Foto;
+
+use Dominio\Daos\DaoFoto;
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoUsuario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/BusinessLogicException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoFoto.php';
 
 use Dominio\Excepciones\BusinessLogicException;
 use Dominio\Clases\Usuario;
@@ -19,10 +24,12 @@ use Dominio\Daos\DaoUsuario;
 class BoUsuarios
 {
 	private $_usuarioDao;
+	private $_fotoDao;
 
 	public function __construct()
 	{
 		$this->_usuarioDao = new DaoUsuario();
+		$this->_fotoDao = new DaoFoto();
 	}
 
 	/**
@@ -95,6 +102,13 @@ class BoUsuarios
 		return $this->_usuarioDao->buscarUsuariosPorNombre($nombre);
 	}
 
+	/**
+	 * Metodo para iniciar sesion
+	 * @param unknown_type $email
+	 * @param unknown_type $password
+	 * @throws BusinessLogicException
+	 * @return \Dominio\ObjetosDeNegocio\Ambigous
+	 */
 	public function iniciarSesionUsuario($email, $password)
 	{
 		$usuarioBD = $this->obtenerUsuarioPorEmail($email);
@@ -107,5 +121,18 @@ class BoUsuarios
 		}
 		throw new BusinessLogicException("El email ingresado no existe");
 
+	}
+
+	public function crearFoto(Foto $foto, $configuracion)
+	{
+		if($foto !=null){
+			return $this->_fotoDao->crear($foto, $configuracion);
+		}
+		throw new BusinessLogicException("Error con el parametro de tipo foto");
+	}
+
+	public function borrarFoto(Foto $foto)
+	{
+		return $this->_fotoDao->borrar($foto);
 	}
 }

@@ -13,15 +13,15 @@ use Dominio\Clases\Periodo;
 use Dominio\Clases\Asignatura;
 use Dominio\Clases\Nota;
 
-require_once '/../Daos/DaoPeriodo.php';
-require_once '/../Daos/DaoAsignatura.php';
-require_once '/../Daos/DaoNota.php';
-require_once '/../Daos/DaoGrupoDeNotas.php';
-require_once '/../Clases/Periodo.php';
-require_once '/../Clases/Asignatura.php';
-require_once '/../Clases/Nota.php';
-require_once '/../Clases/GrupoDeNotas.php';
-require_once '/../Excepciones/BusinessLogicException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoPeriodo.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoAsignatura.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoNota.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoGrupoDeNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Periodo.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Asignatura.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Nota.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/GrupoDeNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/BusinessLogicException.php';
 
 /**
  * Esta clase es un objeto de negocio.
@@ -97,7 +97,7 @@ class BoLogicaNotas
 	 * @param unknown_type $id
 	 * @return Ambigous <NULL, \Dominio\Clases\Asignatura>
 	 */
-	private function obtenerAsignaturaPorId($id)
+	public function obtenerAsignaturaPorId($id)
 	{
 		return $this->_asignaturaDao->obtenerAsignaturaPorId($id);
 	}
@@ -112,8 +112,6 @@ class BoLogicaNotas
 	{
 		$grupoDefectoAsignatura = $this->obtenerGrupoDefectoDeUnaAsignatura($asignatura);
 		$notaFinal  = $this->calcularPromedioDeNotasDeUnGrupo($grupoDefectoAsignatura);
-		$asignatura->setNotaFinal($notaFinal);
-		$this->_asignaturaDao->editar($asignatura);
 		return $notaFinal;
 	}
 
@@ -196,6 +194,11 @@ class BoLogicaNotas
 		//throw new BusinessLogicException("El grupo de notas no existe");
 	}
 
+	public function obtenerNotasFuturas($fecha)
+	{
+		return $this->_notasDao->obtenerNotasFuturas($fecha);
+	}
+
 	/**
 	 * Metodo para crear un periodo
 	 * @param Periodo $periodo
@@ -233,6 +236,7 @@ class BoLogicaNotas
 	public function borrarPeriodo(Periodo $periodo)
 	{
 		if($this->obtenerPeriodoPorId($periodo->getId()) != null){
+
 			return $this->_periodoDao->borrar($periodo);
 		}
 		throw new BusinessLogicException("El periodo que quiere borrar no existe");
@@ -271,8 +275,7 @@ class BoLogicaNotas
 			$numeroAsignaturas = count($listaAsignaturas);
 			if($numeroAsignaturas>0){
 				foreach ($listaAsignaturas as $asignatura){
-					//$promedioFinal = $promedioFinal +  $this->calcularNotaFinalDeUnaAsignatura($asignatura);
-					$promedioFinal = $promedioFinal +  $asignatura->getNotaFinal();
+					$promedioFinal = $promedioFinal +  $this->calcularNotaFinalDeUnaAsignatura($asignatura);
 				}
 				$promedioFinal = $promedioFinal / $numeroAsignaturas;
 			}
@@ -392,33 +395,37 @@ class BoLogicaNotas
 		throw new BusinessLogicException("El grupo no existe");
 	}
 
-	/**
-	 * Metodo para calcular la nota que hace falta para aprobar una asignatura.
-	 * @param GrupoDeNotas $grupo
-	 * @param unknown_type $porcentajeNotaFaltante
-	 * @param unknown_type $valorMinimoParaAprobar
-	 * @return number|string
-	 */
-	public function calcularNotaRestanteParaAprobar(GrupoDeNotas $grupo, $porcentajeNotaFaltante, $valorMinimoParaAprobar)
+	// 	/**
+	// 	 * Metodo para calcular la nota que hace falta para aprobar una asignatura.
+	// 	 * @param GrupoDeNotas $grupo
+	// 	 * @param unknown_type $porcentajeNotaFaltante
+	// 	 * @param unknown_type $valorMinimoParaAprobar
+	// 	 * @return number|string
+	// 	 */
+	// 	public function calcularNotaRestanteParaAprobar(GrupoDeNotas $grupo, $porcentajeNotaFaltante, $valorMinimoParaAprobar)
+	// 	{
+	// 		if($this->obtenerGrupoDeNotasPorId($grupoDeNotas->getId()) != null ){
+	// 			$numeroNotasAsignatura = $grupo->getAsignatura()->getNumeroDeNotas();
+	// 			if($grupo->getEsGrupoDefecto() == true){
+	// 				$listaNotas = $this->obtenerListaDeNotasDeUnGrupo($grupo);
+	// 				$numeroNotasGrupo = count($listaNotas);
+
+	// 				if(($numeroNotasAsignatura - $numeroNotasGrupo) == 1){
+	// 					$promedioActual = $this->calcularPromedioDeNotasDeUnGrupo($grupo);
+	// 					$notaRestante = ($valorMinimoParaAprobar - $promedioActual)*(100/$porcentajeNotaFaltante);
+	// 					return $notaRestante;
+	// 				}
+	// 			}
+	// 			return "No se puede efectuar el calculo, para este grupo";
+	// 		}
+	// 		throw new BusinessLogicException("El grupo no existe");
+	// 	}
+
+	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura)
 	{
-		if($this->obtenerGrupoDeNotasPorId($grupoDeNotas->getId()) != null ){
-			$numeroNotasAsignatura = $grupo->getAsignatura()->getNumeroDeNotas();
-			if($grupo->getEsGrupoDefecto() == true){
-				$listaNotas = $this->obtenerListaDeNotasDeUnGrupo($grupo);
-				$numeroNotasGrupo = count($listaNotas);
-
-				if(($numeroNotasAsignatura - $numeroNotasGrupo) == 1){
-					$promedioActual = $this->calcularPromedioDeNotasDeUnGrupo($grupo);
-					$notaRestante = ($valorMinimoParaAprobar - $promedioActual)*(100/$porcentajeNotaFaltante);
-					return $notaRestante;
-				}
-			}
-			return "No se puede efectuar el calculo, para este grupo";
+		if($this->obtenerAsignaturaPorId($asignatura->getId()) != null ){
+			return $this->_grupoDeNotasDao->obtenerListaDeGruposDeUnaAsignatura($asignatura);
 		}
-		throw new BusinessLogicException("El grupo no existe");
-	}
-
-	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura){
-		return $this->_grupoDeNotasDao->obtenerListaDeGruposDeUnaAsignatura($asignatura);
+		throw new BusinessLogicException("La asignatura no existe");
 	}
 }

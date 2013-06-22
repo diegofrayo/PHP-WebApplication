@@ -10,11 +10,11 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoNotificacion;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoNotificacion.php';
-require_once '/../Clases/Notificacion.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoNotificacion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Notificacion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoNotificacion implements IDaoNotificacion
 {

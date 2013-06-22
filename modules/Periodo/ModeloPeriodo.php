@@ -9,8 +9,8 @@ use Dominio\ObjetosDeNegocio\BoLogicaNotas;
 use Dominio\Clases\Usuario;
 use Dominio\ObjetosDeNegocio\BoUsuarios;
 
-require_once '/../../Dominio/ObjetosDeNegocio/BoUsuarios.php';
-require_once '/../../Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
 
 class ModeloPeriodo
 {
@@ -46,9 +46,14 @@ class ModeloPeriodo
 	{
 		return $this->_boLogicaNotas->crearAsignatura($asignatura);
 	}
-	
+
 	public function obtenerListaDeAsignaturasDeUnPeriodo(Periodo $periodo){
 		return $this->_boLogicaNotas->obtenerListaDeAsignaturasDeUnPeriodo($periodo);
+	}
+
+	public function borrarPeriodo(Periodo $periodo)
+	{
+		return $this->_boLogicaNotas->borrarPeriodo($periodo);
 	}
 
 }

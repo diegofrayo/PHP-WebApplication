@@ -11,21 +11,25 @@ class HelperModules
 {
 
 	public static function crearMensajeExito($mensajeExito){
-		$html = "<div class='divTextoMensajesExito'><b>&Eacute;xito</b><br />".$mensajeExito."</div>";
+		$html = "<div class='divTextoMensajesExito'><strong>&Eacute;xito</strong><br />".$mensajeExito."</div>";
 		return $html;
 	}
 
 	public static function crearMensajeError($mensajeError){
-		$html = "<div class='divTextoMensajesError'><b>Error</b><br />".$mensajeError."</div>";
+		$html = "<div class='divTextoMensajesError'><strong>Error</strong><br />".$mensajeError."</div>";
 		return $html;
 	}
 
 	public static function  redireccionarAlInicio(){
 		header("location: http://ProjectPHP/home");
+		//header("location: ".$_SERVER['DOCUMENT_ROOT']);
+		//header("location: http://qualify.6te.net/");
 	}
 
 	public static function  redireccionar($destino){
 		header("location: http://ProjectPHP/".$destino);
+		//header("location: ".$_SERVER['DOCUMENT_ROOT']."/".$destino);
+		//header("location: http://qualify.6te.net/".$destino);
 	}
 
 	public static function leerPlantillaHTML($nombreModulo , $nombreFile){

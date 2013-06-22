@@ -9,7 +9,7 @@ use modules\Asignatura\VistaAsignatura;
 use modules\HelperModules;
 
 use Dominio\Clases\Periodo;
-require_once '/../Asignatura/VistaAsignatura.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Asignatura/VistaAsignatura.php';
 
 class VistaPeriodo
 {
@@ -29,7 +29,8 @@ class VistaPeriodo
 		$html = str_replace("<!--{Editar Periodo}-->", $editarPeriodoHTML, $html);
 		$html = str_replace("<!--{Lista de asignaturas}-->", $listaAsignaturasHTML, $html);
 		$html = str_replace("<!--{Id Periodo}-->", $dtoPeriodo->getPeriodo()->getId(), $html);
-		
+
+
 		if(count($listaDeAsignaturas)){
 			$html = str_replace("<!--{Navegacion Buttons}-->", $this->crearButtonsNavegacion(), $html);
 		}
@@ -39,13 +40,15 @@ class VistaPeriodo
 		$vistaAsignatura = new VistaAsignatura();
 		$htmlAsignatura= "";
 
-
 		foreach ($arrayDTOAsignatura as $dtoAsignatura){
 			$htmlAsignatura=$vistaAsignatura->imprimirHTML_Asignatura($dtoAsignatura);
 			echo $htmlAsignatura;
 		}
 
 		echo "</div></div>";
+
+		//Por ultimo imprimo un modal oculto
+		echo $this->crearModalParaBorrarPeriodo($dtoPeriodo->getPeriodo()->getId());
 
 	}
 
@@ -63,30 +66,35 @@ class VistaPeriodo
 
 	private function crearInformacionPeriodo(Periodo $periodo){
 		$html="<table class='tablaInformacion'>".
-				"<tbody><tr><td>Nombre</td>".
+				"<tbody><tr><td>Nombre:</td>".
 				"<td>".$periodo->getNombre()."</td>".
-				"</tr><tr><td>Descripci&oacute;n</td>".
-				"<td>".$periodo->getDescripcion()."</td>".
-				"</tr><tr><td>Fecha de inicio</td>".
+				"</tr><tr><td>Fecha de inicio:</td>".
 				"<td>".$periodo->getFechaInicio()."</td>".
-				"</tr><tr><td>Fecha de finalizaci&oacute;n</td>".
+				"</tr><tr><td>Fecha de finalizaci&oacute;n:</td>".
 				"<td>".$periodo->getFechaFinal()."</td>".
-				"</tr></tbody></table>";
+				"</tr><tr><td>Eliminar Periodo:</td>".
+				"<td><a href='#divModalBorrarPeriodo' role='button' data-toggle='modal'>".
+				"<span id='button-remove' class='sprite'></span> </a>".
+				"</td></tr></tbody></table>";
+
 		return $html;
 	}
 
-	private function crearEditarPeriodo(Periodo $periodo){
+	private function crearEditarPeriodo(Periodo $periodo)
+	{
+
+		// 		"<input type='text' class='inputCalendars' value = '".$periodo->getFechaInicio().
+		// 		"<input type='text' class='inputCalendars' value = '".$periodo->getFechaFinal().
+			
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='15' value = '".$periodo->getNombre()."' required />".
 				"</div><label>Fecha de inicio </label><div>".
-				"<input type='text' class='inputCalendars' value = '".$periodo->getFechaInicio().
+				"<input type='text' class='inputCalendars' value = '".
 				"' name='fechaInicio' required />".
 				"</div><label>Fecha de finalizacion </label><div>".
-				"<input type='text' class='inputCalendars' value = '".$periodo->getFechaFinal().
+				"<input type='text' class='inputCalendars' value = '".
 				"' name='fechaFinal' required />".
-				"</div><label>Descripci&oacute;n </label><div>".
-				"<textarea maxlength='30' name='descripcion'>".$periodo->getDescripcion()."</textarea>".
-				"<input type='hidden' name='id' value='".$periodo->getId()."' /></div>";
+				"</div>"."<input type='hidden' name='id' value='".$periodo->getId()."' />";
 		return $html;
 	}
 
@@ -96,6 +104,26 @@ class VistaPeriodo
 				"class='sprite'></span></a><a href='#divCarouselPeriodo' data-slide='prev'> <span id='button-left'".
 				"class='sprite'></span></a> <a href='#divCarouselPeriodo' data-slide='next'><span".
 				" id='button-right' class='sprite'></span> </a></div>";
+		return $html;
+	}
+
+	private function crearModalParaBorrarPeriodo($idPeriodo){
+		$html = "<div id='divModalBorrarPeriodo' class='modal hide fade' tabindex='-1'".
+				"role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>".
+				"<div class='modal-header'>".
+				"<button type='button' class='close' data-dismiss='modal'".
+				"aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
+				"</div>	<div class='modal-body'>".
+				"<p>Borrar&iacute;a el periodo, con todas sus asignaturas y	notas</p>".
+				"</div>	<div class='modal-footer'>".
+				"<form class='form-inline'".
+				" enctype='multipart/form-data' method='post'".
+				" action='modules/Periodo/ControladorPeriodo.php'>".
+				"<input type='hidden' value='".$idPeriodo."' name='id'> <input".
+				" class='btn btn-primary' type='submit' name='action'".
+				" value='Borrar Periodo' />".
+				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
+				"Cancelar</button></form></div></div>";
 		return $html;
 	}
 

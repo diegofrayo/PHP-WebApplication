@@ -3,25 +3,19 @@
 namespace modules\Asignatura;
 
 use Dominio\Clases\GrupoDeNotas;
-
 use Dominio\Clases\Nota;
-
 use Dominio\Clases\Asignatura;
 use Dominio\ObjetosDeNegocio\BoLogicaNotas;
 use Dominio\Clases\Usuario;
-use Dominio\ObjetosDeNegocio\BoUsuarios;
 
-require_once '/../../Dominio/ObjetosDeNegocio/BoUsuarios.php';
-require_once '/../../Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
 
 class ModeloAsignatura
 {
-	private $_boUsuarios;
 	private $_boLogicaNotas;
 
 	public function __construct()
 	{
-		$this->_boUsuarios = new BoUsuarios();
 		$this->_boLogicaNotas = new BoLogicaNotas();
 	}
 
@@ -43,9 +37,19 @@ class ModeloAsignatura
 	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura){
 		return $this->_boLogicaNotas->obtenerListaDeGruposDeUnaAsignatura($asignatura);
 	}
-	
+
 	public function obtenerListaDeNotasDeUnGrupo(GrupoDeNotas $grupo)
 	{
 		return $this->_boLogicaNotas->obtenerListaDeNotasDeUnGrupo($grupo);
+	}
+
+	public function borrarAsignatura(Asignatura $asignatura)
+	{
+		return $this->_boLogicaNotas->borrarAsignatura($asignatura);
+	}
+	
+	public function borrarNota(Nota $nota)
+	{
+		return $this->_boLogicaNotas->borrarNota($nota);
 	}
 }

@@ -17,15 +17,15 @@ use Dominio\Clases\RelacionEntreUsuarios;
 use Dominio\Clases\Notificacion;
 use Dominio\Clases\Comentario;
 
-require_once '/../Daos/DaoRelacionEntreUsuarios.php';
-require_once '/../Daos/DaoComentario.php';
-require_once '/../Daos/DaoNotificacion.php';
-require_once '/../Daos/DaoNoticia.php';
-require_once '/../Clases/Notificacion.php';
-require_once '/../Clases/Comentario.php';
-require_once '/../Clases/RelacionEntreUsuarios.php';
-require_once '/../Clases/Noticia.php';
-require_once '/../Excepciones/BusinessLogicException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoRelacionEntreUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoComentario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoNotificacion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoNoticia.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Notificacion.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Comentario.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/RelacionEntreUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Noticia.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/BusinessLogicException.php';
 
 class BoSocial
 {

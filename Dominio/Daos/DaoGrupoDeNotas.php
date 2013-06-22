@@ -8,9 +8,9 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\Clases\GrupoDeNotas;
 use Dominio\IDaos\IDaoGrupoDeNotas;
 
-require_once '/../IDaos/IDaoGrupoDeNotas.php';
-require_once '/../Clases/GrupoDeNotas.php';
-require_once '/../BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoGrupoDeNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/GrupoDeNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
 
 class DaoGrupoDeNotas implements IDaoGrupoDeNotas
 {
@@ -84,8 +84,11 @@ class DaoGrupoDeNotas implements IDaoGrupoDeNotas
 
 		if(count($resultados)==1){
 			$nuevoGrupo = $resultados[0];
-			return new GrupoDeNotas($nuevoGrupo['id'],$nuevoGrupo['nombre'],
+			$daoAsignatura = new DaoAsignatura();
+			$grupo = new GrupoDeNotas($nuevoGrupo['id'],$nuevoGrupo['nombre'],
 					$nuevoGrupo['porcentajes_iguales'],	$nuevoGrupo['es_grupo_defecto']);
+			$grupo->setAsignatura($daoAsignatura->obtenerAsignaturaPorId($nuevoGrupo['asignatura']));
+			return $grupo;
 		}
 
 		return null;

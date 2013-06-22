@@ -9,22 +9,22 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoPeriodo;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoPeriodo.php';
-require_once '/../Clases/Periodo.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoPeriodo.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Periodo.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoPeriodo implements IDaoPeriodo
 {
 	public function crear(Periodo $periodo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "insert into periodo (id, fecha_inicio, fecha_final, descripcion, usuario, nombre)"
-				. " values (?,?,?,?,?,?)";
+		$consultaSQL = "insert into periodo (id, fecha_inicio, fecha_final,usuario, nombre)"
+				. " values (?,?,?,?,?)";
 
 		$arrayDatos = array(0, date('Y-m-d', strtotime($periodo -> getFechaInicio())),
-				date('Y-m-d', strtotime($periodo -> getFechaFinal())), $periodo->getDescripcion(),
+				date('Y-m-d', strtotime($periodo -> getFechaFinal())),
 				$periodo -> getUsuario()->getEmail(), $periodo->getNombre());
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
@@ -52,10 +52,9 @@ class DaoPeriodo implements IDaoPeriodo
 	public function editar(Periodo $periodo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update periodo set fecha_inicio=?, fecha_final=?, descripcion=?, nombre=? where id = ?" ;
+		$consultaSQL = "update periodo set fecha_inicio=?, fecha_final=?, nombre=? where id = ?" ;
 		$arrayDatos = array($periodo -> getFechaInicio(),
-				$periodo -> getFechaFinal(),  $periodo->getNombre(),
-				$periodo->getDescripcion(),$periodo -> getId());
+				$periodo -> getFechaFinal(),  $periodo->getNombre(),$periodo -> getId());
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos );
 
 		if ($exitoConsulta ==true){
@@ -74,7 +73,7 @@ class DaoPeriodo implements IDaoPeriodo
 		if(count($resultados)==1){
 			$nuevoPeriodo = $resultados[0];
 			return new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion'],$nuevoPeriodo['nombre']);
+					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['nombre']);
 		}
 
 		return null;
@@ -92,7 +91,7 @@ class DaoPeriodo implements IDaoPeriodo
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevoPeriodo = $resultados[$i];
 				$periodoLeido = new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-						$nuevoPeriodo['fecha_final'],$nuevoPeriodo['descripcion'],$nuevoPeriodo['nombre']);
+						$nuevoPeriodo['fecha_final'],$nuevoPeriodo['nombre']);
 				$periodoLeido->setUsuario($usuario);
 				$listaPeriodos[] = $periodoLeido;
 			}

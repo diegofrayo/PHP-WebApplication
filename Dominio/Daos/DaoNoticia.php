@@ -10,11 +10,11 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoNoticia;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoNoticia.php';
-require_once '/../Clases/Noticia.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoNoticia.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Noticia.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoNoticia implements IDaoNoticia
 {

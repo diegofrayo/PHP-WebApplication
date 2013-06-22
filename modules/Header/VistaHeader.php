@@ -12,7 +12,7 @@ class VistaHeader
 	public function imprimirHTML_UsuarioLogueado(DTOModuloHeader $dtoHeader){
 		$html = HelperModules::leerPlantillaHTML("Header","Header_User_Logueado");
 
-		$linkUsuario = $this->crearLinkUsuario($dtoHeader->getNickUsuario());
+		$linkUsuario = $this->crearLinkUsuario($dtoHeader->getNickUsuario(), $dtoHeader->getFotoUsuario());
 		//$listaDeNoticias = $this->crearFeedDeNoticias($dtoHeader->getListaNotificacionesUsuario());
 
 		$html = str_replace("<!--{Link Usuario}-->", $linkUsuario, $html);
@@ -24,8 +24,15 @@ class VistaHeader
 		echo HelperModules::leerPlantillaHTML("Header","Header_User_No_Logueado");
 	}
 
-	private function crearLinkUsuario($nick){
-		$html = "<a href = '/perfil/".$nick."'>@".$nick."</a>";
+	private function crearLinkUsuario($nick, $ubicacionFoto){
+
+		// 		$html = "<a href = '/perfil/".$nick."'><div id='divProfile'>".
+		// 				"<img alt='image-profile' src='".$_SERVER['DOCUMENT_ROOT']."/".$ubicacionFoto."'/>.
+		// 						<p>@".$nick."</p></div></a>";
+
+		$html = "<a href = '/perfil/".$nick."'><div id='divImgProfile'>".
+				"<img alt='image-profile' src='http://ProjectPHP/".$ubicacionFoto."'/>.
+						<p>@".$nick."</p></div></a>";
 		return $html;
 	}
 

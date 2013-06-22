@@ -11,22 +11,12 @@ use modules\Header\VistaHeader;
 use Dominio\Clases\Usuario;
 use modules\Header\ModeloHeader;
 
-// require_once 'VistaHeader.php';
-// require_once 'ModeloHeader.php';
-// require_once '/../HelperModules.php';
-// require_once '/../../Dominio/Excepciones/BusinessLogicException.php';
-// require_once '/../../Dominio/Excepciones/DBTransactionException.php';
-// require_once '/../../Dominio/DTO/DTOModuloHeader.php';
-
-require_once 'modules/Header/VistaHeader.php';
-require_once 'modules/Header/ModeloHeader.php';
-require_once 'modules/HelperModules.php';
-require_once 'Dominio/Excepciones/BusinessLogicException.php';
-require_once 'Dominio/Excepciones/DBTransactionException.php';
-require_once 'Dominio/DTO/DTOModuloHeader.php';
-
-//Como sería utilizando $_SERVER['DOCUMENT_ROOT']
-
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Header/VistaHeader.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Header/ModeloHeader.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/modules/HelperModules.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/BusinessLogicException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOModuloHeader.php';
 
 $modeloHeader = new ModeloHeader();
 $vistaHeader = new VistaHeader();
@@ -59,9 +49,16 @@ if(isset($_POST["action"])){
 	if($usuarioApp == "Visitante"){
 		$vistaHeader->imprimirHTML_UsuarioNoLogueado();
 	}else{
-		$dtoHeader = new DTOModuloHeader();
-		$dtoHeader->setNickUsuario( $usuarioApp->getNick());
-		$dtoHeader->setListaNotificacionesUsuario($modeloHeader->obtenerNotificacionesDelUsuario($usuarioApp));
-		$vistaHeader->imprimirHTML_UsuarioLogueado($dtoHeader);
+		try{
+			$dtoHeader = new DTOModuloHeader();
+			$dtoHeader->setNickUsuario($usuarioApp['nick']);
+			$dtoHeader->setFotoUsuario( $usuarioApp['foto']['ubicacion']);
+			$dtoHeader->setListaNotificacionesUsuario($modeloHeader->obtenerNotificacionesDelUsuario(Usuario::arrayToUser($usuarioApp)));
+			$vistaHeader->imprimirHTML_UsuarioLogueado($dtoHeader);
+		}catch (BusinessLogicException $e1){
+			$_SESSION["mensajes"] = $e1->__toString();
+		}catch (DBTransactionException $e2){
+			$_SESSION["mensajes"] = $e2->__toString();
+		}
 	}
 }

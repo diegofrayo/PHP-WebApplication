@@ -9,11 +9,11 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoNota;
 use Dominio\DTO\DTOCrud;
 
-require_once '/../IDaos/IDaoNota.php';
-require_once '/../Clases/Nota.php';
-require_once '/../BaseDeDatos/BDFactory.php';
-require_once '/../DTO/DTOCrud.php';
-require_once '/../Excepciones/DBTransactionException.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoNota.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Nota.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/DTO/DTOCrud.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Excepciones/DBTransactionException.php';
 
 class DaoNota implements IDaoNota
 {
@@ -76,7 +76,6 @@ class DaoNota implements IDaoNota
 				$notaLeida->setGrupo($grupo);
 				$listaNotas[] = $notaLeida;
 			}
-			return $listaNotas;
 		}
 
 		return $listaNotas;
@@ -89,13 +88,38 @@ class DaoNota implements IDaoNota
 		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($id));
 
 		if(count($resultados)==1){
-			$notaLeida = $resultados[0];
+			$daoGrupo = new DaoGrupoDeNotas();
+			$nuevaNota = $resultados[0];
 			$notaLeida = new Nota($nuevaNota['id'],$nuevaNota['nombre'],
 					$nuevaNota['valor'], $nuevaNota['porcentaje'] ,$nuevaNota['fecha']);
+			$notaLeida->setGrupo($daoGrupo->obtenerGrupoPorId($nuevaNota['grupo']));
+			return $notaLeida;
 		}
 
 		return null;
 
+	}
+
+	public function obtenerNotasFuturas($fecha)
+	{
+		$manejadorBD = BDFactory::crearManejadorBD();
+		$consultaSQL = "select * from nota where fecha  >= ?";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($fecha));
+		$numeroResultados = count($resultados);
+		$listaNotas = array();
+
+		if($numeroResultados!=0){
+			$daoGrupo = new DaoGrupoDeNotas();
+			for ($i = 0; $i<$numeroResultados; $i++){
+				$nuevaNota = $resultados[$i];
+				$notaLeida = new Nota($nuevaNota['id'],$nuevaNota['nombre'],
+						$nuevaNota['valor'],$nuevaNota['porcentaje'] ,$nuevaNota['fecha']);
+				$notaLeida->setGrupo($daoGrupo->obtenerGrupoPorId($nuevaNota['grupo']));
+				$listaNotas[] = $notaLeida;
+			}
+		}
+
+		return $listaNotas;
 	}
 
 }

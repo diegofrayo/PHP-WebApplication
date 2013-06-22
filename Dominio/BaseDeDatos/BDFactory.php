@@ -1,7 +1,7 @@
 <?php
 
 namespace Dominio\BaseDeDatos;
-require_once 'BDMySQL.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDMySQL.php';
 
 class BDFactory {
 	

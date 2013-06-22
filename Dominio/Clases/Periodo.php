@@ -17,12 +17,7 @@ class Periodo
 	 */
 	private $_fechaFinal;
 	
-	/**
-	 * Breve descripcion acerca del periodo
-	 * @var String
-	 */
-	private $_descripcion;
-	
+
 	/**
 	 * Atributo de tipo Usuario. Es el usuario propietario del periodo
 	 */
@@ -30,12 +25,11 @@ class Periodo
 	
 	private $_nombre;
 
-	public function __construct($id, $fechaInicio, $fechaFinal, $descripcion, $nombre)
+	public function __construct($id, $fechaInicio, $fechaFinal, $nombre)
 	{
 		$this->_id = $id;
 		$this->_fechaInicio= $fechaInicio;
 		$this->_fechaFinal = $fechaFinal;
-		$this->_descripcion = $descripcion;
 		$this->_nombre = $nombre;
 	}
 
@@ -55,10 +49,7 @@ class Periodo
 	{
 		return $this->_fechaFinal;
 	}
-	public function getDescripcion()
-	{
-		return $this->_descripcion;
-	}
+
 	public function getUsuario()
 	{
 		return $this->_usuario;

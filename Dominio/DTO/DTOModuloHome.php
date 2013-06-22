@@ -7,6 +7,7 @@ class DTOModuloHome
 
 	private $_listaDePeriodosDeUnUsuario;
 	private $_feedNoticias;
+	private $_listaNotasFuturo;
 
 	public function __construct()
 	{
@@ -31,6 +32,16 @@ class DTOModuloHome
 	public function setFeedNoticias($feedNoticias) {
 
 		$this -> _feedNoticias = $feedNoticias;
+	}
+
+	public function getListaNotasFuturo()
+	{
+		return $this -> _listaNotasFuturo;
+	}
+
+	public function setListaNotasFuturo($listaNotasFuturo)
+	{
+		$this -> _listaNotasFuturo = $listaNotasFuturo;
 	}
 
 
