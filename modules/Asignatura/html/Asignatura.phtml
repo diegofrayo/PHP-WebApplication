@@ -59,7 +59,7 @@
 						<div class="divTituloModulo">
 							<h1>
 								<a href="#collapseCrear<!--{Indice Asignatura}-->"
-									data-toggle="collapse" class="linkCollapse">Crear Nota <i
+									data-toggle="collapse" class="linkCollapse">Crear nota <i
 									class="icon-chevron-down"></i>
 								</a>
 							</h1>
@@ -68,6 +68,37 @@
 						<div class="divInputsFormularios collapse"
 							id="collapseCrear<!--{Indice Asignatura}-->">
 							<!--{Crear Nota}-->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="divFormularios moduloApp" id="divCrearGrupo">
+					<form id="formCrearNota" enctype="multipart/form-data"
+						method="post"
+						action="/../modules/Asignatura/ControladorAsignatura.php">
+						<div class="divTituloModulo">
+							<h1>
+								<a href="#collapseCrearGrupo" data-toggle="collapse"
+									class="linkCollapse">Crear grupo de notas <i
+									class="icon-chevron-down"></i>
+								</a>
+							</h1>
+							<p></p>
+						</div>
+						<div class="divInputsFormularios collapse" id="collapseCrearGrupo">
+							<label>Nombre </label>
+							<div>
+								<input name="nombre" type="text" maxlength="18" required />
+							</div>
+							<label style="display: inline;">Porcentajes Iguales</label> <input
+								type='checkbox' style="display: inline;"
+								name='porcentajesIguales'> <br /> <input type="hidden"
+								name="idAsignatura" value="<!--{Id Asignatura}-->" /> <input
+								class="btn btn-primary" type="submit" name="action"
+								value="Crear Grupo" />
 						</div>
 					</form>
 				</div>

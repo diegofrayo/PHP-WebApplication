@@ -1,5 +1,7 @@
 <?php
 
+use Dominio\Clases\GrupoDeNotas;
+
 use modules\Periodo\ModeloPeriodo;
 use Dominio\Clases\Nota;
 use Dominio\Clases\Asignatura;
@@ -37,7 +39,7 @@ if(isset($_POST["action"])){
 			case 'Borrar Nota':
 				try{
 					if(isset($_POST['id'])){
-						
+
 						$notaABorrar = new Nota($_POST['id'], "", 0, 0, null);
 						$notaABorrar = $modeloAsignatura->borrarNota($notaABorrar);
 						if($notaABorrar!=null){
@@ -56,11 +58,9 @@ if(isset($_POST["action"])){
 		}
 
 	}else{
-
 		switch ($action){
 
 			case 'Crear Nota':
-
 				try{
 					if(isset($_POST['grupo'])){
 						$grupo = $modeloAsignatura->obtenerGrupoDeNotasPorId($_POST['grupo']);
@@ -80,8 +80,20 @@ if(isset($_POST["action"])){
 				header("Location: " . $_SERVER['HTTP_REFERER']);
 				break;
 
-			case 'Editar Asignatura':
+			case 'Editar Nota':
+				try{
+					$notaEditada = new Nota($_POST['idNota'], $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
+					$modeloAsignatura->editarNota($notaEditada);
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha editado la nota");
+				}catch (BusinessLogicException $e1){
+					$_SESSION["mensajes"] = $e1->__toString();
+				}catch (DBTransactionException $e2){
+					$_SESSION["mensajes"] = $e2->__toString();
+				}
+				header("Location: " . $_SERVER['HTTP_REFERER']);
+				break;
 
+			case 'Editar Asignatura':
 				try{
 					$asignaturaEditada= new Asignatura($_POST['idAsignatura'], $_POST['nombre']);
 					$periodoAsignatura = $modeloPeriodo->obtenerPeriodoPorId($_POST['periodo']);
@@ -97,11 +109,66 @@ if(isset($_POST["action"])){
 				break;
 
 			case 'Borrar Asignatura':
-
 				try{
 					$asignaturaBorrar = new Asignatura($_POST['idAsignatura'], "Asignatura 2");
 					$modeloAsignatura->borrarAsignatura($asignaturaBorrar);
 					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("La asignatura se ha borrado");
+				}catch (BusinessLogicException $e1){
+					$_SESSION["mensajes"] = $e1->__toString();
+				}catch (DBTransactionException $e2){
+					$_SESSION["mensajes"] = $e2->__toString();
+				}
+				header("Location: " . $_SERVER['HTTP_REFERER']);
+				break;
+
+			case 'Borrar Grupo':
+				try{
+					$grupoABorrar = new GrupoDeNotas($_POST['idGrupo'], "", true, true);
+					$modeloAsignatura->borrarGrupoDeNotas($grupoABorrar);
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("El grupo se ha borrado");
+				}catch (BusinessLogicException $e1){
+					$_SESSION["mensajes"] = $e1->__toString();
+				}catch (DBTransactionException $e2){
+					$_SESSION["mensajes"] = $e2->__toString();
+				}
+				header("Location: " . $_SERVER['HTTP_REFERER']);
+				break;
+
+			case 'Crear Grupo':
+				try{
+					$porcentajesIguales =	$_POST['porcentajesIguales'];
+
+					if($porcentajesIguales == 'on'){
+						$porcentajesIguales = true;
+					}else{
+						$porcentajesIguales = false;
+					}
+
+					$grupoNuevo= new GrupoDeNotas(0, $_POST['nombre'], $porcentajesIguales, false);
+					$grupoNuevo->setAsignatura(new Asignatura($_POST['idAsignatura'],""));
+					$modeloAsignatura->crearGrupoDeNotas($grupoNuevo);
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("El grupo se ha creado");
+				}catch (BusinessLogicException $e1){
+					$_SESSION["mensajes"] = $e1->__toString();
+				}catch (DBTransactionException $e2){
+					$_SESSION["mensajes"] = $e2->__toString();
+				}
+				header("Location: " . $_SERVER['HTTP_REFERER']);
+				break;
+
+			case 'Editar Grupo':
+				try{
+					$porcentajesIguales =	$_POST['porcentajesIguales'];
+
+					if($porcentajesIguales == 'on'){
+						$porcentajesIguales = true;
+					}else{
+						$porcentajesIguales = false;
+					}
+
+					$grupoAEditar= new GrupoDeNotas($_POST['idGrupo'], $_POST['nombre'], $porcentajesIguales, $_POST['grupo_defecto']);
+					$modeloAsignatura->editarGrupoDeNotas($grupoAEditar);
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("El grupo se ha editado");
 				}catch (BusinessLogicException $e1){
 					$_SESSION["mensajes"] = $e1->__toString();
 				}catch (DBTransactionException $e2){

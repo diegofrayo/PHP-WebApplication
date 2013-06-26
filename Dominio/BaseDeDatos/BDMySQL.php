@@ -7,14 +7,14 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/IBaseDeDatos.php';
 
 class BDMySQL implements IBaseDeDatos {
 
-		const USUARIO = 'root';
-		const CLAVE = '12345';
-		const BD = '675899';
-		const SERVIDOR = 'localhost';
-		// 	const USUARIO = '675899';
-		// 	const CLAVE = 'clmyis93';
-		// 	const BD = '675899';
-		// 	const SERVIDOR = 'localhost';
+	const USUARIO = 'root';
+	const CLAVE = '12345';
+	const BD = '675899';
+	const SERVIDOR = 'localhost';
+	// 	const USUARIO = 'u942880924_php';
+	// 	const CLAVE = 'clmyis93';
+	// 	const BD = 'u942880924_php';
+	// 	const SERVIDOR = 'mysql.hostinger.co';
 
 	/**
 	 * Conexion a base de exitoConsulta

@@ -26,12 +26,12 @@ $usuarioApp = $_SESSION["usuario"];
 if(isset($_POST["action"])){
 
 	$action = $_POST["action"];
-	session_start();
+
 	$usuarioApp = $_SESSION["usuario"];
 
 	switch ($action){
 		case 'Cerrar Sesion':
-			$_SESSION["usuario"] =  null;
+			$_SESSION["usuario"] =  "Visitante";
 			$_SESSION["mensajes"] = "";
 			HelperModules::redireccionarAlInicio();
 			break;

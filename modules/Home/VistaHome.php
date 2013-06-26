@@ -33,7 +33,7 @@ class VistaHome
 	private function crearListaDePeriodos($listaDePeriodos){
 		$html = "<ul>";
 		foreach ($listaDePeriodos as $periodoLeido){
-			$itemPeriodo = "<li><a href = '/periodo/".$periodoLeido->getId()."'>".$periodoLeido->getNombre().
+			$itemPeriodo = "<li><a href = 'periodo/".$periodoLeido->getId()."'>".$periodoLeido->getNombre().
 			" [" . $periodoLeido->getFechaInicio()." / ".$periodoLeido->getFechaFinal()." ]</a></li>";
 			$html.=$itemPeriodo;
 		}

@@ -31,7 +31,7 @@ class VistaHeader
 		// 						<p>@".$nick."</p></div></a>";
 
 		$html = "<a href = '/perfil/".$nick."'><div id='divImgProfile'>".
-				"<img alt='image-profile' src='http://ProjectPHP/".$ubicacionFoto."'/>.
+				"<img alt='image-profile' src='http://qualify.hol.es/".$ubicacionFoto."'/>.
 						<p>@".$nick."</p></div></a>";
 		return $html;
 	}

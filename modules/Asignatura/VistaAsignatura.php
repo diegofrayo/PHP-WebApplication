@@ -10,7 +10,6 @@ use Dominio\Clases\Asignatura;
 
 class VistaAsignatura
 {
-
 	public function imprimirHTML_Asignatura(DTOModuloAsignatura $dtoAsignatura){
 
 		echo "<div class='item'><div class='row-fluid'><div class='span12'>";
@@ -26,6 +25,7 @@ class VistaAsignatura
 		$html = str_replace("<!--{Editar Asignatura}-->", $editarAsignaturaHTML, $html);
 		$html = str_replace("<!--{Indice Asignatura}-->", $dtoAsignatura->getIndice(), $html);
 		$html = str_replace("<!--{Crear Nota}-->", $formCrearNota, $html);
+		$html = str_replace("<!--{Id Asignatura}-->", $dtoAsignatura->getAsignatura()->getId(), $html);
 
 		echo $html;
 
@@ -46,6 +46,9 @@ class VistaAsignatura
 
 		//Por ultimo imprimo un modal oculto
 		echo $this->crearModalParaBorrarAsignatura($dtoAsignatura->getAsignatura()->getId());
+		echo $this->crearModalParaBorrarNota();
+		echo $this->crearModalParaBorrarGrupo();
+		echo $this->crearModalParaEditarNota();
 	}
 
 	private function crearInformacionAsignatura(Asignatura $asignatura)
@@ -104,7 +107,7 @@ class VistaAsignatura
 		$html .="</div><label>Fecha </label><div>".
 				"<input type='text' class='inputCalendars' name='fecha' required />".
 				"</div><input type='hidden' name='idAsignatura'".
-				"value='".$asignatura->getId()."' />".
+				" value='".$asignatura->getId()."' />".
 				"<input class='btn btn-primary' type='submit' name='action' value='Crear Nota' />";
 
 		return $html;
@@ -123,46 +126,109 @@ class VistaAsignatura
 		//Creo el contenido
 		$html.="<div class='collapse' id='collapseGrupo".$grupo->getId()."'><div class='row-fluid'>";
 
-		if(count($listaDeNotas)){
+		if(count($listaDeNotas)>0){
 
 			//Creo la tabla de notas (columna1)
 			$html.=	"<div class='span6'>";
 
-			$html.=	"<table class='table tablaNotas'>".
-					"<thead><tr><th>Nombre</th>".
-					"<th>Valor</th><th>Porcentaje</th>".
-					"<th>Fecha</th><th>Editar</th>".
-					"<th>Borrar</th></tr></thead><tbody>";
+			if($grupo->getPorcentajesIguales() ==true){
 
-			foreach ($listaDeNotas as $nota){
-				$html.=
-				"<tr><td>".$nota->getNombre()."</td>".
-				"<td>".$nota->getValor()."</td>".
-				"<td>".$nota->getPorcentaje()."</td>".
-				"<td>".$nota->getFecha()."</td>".
-				"<td><a href='#divModalEditarNota' role='button'".
-				" data-toggle='modal'".
-				" onclick='eventoEditarNota(this, ".$nota->getId().")'>".
-				"<span id='button-editar' class='sprite'></span></a></td>".
-				"<td><a ".
-				" onclick='borrarNota(this,".$nota->getId().")'><span".
-				" id='button-remove' class='sprite'></span> </a></td>".
-				"</tr>";
+				$html.=	"<table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
+						"<thead><tr><th>Nombre</th>".
+						"<th>Valor</th>".
+						"<th>Fecha</th><th>Editar</th>".
+						"<th>Borrar</th></tr></thead><tbody>";
+
+				foreach ($listaDeNotas as $nota){
+					$html.=
+					"<tr><td>".$nota->getNombre()."</td>".
+					"<td>".$nota->getValor()."</td>".
+					"<td>".$nota->getFecha()."</td>".
+					"<td><a href='#divModalEditarNota' role='button'".
+					" data-toggle='modal'".
+					" onclick='dialogEditarNota(this, ".$nota->getId().")' href='javascript:void(0)'>".
+					"<span id='button-editar' class='sprite'></span></a></td>".
+					"<td><a ".
+					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='javascript:void(0)'><span".
+					" id='button-remove' class='sprite'></span> </a></td>".
+					"</tr>";
+				}
+			}else{
+
+				$html.=	"<table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
+						"<thead><tr><th>Nombre</th>".
+						"<th>Valor</th><th>Porcentaje</th>".
+						"<th>Fecha</th><th>Editar</th>".
+						"<th>Borrar</th></tr></thead><tbody>";
+
+				foreach ($listaDeNotas as $nota){
+					$html.=
+					"<tr><td>".$nota->getNombre()."</td>".
+					"<td>".$nota->getValor()."</td>".
+					"<td>".$nota->getPorcentaje()."</td>".
+					"<td>".$nota->getFecha()."</td>".
+					"<td><a href='#divModalEditarNota' role='button'".
+					" data-toggle='modal'".
+					" onclick='dialogEditarNota(this, ".$nota->getId().")'>".
+					"<span id='button-editar' class='sprite'></span></a></td>".
+					"<td><a ".
+					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='#divModalBorrarNota' role='button' data-toggle='modal'><span".
+					" id='button-remove' class='sprite'></span> </a></td>".
+					"</tr>";
+				}
 			}
+
+			$html.="</tbody></table><br/>";
+
+			$html.="<table class='table' style='text-align: center'>".
+					"<tbody><tr><td>".
+					"<a class='btn' onclick='calcularPromedioGrupo(&#39;#tablaNotas".$grupo->getId()."&#39; ,&#39;#divPromedioGrupo".$grupo->getId()."&#39;, ".$grupo->getPorcentajesIguales().");'>".
+					"Calcular Promedio </a></td>".
+					"<td><div id='divPromedioGrupo".$grupo->getId()."'></div></td>".
+					"</tr></tbody></table>";
+
 			//Cierra la columna 1
-			$html.="</tbody></table></div>";
-
-			//Creo la info del grupo (columna 2)
-			$html.=	"<div class='span6'>";
-
-			//Cierra la columna 2
 			$html.="</div>";
 
 		}else{
 
-			$html.=	"<div class='span6'></div><div class='span6'></div>";
+			$html.=	"<div class='span6'></div>";
 
 		}
+
+		//Creo la info del grupo (columna 2)
+		$html.=	"<div class='span6'>";
+
+
+		$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
+				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+				"<div class='divFormularios moduloApp'>".
+				"<div class='descripcionFormularios'>".
+				"<h1>Configuraci&oacute;n</h1>".
+				"</div><div class='divInputsFormularios'>".
+				"<label>Nombre </label><div>".
+				"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='18' value='".$grupo->getNombre()."' required />".
+				"</div><label style='display:inline;'>Porcentajes Iguales</label>";
+
+		if($grupo->getPorcentajesIguales() ==true){
+			$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' checked />";
+		}else{
+			$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' />";
+		}
+
+		$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
+				"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
+				"<br/><input type='submit' class='btn btn-primary' name='action'".
+				" value='Editar Grupo' />";
+
+		if($grupo->getEsGrupoDefecto() == false){
+			$html.=	"<a class='btn btn-danger' onclick='dialogBorrarGrupo(".$grupo->getId().")'>Borrar Grupo</a>";
+		}
+
+		$html.="</div></div></form>";
+
+		//Cierra la columna 2
+		$html.="</div>";
 
 		//Cierra el contenido
 		$html.="</div></div>";
@@ -175,21 +241,83 @@ class VistaAsignatura
 
 	private function crearModalParaBorrarAsignatura($idAsignatura){
 		$html = "<div id='divModalBorrarAsignatura' class='modal hide fade' tabindex='-1'".
-				"role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>".
+				" role='dialog'  aria-hidden='true'>".
 				"<div class='modal-header'>".
 				"<button type='button' class='close' data-dismiss='modal'".
-				"aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div>	<div class='modal-body'>".
 				"<p>Borrar&iacute;a la asignatura, con todas sus notas</p>".
 				"</div>	<div class='modal-footer'>".
 				"<form class='form-inline'".
 				" enctype='multipart/form-data' method='post'".
 				" action='/../modules/Asignatura/ControladorAsignatura.php'>".
-				"<input type='hidden' value='".$idAsignatura."' name='idAsignatura'> <input".
+				"<input type='hidden' value='".$idAsignatura."' name='idAsignatura' /> <input".
 				" class='btn btn-primary' type='submit' name='action'".
 				" value='Borrar Asignatura' />".
 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
 				"Cancelar</button></form></div></div>";
+		return $html;
+	}
+
+	private function crearModalParaBorrarNota(){
+		$html = "<div id='divModalBorrarNota' class='modal hide fade' tabindex='-1'".
+				" role='dialog'  aria-hidden='true'>".
+				"<div class='modal-header'>".
+				"<button type='button' class='close' data-dismiss='modal'".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
+				"</div><div class='modal-body'>".
+				"<p>Borrar&iacute;a la nota seleccionada</p>".
+				"</div><div class='modal-footer'>".
+				"<button class='btn btn-primary' onclick='borrarNota()' >".
+				"Borrar</button>".
+				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
+				"Cancelar</button></div></div>";
+		return $html;
+	}
+
+	private function crearModalParaBorrarGrupo(){
+		$html = "<div id='divModalBorrarGrupo' class='modal hide fade' tabindex='-1'".
+				" role='dialog'  aria-hidden='true'>".
+				"<div class='modal-header'>".
+				"<button type='button' class='close' data-dismiss='modal'".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
+				"</div><div class='modal-body'>".
+				"<form name='formBorrarGrupo' id='formBorrarGrupo' enctype='multipart/form-data'".
+				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+				"<p>Borrar&iacute;a el grupo seleccionado</p>".
+				"<input type='hidden' name='idGrupo' id='hiddenGrupoBorrar' />".
+				"<input type='hidden' name='action' id='Borrar Grupo' />".
+				"</form></div><div class='modal-footer'>".
+				"<button class='btn btn-primary' onclick='borrarGrupo()' >".
+				"Borrar</button>".
+				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
+				"Cancelar</button></div></div>";
+		return $html;
+	}
+
+	private function crearModalParaEditarNota(){
+		$html = "<div id='divModalEditarNota' class='modal hide fade' tabindex='-1'".
+				" role='dialog'  aria-hidden='true'>".
+				"<div class='modal-header'>".
+				"<button type='button' class='close' data-dismiss='modal'".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Editar Nota</h3></div>".
+				"<div class='modal-body'>".
+				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
+				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+				"<label>Nombre</label>".
+				"<div><input name='nombre' type='text' maxlength='10' required />".
+				"</div><label>Valor </label><div>".
+				"<input name='valor' type='number' required maxlength='4' />".
+				"</div><label id='labelPorcentaje'>Porcentaje </label><div>".
+				"<input name='porcentaje' type='number' maxlength='3' required />".
+				"</div><label>Fecha </label><div>".
+				"<input type='text' class='inputCalendars' name='fecha' required />".
+				"</div><input type='hidden' name='idNota' /><input type='hidden' value='Editar Nota' name='action' /></form></div>".
+				"<div class='modal-footer'>".
+				"<button class='btn btn-primary' onclick='editarNota();' >".
+				"Editar Nota</button>".
+				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
+				"Cancelar</button></div></div>";
 		return $html;
 	}
 

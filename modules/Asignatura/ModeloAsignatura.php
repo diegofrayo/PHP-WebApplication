@@ -47,9 +47,29 @@ class ModeloAsignatura
 	{
 		return $this->_boLogicaNotas->borrarAsignatura($asignatura);
 	}
-	
+
 	public function borrarNota(Nota $nota)
 	{
 		return $this->_boLogicaNotas->borrarNota($nota);
+	}
+
+	public function borrarGrupoDeNotas(GrupoDeNotas $grupoDeNotas)
+	{
+		return $this->_boLogicaNotas->borrarGrupoDeNotas($grupoDeNotas);
+	}
+
+	public function editarGrupoDeNotas(GrupoDeNotas $grupoDeNotas)
+	{
+		return $this->_boLogicaNotas->editarGrupoDeNotas($grupoDeNotas);
+	}
+
+	public function crearGrupoDeNotas(GrupoDeNotas $grupoDeNotas)
+	{
+		return $this->_boLogicaNotas->crearGrupoDeNotas($grupoDeNotas);
+	}
+
+	public function editarNota(Nota $nota)
+	{
+		return $this->_boLogicaNotas->editarNota($nota);
 	}
 }

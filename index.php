@@ -1,6 +1,11 @@
 <?php
 
 session_start();
+
+//$_SESSION["root"] = "C:/xampp/htdocs/ProjectPHP";
+
+$root = dirname($_SERVER['SCRIPT_NAME']);
+
 if (!isset($_SESSION["usuario"])) {
 	$_SESSION["usuario"] = "Visitante";
 }
@@ -13,23 +18,27 @@ if (!isset($_SESSION["usuario"])) {
 	content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1 ">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Qualify.com</title>
-<link rel="shortcut icon" href="http://ProjectPHP/media/img/favicon.png">
+<link rel="shortcut icon"
+	href="<?php echo $root; ?>/media/img/favicon.png">
+<link href='http://fonts.googleapis.com/css?family=Coda&subset=latin'
+	rel='stylesheet' type='text/css'>
 <link rel="stylesheet"
-	href="http://ProjectPHP/media/css/reset-layout.css" type="text/css" />
-<link rel="stylesheet" href="http://ProjectPHP/media/css/bootstrap.css"
+	href="<?php echo $root; ?>/media/css/reset-layout.css" type="text/css" />
+<link rel="stylesheet"
+	href="<?php echo $root; ?>/media/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet"
+	href="<?php echo $root; ?>/media/css/bootstrap-responsive.css"
 	type="text/css" />
 <link rel="stylesheet"
-	href="http://ProjectPHP/media/css/bootstrap-responsive.css"
-	type="text/css" />
-<link rel="stylesheet" href="http://ProjectPHP/media/css/datepicker.css">
-<link rel="stylesheet" href="http://ProjectPHP/media/css/template.css"
-	type="text/css" />
+	href="<?php echo $root; ?>/media/css/datepicker.css">
+<link rel="stylesheet"
+	href="<?php echo $root; ?>/media/css/template.css" type="text/css" />
 
-<script src="http://ProjectPHP/media/js/jquery.js"></script>
-<script src="http://ProjectPHP/media/js/bootstrap.js"></script>
-<script src="http://ProjectPHP/media/js/bootstrap-datepicker.js"></script>
-<script src="http://ProjectPHP/media/js/validation/jQuery.validate.js"></script>
-<script src="http://ProjectPHP/media/js/script.js"></script>
+<script src="<?php echo $root; ?>/media/js/jquery.js"></script>
+<script src="<?php echo $root; ?>/media/js/bootstrap.js"></script>
+<script src="<?php echo $root; ?>/media/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $root; ?>/media/js/validation/validate.js"></script>
+<script src="<?php echo $root; ?>/media/js/script.js"></script>
 
 </head>
 

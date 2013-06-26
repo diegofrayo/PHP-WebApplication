@@ -792,8 +792,8 @@ legend+.control-group {
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #e6e6e6;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 	border: 1px solid #cccccc;
 	*border: 0;
 	border-bottom-color: #b3b3b3;
@@ -855,7 +855,7 @@ legend+.control-group {
 	cursor: default;
 	background-image: none;
 	opacity: 0.65;
-	filter: alpha(opacity =                       65);
+	filter: alpha(opacity =                                           65);
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -938,8 +938,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #0044cc;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled]
@@ -970,8 +970,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #f89406;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-warning:hover,.btn-warning:focus,.btn-warning:active,.btn-warning.active,.btn-warning.disabled,.btn-warning[disabled]
@@ -1002,8 +1002,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #bd362f;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-danger:hover,.btn-danger:focus,.btn-danger:active,.btn-danger.active,.btn-danger.disabled,.btn-danger[disabled]
@@ -1034,8 +1034,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #51a351;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-success:hover,.btn-success:focus,.btn-success:active,.btn-success.active,.btn-success.disabled,.btn-success[disabled]
@@ -1066,8 +1066,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #2f96b4;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-info:hover,.btn-info:focus,.btn-info:active,.btn-info.active,.btn-info.disabled,.btn-info[disabled]
@@ -1098,8 +1098,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 	*background-color: #222222;
 	/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=             false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=         
+		             false );
 }
 
 .btn-inverse:hover,.btn-inverse:focus,.btn-inverse:active,.btn-inverse.active,.btn-inverse.disabled,.btn-inverse[disabled]
@@ -1834,7 +1834,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	-moz-border-radius: 23px;
 	border-radius: 23px;
 	opacity: 0.5;
-	filter: alpha(opacity =                   50);
+	filter: alpha(opacity =                                       50);
 }
 
 .carousel-control.right {
@@ -1846,7 +1846,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	color: #ffffff;
 	text-decoration: none;
 	opacity: 0.9;
-	filter: alpha(opacity =                   90);
+	filter: alpha(opacity =                                       90);
 }
 
 .carousel-indicators {
@@ -3011,8 +3011,8 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	text-decoration: none;
 	background-color: transparent;
 	background-image: none;
-	filter: progid:DXImageTransform.Microsoft.gradient(enabled=       false
-		);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=   
+		             false );
 	cursor: default;
 }
 
@@ -3225,7 +3225,8 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	bottom: 0;
 	left: 0;
 	z-index: 1040;
-	background-color: #000000;
+	/*background-color: #000000;*/
+	background-color: #333;
 }
 
 .modal-backdrop.fade {
@@ -3234,7 +3235,7 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 
 .modal-backdrop,.modal-backdrop.fade.in {
 	opacity: 0.8;
-	filter: alpha(opacity =     80);
+	filter: alpha(opacity =                         80);
 }
 
 .modal {
@@ -3244,7 +3245,8 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	z-index: 1050;
 	width: 560px;
 	margin-left: -280px;
-	background-color: #ffffff;
+	/*background-color: #ffffff;*/
+	background-color: #333;
 	border: 1px solid #999;
 	border: 1px solid rgba(0, 0, 0, 0.3);
 	*border: 1px solid #999;
@@ -3259,6 +3261,8 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
 	outline: none;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	*border: 1px solid #999;
 }
 
 .modal.fade {
@@ -3275,7 +3279,9 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 
 .modal-header {
 	padding: 9px 15px;
-	border-bottom: 1px solid #eee;
+	/*border-bottom: 1px solid #eee;*/
+	border-bottom: 1px solid #333;
+	background-color: #444;
 }
 
 .modal-header .close {
@@ -3295,10 +3301,6 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	padding: 15px;
 }
 
-.modal-body p {
-	color: black;
-}
-
 .modal-form {
 	margin-bottom: 0;
 	display: inline;
@@ -3308,14 +3310,15 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	padding: 14px 15px 15px;
 	margin-bottom: 0;
 	text-align: right;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
+	/*background-color: #f5f5f5;*/
+	background-color: #444;
+	/*border-top: 1px solid #ddd;*/
 	-webkit-border-radius: 0 0 6px 6px;
 	-moz-border-radius: 0 0 6px 6px;
 	border-radius: 0 0 6px 6px;
-	-webkit-box-shadow: inset 0 1px 0 #ffffff;
+	/*-webkit-box-shadow: inset 0 1px 0 #ffffff;
 	-moz-box-shadow: inset 0 1px 0 #ffffff;
-	box-shadow: inset 0 1px 0 #ffffff;
+	box-shadow: inset 0 1px 0 #ffffff;*/
 	*zoom: 1;
 }
 
@@ -3350,18 +3353,20 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini {
 	font-size: 20px;
 	font-weight: bold;
 	line-height: 20px;
-	color: #000000;
+	/*color: #000000;*/
+	color: white;
 	text-shadow: 0 1px 0 #ffffff;
-	opacity: 0.2;
-	filter: alpha(opacity = 20);
+	opacity: 0.5;
+	filter: alpha(opacity =                     20);
+	text-shadow: 0 1px 0 #ffffff;
 }
 
 .close:hover,.close:focus {
-	color: #000000;
+	/*color: #000000;*/
 	text-decoration: none;
 	cursor: pointer;
 	opacity: 0.4;
-	filter: alpha(opacity = 40);
+	filter: alpha(opacity =                     40);
 }
 
 button.close {

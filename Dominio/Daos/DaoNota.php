@@ -49,8 +49,8 @@ class DaoNota implements IDaoNota
 	public function editar(Nota $nota)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update nota set nombre=?, valor=?, porcentaje=?, grupo=?, fecha=? where id = ?" ;
-		$arrayDatos = array($nota -> getNombre(), $nota -> getValor(), $nota->getPorcentaje(), $nota -> getGrupo()->getId(), $nota->getFecha(),$nota -> getId());
+		$consultaSQL = "update nota set nombre=?, valor=?, porcentaje=?, fecha=? where id = ?" ;
+		$arrayDatos = array($nota -> getNombre(), $nota -> getValor(), $nota->getPorcentaje(), $nota->getFecha(),$nota -> getId());
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos );
 
 		if ($exitoConsulta ==true){

@@ -1,3 +1,8 @@
+//Estas variables globales se utilizan para borrar y editar notas
+var idNota = 0;
+var filaSeleccionada = "";
+var tablaSeleccionada = "";
+
 $(document).ready(function() {
 
 	// Muevo los mensajes de error y exito
@@ -40,11 +45,11 @@ function modificarTituloApp(titulo) {
 	document.title = "@" + titulo + " - Qualify";
 }
 
-function ajax(filePHP, idElementoSalida, parametros, funcionRespuesta) {
+function ajax(filaPHP, idElementoSalida, parametros, funcionRespuesta) {
 
 	$.ajax({
 		data : parametros,
-		url : filePHP,
+		url : filaPHP,
 		type : 'post',
 		beforeSend : function() {
 			$(idElementoSalida).html("Procesando, espere por favor...");
@@ -68,7 +73,7 @@ function calcularPromedioPeriodo(idPeriodo) {
 		$(idElementoSalida).html(response);
 	};
 
-	ajax('http://ProjectPHP/modules/Periodo/ControladorPeriodo.php',
+	ajax('http://qualify.hol.es/modules/Periodo/ControladorPeriodo.php',
 			'#divPromedioPeriodo', parametrosMetodo, funcion);
 }
 
@@ -99,7 +104,7 @@ function comprobarNickDisponible() {
 			}
 		};
 
-		ajax('http://ProjectPHP/modules/Home/ControladorHome.php',
+		ajax('http://qualify.hol.es/modules/Home/ControladorHome.php',
 				'#divNickDisponible', parametros, funcion);
 
 	} else {
@@ -136,7 +141,7 @@ function comprobarEmailDisponible() {
 			}
 		};
 
-		ajax('http://ProjectPHP/modules/Home/ControladorHome.php',
+		ajax('http://qualify.hol.es/modules/Home/ControladorHome.php',
 				'#divEmailDisponible', parametros, funcion);
 
 	} else {
@@ -146,7 +151,14 @@ function comprobarEmailDisponible() {
 	}
 }
 
-function borrarNota(botonPresionado, idNota) {
+function dialogBorrarNota(botonPresionado, idDeLaNota) {
+	idNota = idDeLaNota;
+	tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
+	filaSeleccionada = botonPresionado.parentNode.parentNode;
+	// $('#divModalBorrarNota').modal('show');
+}
+
+function borrarNota() {
 
 	var parametrosMetodo = {
 		action : 'Borrar Nota',
@@ -160,13 +172,98 @@ function borrarNota(botonPresionado, idNota) {
 		$("#divNavMensajes").append($('.divTextoMensajesExito'));
 		$("#divNavMensajes").append($('.divTextoMensajesError'));
 
-		var tabla = botonPresionado.parentNode.parentNode.parentNode;
+		tablaSeleccionada.removeChild(filaSeleccionada);
 
-		tabla.removeChild(botonPresionado.parentNode.parentNode);
-		// alert("Nota borrada correctamente");
+		$('#divModalBorrarNota').modal('hide');
+
+		idNota = 0;
+		filaSeleccionada = "";
+		tablaSeleccionada = "";
+
 	};
 
-	ajax('http://ProjectPHP/modules/Asignatura/ControladorAsignatura.php',
+	ajax('http://qualify.hol.es/modules/Asignatura/ControladorAsignatura.php',
 			'#divNavMensajes', parametrosMetodo, funcion);
 
+}
+
+function dialogBorrarGrupo(idGrupo) {
+	document.formBorrarGrupo.idGrupo = idGrupo;
+	$('#divModalBorrarGrupo').modal('show');
+}
+
+function borrarGrupo() {
+	document.formBorrarGrupo.submit();
+	$('#divModalBorrarGrupo').modal('hide');
+}
+
+function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
+		opcionPorcentajesIguales) {
+
+	var tablaNotas = $(tablaNotasHTML + ' tbody tr');
+	var promedio = 0;
+
+	if (opcionPorcentajesIguales == 1) {
+		var sumatoriaNotas = 0;
+		var numeroDeNotas = 0;
+		tablaNotas.each(function(index) {
+			$(this).children("td").each(function(index2) {
+				switch (index2) {
+				case 1:
+					sumatoriaNotas += parseInt($(this).text());
+					numeroDeNotas++;
+					break;
+				}
+			});
+		});
+		promedio = sumatoriaNotas / numeroDeNotas;
+	} else {
+		var notaActual = 0;
+		var porcentajeActual = 0;
+		tablaNotas.each(function(index) {
+			$(this).children("td").each(function(index2) {
+				switch (index2) {
+				case 1:
+					notaActual = parseInt($(this).text());
+					break;
+				case 2:
+					porcentajeActual = parseInt($(this).text());
+					break;
+				}
+			});
+			promedio += ((notaActual / 100) * porcentajeActual);
+		});
+	}
+	$(divSalidaPromedio).html("El promedio es de: " + promedio);
+}
+
+function dialogEditarNota(botonPresionado, idDeLaNota) {
+
+	tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
+	filaSeleccionada = botonPresionado.parentNode.parentNode.cells;
+	var numeroColumnas = filaSeleccionada.length;
+
+	document.formEditarNota.nombre.value = filaSeleccionada[0].innerHTML;
+	document.formEditarNota.valor.value = filaSeleccionada[1].innerHTML;
+
+	// Hay porcentaje
+	if (numeroColumnas == 6) {
+		document.formEditarNota.porcentaje.value = filaSeleccionada[2].innerHTML;
+	} else {
+		document.formEditarNota.porcentaje.value = 0;
+		document.getElementById('labelPorcentaje').innerHTML = "No requiere porcentaje";
+	}
+
+	document.formEditarNota.idNota.value = idDeLaNota;
+
+}
+
+function editarNota() {
+	var form = $("#formEditarNota").validate();
+	form.form();
+	var isValido = form.valid();
+	if (isValido == true) {
+		document.formEditarNota.submit();
+		$('#divModalEditarNota').modal('hide');
+	}
 }

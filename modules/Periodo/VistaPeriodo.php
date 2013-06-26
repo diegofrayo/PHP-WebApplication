@@ -101,18 +101,18 @@ class VistaPeriodo
 	private function crearButtonsNavegacion(){
 		$html = "<div id='divNavButtonsPHP'>
 				<a href='javascript:void(0)' onclick='desplazarCarousel(0);'> <span id='button-home-periodo'".
-				"class='sprite'></span></a><a href='#divCarouselPeriodo' data-slide='prev'> <span id='button-left'".
-				"class='sprite'></span></a> <a href='#divCarouselPeriodo' data-slide='next'><span".
+				" class='sprite'></span></a><a href='#divCarouselPeriodo' data-slide='prev'> <span id='button-left'".
+				" class='sprite'></span></a> <a href='#divCarouselPeriodo' data-slide='next'><span".
 				" id='button-right' class='sprite'></span> </a></div>";
 		return $html;
 	}
 
 	private function crearModalParaBorrarPeriodo($idPeriodo){
 		$html = "<div id='divModalBorrarPeriodo' class='modal hide fade' tabindex='-1'".
-				"role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>".
+				" role='dialog' aria-hidden='true'>".
 				"<div class='modal-header'>".
 				"<button type='button' class='close' data-dismiss='modal'".
-				"aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div>	<div class='modal-body'>".
 				"<p>Borrar&iacute;a el periodo, con todas sus asignaturas y	notas</p>".
 				"</div>	<div class='modal-footer'>".

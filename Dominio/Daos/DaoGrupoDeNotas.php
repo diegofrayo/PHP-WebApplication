@@ -46,8 +46,8 @@ class DaoGrupoDeNotas implements IDaoGrupoDeNotas
 	public function editar(GrupoDeNotas $grupoDeNotas)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update grupo_de_notas set nombre = ?,porcentajes_iguales = ?,asignatura = ? where id = ?" ;
-		$arrayDatos = array($grupoDeNotas -> getNombre(), $grupoDeNotas -> getPorcentajesIguales(), $grupoDeNotas -> getAsignatura()->getId(), $grupoDeNotas -> getId());
+		$consultaSQL = "update grupo_de_notas set nombre = ?,porcentajes_iguales = ? where id = ?" ;
+		$arrayDatos = array($grupoDeNotas -> getNombre(), $grupoDeNotas -> getPorcentajesIguales(), $grupoDeNotas -> getId());
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos );
 
 		if ($exitoConsulta ==true){
