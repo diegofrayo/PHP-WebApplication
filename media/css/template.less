@@ -9,8 +9,8 @@
 /*4*/
 @colorBordes: #444;
 
-/*2*/
-@colorTitulos: #00A6FF;
+/*2#00A6FF*/
+@colorTitulos: #FF1919;
 
 /*3*/
 @colorLinks: #fff;
@@ -51,6 +51,7 @@
 	overflow: hidden;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
+	padding: 3px;
 	padding-top: 0;
 }
 
@@ -85,9 +86,9 @@
 }
 
 #divNavMensajes{
-a{
-	color: white
-}
+	a{
+		color: white
+	}
 }
 
 #footer{
@@ -95,353 +96,389 @@ a{
 	background-color: @colorFondoHeader;
 }
 
-/*.span6,.span12{
+/*-----------------------*/
+
+/*----------Sprites-------------*/
+
+.sprite, #botonSalir{
+	background: url('../img/sprite.png');
+	display: block;
+}
+
+#botonSalir{
+	background-position: -486px -12px; 
+	width: 43px; 
+	height: 69px;
+	border: none; 
+}
+
+#button-home{
+	background-position: -296px -10px; 
+	width: 46px;
+	height: 70px;
+}
+
+#button-alertas{
+	background-position: -422px -10px; 
+	width: 54px; 
+	height: 71px;
+}
+
+#button-perfil{
+	background-position: -356px -8px;
+	width: 49px;
+	height: 72px;
+}
+
+#logo-header{
+	background-position:  1px 0;
+	width: 246px;
+	height: 71px;
+}
+
+#button-left{
+	background-position: -12px -98px; 
+	width: 23px; 
+	height: 32px;
+}
+
+#button-right{
+	background-position: -44px -98px;
+	width: 22px;
+	height: 32px;
+}
+
+#button-home-periodo{
+	background-position: -73px -98px;
+	width: 32px; 
+	height: 32px;
+}
+
+#button-remove{
+	background-position: -115px -106px;
+	width: 17px; 
+	height: 16px;
+}
+
+#button-editar{
+	background-position: -139px -106px; 
+	width: 16px;
+	height: 16px;
+}
+
+/*-----------------------*/
+
+/*----------Estilos de textos-------------*/
+
+body {
+	margin: 0;
+	font-size: 1em;
+	line-height: 20px;
+	color: @colorTexto;
+	font-weight: bold;
+	font-family: 'Coda',sans-serif;
+	background-image: url('../img/bg.png');
+}
+
+p{
+	margin: 5px;
+}
+
+a {
+	color: @colorLinks;
+	text-decoration: none;
+}
+
+a:visited{
+	color: @colorTexto - #111;
+	text-decoration: underline;
+}
+
+a:hover,a:focus {
+	color: #FF0909;
+}
+
+h1,h2,h3{
+	color: @colorTitulos;
+	font-size: 2em;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin: 5px;
+	line-height: 100%;
+	a{
+		color: @colorTitulos;
+	}
+}
+
+h2{
+	font-size: 1.5em;	
+}
+
+ul{
+	list-style-image: url('../img/list-type.png');
+	li{
+		margin: 5px;
+		a:hover{
+			color: @colorTexto - #444;
+			text-decoration: underline;
+		}
+	}
+}
+
+input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea {
+	border: none;
+	background: @colorFondoBase + #222;
+	color: @colorTexto;
+}
+
+/*-----------------------*/
+
+/*----------Estilos formularios-------------*/
+
+.divFormularios{
+
+	.descripcionFormularios{
+		margin-bottom: 15px;
+		border-bottom: 1px solid @colorBordes;
+		h1,h2{
+			color: #00A6FF;
+		}
+	}
+
+	.divInputsFormularios{
+		*{
+			margin: 5px;
+		}
+		div{
+			margin-top: 0;
+			margin-bottom: 15px; 
+		}
+		.error{
+			color: #b94a48;
+		}
+	}
+}
+
+/*-----------------------*/
+
+/*----------Estilos divs de la pagina-------------*/
+
+#divButtonsHeader, #divNavButtonsPHP{
+	text-align: center;
+	span{
+		display: inline-block;
+		margin: 5px;
+	}
+
+	a{
+		text-decoration: none;
+	}
+}
+
+.divTextoMensajesError{
+	background-color: #f2dede;
+	border-color: #eed3d7;
+	color: #b94a48;
 	padding: 5px;
-	}*/
+	margin: 0;
+	strong{
+		text-decoration: underline;
+	}
+}
 
-	/*-----------------------*/
+.divTextoMensajesExito{
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+	color: #468847;
+	padding: 5px;
+	margin: 0;
+	strong{
+		text-decoration: underline;
+	}
+}
 
-	/*----------Sprites-------------*/
+#navHeaderProfile{
+	background-color: @colorFondoHeader;
+	text-align: right;
+}
 
-	.sprite, #botonSalir{
-		background: url('../img/sprite.png');
+#divHijoNavProfile{
+	float: right;
+	width: 20%;
+	padding: 5px;
+	img{
+		width: 32px;
+		height: 32px;
+		vertical-align: middle;
+	}
+	a{
+		color: @colorTexto;
+	}
+	p{
+		display: inline;
+	}
+}
+
+/*Es un div, con informacion generada por php. Es una seccion con contenido*/
+.moduloApp{
+	border: 1px solid @colorBordes;
+	.bordesRedondos(5px);
+	width: 96%;
+	margin: 5px;
+	.divTituloModulo{
+		border-bottom: 1px solid @colorBordes;
+		background-color: @colorFondoBase - #111;
+		padding: 5px;
+		h1{
+			margin: 0;
+		}
+		i{
+			float: right;
+		}
+	}
+
+	.divContenidoModulo{
+
+	}
+
+	.linkCollapse{
+		width: 100%;
+		display: block;
+	}
+}
+
+#divError404{
+	text-align: center;
+	img{
+		display: block;
+		margin: 0 auto;
+		border: 5px solid @colorBordes;
+	}
+	p{
+
+	}
+}
+
+.divGrupoDefecto{
+	-moz-box-shadow: 0px 0px 5px 1px #fff;
+	-webkit-box-shadow: 0px 0px 5px 1px #fff;
+	box-shadow: 0px 0px 5px 1px #fff;
+	background-color: @colorFondoBase - #111;
+
+	.divTituloModulo{
+		background-color: @colorFondoBase - #222;
+		h1{
+			margin: 0;
+			a{
+				color: white;
+			}
+		}
+		i{
+			float: right;
+		}
+	}
+}
+
+/*-----------------------*/
+
+/*----------Componentes y elementos particulares-------------*/
+
+.tablaInformacion{
+	width: 100%;
+	td{
+		color: @colorTexto;
+		width: 50%;
+	}
+
+	td:last-child{
+		text-align: center;
+		span{
+			margin: 0 auto;
+		}
+	}
+
+	tr:nth-child(even){
+		background-color: #444;
+	}
+	tr:nth-child(odd){
+		background-color: #555;
+	}
+}
+
+.tablaNotas{
+	width: 100%;
+	td{
+		color: @colorTexto;
+		text-align: center;
+		background-color: #555;
+		span{
+			margin: 0 auto;
+		}
+	}
+
+	th{
+		background-color: #444;
+	}
+
+}
+
+/*-----------------------*/
+
+/*----------Media Queries-------------*/
+
+/*Pantallas pequeñas*/
+@media ( max-width : 767px)  {
+
+	body{
+		margin: 0;
+		padding: 0;
+		background: none;
+	}
+
+	/*Contenedor Principal (Tabla)*/
+	#contenedorGlobal {
+		width: 100%;
+		margin: 0 auto;
 		display: block;
 	}
 
-	#botonSalir{
-		background-position: -486px -12px; 
-		width: 43px; 
-		height: 69px;
-		border: none; 
+	/*Div lateral con argollas (Celda)*/
+	#divArgollas {
+		display: none;
 	}
 
-	#button-home{
-		background-position: -296px -10px; 
-		width: 46px;
-		height: 70px;
+	/*Div lateral con toda la interfaz (Celda)*/
+	#contenedorCuaderno {
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+		padding: 0;
+		width: 100%;
+		display: block;
 	}
 
-	#button-alertas{
-		background-position: -422px -10px; 
-		width: 54px; 
-		height: 71px;
+	#header{
+		.row-fluid{
+			margin-top: 0;
+		}
+		#logo-header{
+			margin: 0 auto;
+			text-align: center;
+		}
 	}
 
-	#button-perfil{
-		background-position: -356px -8px;
-		width: 49px;
-		height: 72px;
-	}
-
-	#logo-header{
-		background-position:  1px 0;
-		width: 246px;
-		height: 71px;
-	}
-
-	#button-left{
-		background-position: -12px -98px; 
-		width: 23px; 
-		height: 32px;
-	}
-
-	#button-right{
-		background-position: -44px -98px;
-		width: 22px;
-		height: 32px;
-	}
-
-	#button-home-periodo{
-		background-position: -73px -98px;
-		width: 32px; 
-		height: 32px;
-	}
-
-	#button-remove{
-		background-position: -115px -106px;
-		width: 17px; 
-		height: 16px;
-	}
-
-	#button-editar{
-		background-position: -139px -106px; 
-		width: 16px;
-		height: 16px;
-	}
-
-	/*-----------------------*/
-
-	/*----------Estilos de textos-------------*/
-
-	body {
-		margin: 0;
-		font-size: 1em;
-		line-height: 20px;
-		color: @colorTexto;
-		font-weight: bold;
-		font-family: 'Coda',sans-serif;
-		background-image: url('../img/bg.png');
-	}
-
-	p{
-		margin: 5px;
-	}
-
-	a {
-		color: @colorLinks;
-		text-decoration: none;
-	}
-
-	a:hover,a:focus {
-		color: @colorTitulos - #222;
-	}
-
-	h1,h2,h3{
-		color: @colorTitulos;
-		font-size: 2em;
-		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-		margin: 5px;
+	h1,h2{
+		font-size: 1.2em;
 		line-height: 100%;
-		a{
-			color: @colorTitulos;
-		}
 	}
 
-	h2{
-		font-size: 1.5em;	
-	}
-
-	ul{
-		list-style-image: url('../img/list-type.png');
-		li{
-			margin: 5px;
-		}
-	}
-
-	input[type="text"], input[type="number"], input[type="password"], input[type="email"], textarea {
-		border: none;
-		background: @colorFondoBase + #222;
-		color: @colorTexto;
-	}
-
-	/*-----------------------*/
-
-	/*----------Estilos formularios-------------*/
-
-	.divFormularios{
-
-		.descripcionFormularios{
-			margin-bottom: 15px;
-			border-bottom: 1px solid @colorBordes;
-		}
-
-		.divInputsFormularios{
-			*{
-				margin: 5px;
-			}
-			div{
-				margin-top: 0;
-				margin-bottom: 15px; 
-			}
-			.error{
-				color: #b94a48;
-			}
-		}
-	}
-
-	/*-----------------------*/
-
-	/*----------Estilos divs de la pagina-------------*/
-
-	#divButtonsHeader, #divNavButtonsPHP{
+	#navHeaderProfile{
 		text-align: center;
-		span{
-			display: inline-block;
-			margin: 5px;
-		}
-
-		a{
-			text-decoration: none;
-		}
 	}
 
-	.divTextoMensajesError{
-		background-color: #f2dede;
-		border-color: #eed3d7;
-		color: #b94a48;
-		padding: 5px;
-		margin: 0;
-		strong{
-			text-decoration: underline;
-		}
-	}
-
-	.divTextoMensajesExito{
-		background-color: #dff0d8;
-		border-color: #d6e9c6;
-		color: #468847;
-		padding: 5px;
-		margin: 0;
-		strong{
-			text-decoration: underline;
-		}
-	}
-
-	#divNombreProfile{
-		background-color: @colorFondoHeader;
-		text-align: right;
-		#divImgProfile{
-			img{
-				width: 32px;
-				height: 32px;
-				vertical-align: middle;
-			}
-			a{
-				color: @colorTexto;
-			}
-			p{
-				display: inline;
-			}
-		}
-	}
-
-	/*Es un div, con informacion generada por php. Es una seccion con contenido*/
-	.moduloApp{
-		border: 1px solid @colorBordes;
-		.bordesRedondos(5px);
-		width: 98%;
-		margin: 5px;
-
-		.divTituloModulo{
-			border-bottom: 1px solid @colorBordes;
-			background-color: @colorFondoBase - #111;
-			padding: 5px;
-			h1{
-				margin: 0;
-			}
-			i{
-				float: right;
-			}
-		}
-
-		.divContenidoModulo{
-
-		}
-
-		.linkCollapse{
-			width: 100%;
-			display: block;
-		}
-	}
-
-	#divError404{
-		text-align: center;
-		img{
-			display: block;
-			margin: 0 auto;
-			border: 5px solid @colorBordes;
-		}
-		p{
-
-		}
-	}
-
-	/*-----------------------*/
-
-	/*----------Componentes y elementos particulares-------------*/
-
-	.tablaInformacion{
+	#divHijoNavProfile{
 		width: 100%;
-		td{
-			color: @colorTexto;
-			width: 50%;
-		}
-
-		td:last-child{
-			text-align: center;
-			span{
-				margin: 0 auto;
-			}
-		}
-		
-		tr:nth-child(even){
-			background-color: #444;
-		}
-		tr:nth-child(odd){
-			background-color: #555;
-		}
+		float: none;
 	}
 
-	.tablaNotas{
-		width: 100%;
-		td{
-			color: @colorTexto;
-			text-align: center;
-			background-color: #555;
-			span{
-				margin: 0 auto;
-			}
-		}
-
-		th{
-			background-color: #444;
-		}
-
-	}
-
-	/*-----------------------*/
-
-	/*----------Media Queries-------------*/
-
-	/*Pantallas pequeñas*/
-	@media ( max-width : 767px)  {
-
-		body{
-			margin: 0;
-			padding: 0;
-			background: none;
-		}
-
-		/*Contenedor Principal (Tabla)*/
-		#contenedorGlobal {
-			width: 100%;
-			margin: 0 auto;
-			display: block;
-		}
-
-		/*Div lateral con argollas (Celda)*/
-		#divArgollas {
-			display: none;
-		}
-
-		/*Div lateral con toda la interfaz (Celda)*/
-		#contenedorCuaderno {
-			border-top-right-radius: 0px;
-			border-bottom-right-radius: 0px;
-			padding: 0;
-			width: 100%;
-			display: block;
-		}
-
-		#header{
-			.row-fluid{
-				margin-top: 0;
-			}
-			#logo-header{
-				margin: 0 auto;
-				text-align: center;
-			}
-		}
-
-		h1,h2{
-			font-size: 1.2em;
-			line-height: 100%;
-		}
-
-		#divNombreProfile{
-			text-align: center;
-		}
-
-	}
+}
 
 /*-----------------------*/

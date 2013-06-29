@@ -25,14 +25,10 @@ class VistaHeader
 	}
 
 	private function crearLinkUsuario($nick, $ubicacionFoto){
-
-		// 		$html = "<a href = '/perfil/".$nick."'><div id='divProfile'>".
-		// 				"<img alt='image-profile' src='".$_SERVER['DOCUMENT_ROOT']."/".$ubicacionFoto."'/>.
-		// 						<p>@".$nick."</p></div></a>";
-
-		$html = "<a href = '/perfil/".$nick."'><div id='divImgProfile'>".
-				"<img alt='image-profile' src='http://qualify.hol.es/".$ubicacionFoto."'/>.
-						<p>@".$nick."</p></div></a>";
+		$html = "<div id='divHijoNavProfile'><a href = '#' >".
+				"<img alt='image-profile' src='http://qualify.hol.es/".$ubicacionFoto."' /><p>@".$nick."</p></a></div>";
+		// 		$html = "<div id='divHijoNavProfile'><a href = '/perfil/".$nick."'>".
+		// 				"<img alt='image-profile' src='http://qualify.hol.es/".$ubicacionFoto."' /><p>@".$nick."</p></a></div>";
 		return $html;
 	}
 

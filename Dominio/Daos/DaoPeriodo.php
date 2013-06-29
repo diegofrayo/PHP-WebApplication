@@ -72,8 +72,8 @@ class DaoPeriodo implements IDaoPeriodo
 
 		if(count($resultados)==1){
 			$nuevoPeriodo = $resultados[0];
-			return new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['nombre']);
+			return new Periodo($nuevoPeriodo['id'],date("d-m-Y",strtotime($nuevoPeriodo['fecha_inicio'])),
+					date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
 		}
 
 		return null;
@@ -90,8 +90,8 @@ class DaoPeriodo implements IDaoPeriodo
 		if($numeroResultados!=0){
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevoPeriodo = $resultados[$i];
-				$periodoLeido = new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
-						$nuevoPeriodo['fecha_final'],$nuevoPeriodo['nombre']);
+				$periodoLeido = new Periodo($nuevoPeriodo['id'],date("d-m-Y",strtotime($nuevoPeriodo['fecha_inicio'])),
+							date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
 				$periodoLeido->setUsuario($usuario);
 				$listaPeriodos[] = $periodoLeido;
 			}

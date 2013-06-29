@@ -187,14 +187,24 @@ function borrarNota() {
 
 }
 
-function dialogBorrarGrupo(idGrupo) {
-	document.formBorrarGrupo.idGrupo = idGrupo;
+function dialogBorrarGrupo(idGrupoNotas) {
+	document.formBorrarGrupo.idGrupo.value = idGrupoNotas;
 	$('#divModalBorrarGrupo').modal('show');
 }
 
 function borrarGrupo() {
 	document.formBorrarGrupo.submit();
 	$('#divModalBorrarGrupo').modal('hide');
+}
+
+function dialogBorrarAsignatura(idAsignaturaNota) {
+	document.formBorrarAsignatura.idAsignatura.value = idAsignaturaNota;
+	$('#divModalBorrarAsignatura').modal('show');
+}
+
+function borrarAsignatura() {
+	document.formBorrarAsignatura.submit();
+	$('#divModalBorrarAsignatura').modal('hide');
 }
 
 function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
@@ -210,7 +220,7 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 			$(this).children("td").each(function(index2) {
 				switch (index2) {
 				case 1:
-					sumatoriaNotas += parseInt($(this).text());
+					sumatoriaNotas += parseFloat($(this).text());
 					numeroDeNotas++;
 					break;
 				}
@@ -224,10 +234,10 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 			$(this).children("td").each(function(index2) {
 				switch (index2) {
 				case 1:
-					notaActual = parseInt($(this).text());
+					notaActual = parseFloat($(this).text());
 					break;
 				case 2:
-					porcentajeActual = parseInt($(this).text());
+					porcentajeActual = parseFloat($(this).text());
 					break;
 				}
 			});
@@ -238,32 +248,31 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 }
 
 function dialogEditarNota(botonPresionado, idDeLaNota) {
-
-	tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
-	filaSeleccionada = botonPresionado.parentNode.parentNode.cells;
-	var numeroColumnas = filaSeleccionada.length;
-
-	document.formEditarNota.nombre.value = filaSeleccionada[0].innerHTML;
-	document.formEditarNota.valor.value = filaSeleccionada[1].innerHTML;
-
-	// Hay porcentaje
-	if (numeroColumnas == 6) {
-		document.formEditarNota.porcentaje.value = filaSeleccionada[2].innerHTML;
-	} else {
-		document.formEditarNota.porcentaje.value = 0;
-		document.getElementById('labelPorcentaje').innerHTML = "No requiere porcentaje";
-	}
-
-	document.formEditarNota.idNota.value = idDeLaNota;
-
+	// tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
+	// filaSeleccionada = botonPresionado.parentNode.parentNode.cells;
+	// var numeroColumnas = filaSeleccionada.length;
+	//
+	// document.formEditarNota.nombre.value = filaSeleccionada[0].innerHTML;
+	// document.formEditarNota.valor.value = filaSeleccionada[1].innerHTML;
+	//
+	// // Hay porcentaje
+	// if (numeroColumnas == 6) {
+	// document.formEditarNota.porcentaje.value = filaSeleccionada[2].innerHTML;
+	// } else {
+	// document.formEditarNota.porcentaje.value = 0;
+	// document.getElementById('labelPorcentaje').innerHTML = "No requiere
+	// porcentaje";
+	// }
+	//
+	// document.formEditarNota.idNota.value = idDeLaNota;
 }
 
 function editarNota() {
-	var form = $("#formEditarNota").validate();
-	form.form();
-	var isValido = form.valid();
-	if (isValido == true) {
-		document.formEditarNota.submit();
-		$('#divModalEditarNota').modal('hide');
-	}
+	// var form = $("#formEditarNota").validate();
+	// form.form();
+	// var isValido = form.valid();
+	// if (isValido == true) {
+	// document.formEditarNota.submit();
+	// $('#divModalEditarNota').modal('hide');
+	// }
 }

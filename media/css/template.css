@@ -2,7 +2,7 @@
 /*1*/
 /*5*/
 /*4*/
-/*2*/
+/*2#00A6FF*/
 /*3*/
 /*Negro*/
 /*-----------------------*/
@@ -36,6 +36,7 @@
   overflow: hidden;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  padding: 3px;
   padding-top: 0;
 }
 #header {
@@ -72,10 +73,6 @@
   height: 50px;
   background-color: #222222;
 }
-/*.span6,.span12{
-	padding: 5px;
-	}*/
-
 /*-----------------------*/
 
 /*----------Sprites-------------*/
@@ -156,14 +153,18 @@ a {
   color: white;
   text-decoration: none;
 }
+a:visited {
+  color: #eeeeee;
+  text-decoration: underline;
+}
 a:hover,
 a:focus {
-  color: #0084dd;
+  color: #ff0909;
 }
 h1,
 h2,
 h3 {
-  color: #00a6ff;
+  color: #ff1919;
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 5px;
@@ -172,7 +173,7 @@ h3 {
 h1 a,
 h2 a,
 h3 a {
-  color: #00a6ff;
+  color: #ff1919;
 }
 h2 {
   font-size: 1.5em;
@@ -182,6 +183,10 @@ ul {
 }
 ul li {
   margin: 5px;
+}
+ul li a:hover {
+  color: #bbbbbb;
+  text-decoration: underline;
 }
 input[type="text"],
 input[type="number"],
@@ -199,6 +204,10 @@ textarea {
 .divFormularios .descripcionFormularios {
   margin-bottom: 15px;
   border-bottom: 1px solid #444444;
+}
+.divFormularios .descripcionFormularios h1,
+.divFormularios .descripcionFormularios h2 {
+  color: #00a6ff;
 }
 .divFormularios .divInputsFormularios * {
   margin: 5px;
@@ -247,19 +256,24 @@ textarea {
 .divTextoMensajesExito strong {
   text-decoration: underline;
 }
-#divNombreProfile {
+#navHeaderProfile {
   background-color: #222222;
   text-align: right;
 }
-#divNombreProfile #divImgProfile img {
+#divHijoNavProfile {
+  float: right;
+  width: 20%;
+  padding: 5px;
+}
+#divHijoNavProfile img {
   width: 32px;
   height: 32px;
   vertical-align: middle;
 }
-#divNombreProfile #divImgProfile a {
+#divHijoNavProfile a {
   color: white;
 }
-#divNombreProfile #divImgProfile p {
+#divHijoNavProfile p {
   display: inline;
 }
 /*Es un div, con informacion generada por php. Es una seccion con contenido*/
@@ -267,7 +281,7 @@ textarea {
 .moduloApp {
   border: 1px solid #444444;
   border-radius: 5px;
-  width: 98%;
+  width: 96%;
   margin: 5px;
 }
 .moduloApp .divTituloModulo {
@@ -292,6 +306,24 @@ textarea {
   display: block;
   margin: 0 auto;
   border: 5px solid #444444;
+}
+.divGrupoDefecto {
+  -moz-box-shadow: 0px 0px 5px 1px white;
+  -webkit-box-shadow: 0px 0px 5px 1px white;
+  box-shadow: 0px 0px 5px 1px white;
+  background-color: #222222;
+}
+.divGrupoDefecto .divTituloModulo {
+  background-color: #111111;
+}
+.divGrupoDefecto .divTituloModulo h1 {
+  margin: 0;
+}
+.divGrupoDefecto .divTituloModulo h1 a {
+  color: white;
+}
+.divGrupoDefecto .divTituloModulo i {
+  float: right;
 }
 /*-----------------------*/
 
@@ -375,8 +407,12 @@ textarea {
     font-size: 1.2em;
     line-height: 100%;
   }
-  #divNombreProfile {
+  #navHeaderProfile {
     text-align: center;
+  }
+  #divHijoNavProfile {
+    width: 100%;
+    float: none;
   }
 }
 /*-----------------------*/

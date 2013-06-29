@@ -3,12 +3,10 @@
 namespace modules\Periodo;
 
 use Dominio\DTO\DTOModuloPeriodo;
-
 use modules\Asignatura\VistaAsignatura;
-
 use modules\HelperModules;
-
 use Dominio\Clases\Periodo;
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Asignatura/VistaAsignatura.php';
 
 class VistaPeriodo
@@ -47,8 +45,12 @@ class VistaPeriodo
 
 		echo "</div></div>";
 
-		//Por ultimo imprimo un modal oculto
+		//Por ultimo imprimo varios modales ocultos
 		echo $this->crearModalParaBorrarPeriodo($dtoPeriodo->getPeriodo()->getId());
+		echo $vistaAsignatura->crearModalParaBorrarAsignatura();
+		echo $vistaAsignatura->crearModalParaBorrarNota();
+		echo $vistaAsignatura->crearModalParaBorrarGrupo();
+		//echo $this->crearModalParaEditarNota();
 
 	}
 
@@ -72,7 +74,7 @@ class VistaPeriodo
 				"<td>".$periodo->getFechaInicio()."</td>".
 				"</tr><tr><td>Fecha de finalizaci&oacute;n:</td>".
 				"<td>".$periodo->getFechaFinal()."</td>".
-				"</tr><tr><td>Eliminar Periodo:</td>".
+				"</tr><tr><td>Eliminar:</td>".
 				"<td><a href='#divModalBorrarPeriodo' role='button' data-toggle='modal'>".
 				"<span id='button-remove' class='sprite'></span> </a>".
 				"</td></tr></tbody></table>";
@@ -83,9 +85,6 @@ class VistaPeriodo
 	private function crearEditarPeriodo(Periodo $periodo)
 	{
 
-		// 		"<input type='text' class='inputCalendars' value = '".$periodo->getFechaInicio().
-		// 		"<input type='text' class='inputCalendars' value = '".$periodo->getFechaFinal().
-			
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='15' value = '".$periodo->getNombre()."' required />".
 				"</div><label>Fecha de inicio </label><div>".
