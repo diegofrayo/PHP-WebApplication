@@ -10,6 +10,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoRelacionEntreUsuarios;
 use Dominio\DTO\DTOCrud;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoRelacionEntreUsuarios.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/RelacionEntreUsuarios.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';

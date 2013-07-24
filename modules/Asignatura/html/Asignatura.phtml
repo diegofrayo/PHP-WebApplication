@@ -24,7 +24,7 @@
 				<div class="divFormularios moduloApp" id="divEditarAsignatura">
 					<form id="formEditarAsignatura" enctype="multipart/form-data"
 						method="post"
-						action="/../modules/Asignatura/ControladorAsignatura.php">
+						action="<!--{Root Site}-->/modules/Asignatura/ControladorAsignatura.php">
 
 						<div class="divTituloModulo">
 							<h1>
@@ -55,7 +55,7 @@
 				<div class="divFormularios moduloApp" id="divCrearNota">
 					<form id="formCrearNota" enctype="multipart/form-data"
 						method="post"
-						action="/../modules/Asignatura/ControladorAsignatura.php">
+						action="<!--{Root Site}-->/modules/Asignatura/ControladorAsignatura.php">
 						<div class="divTituloModulo">
 							<h1>
 								<a href="#collapseCrear<!--{Indice Asignatura}-->"
@@ -78,7 +78,7 @@
 				<div class="divFormularios moduloApp" id="divCrearGrupo">
 					<form id="formCrearNota" enctype="multipart/form-data"
 						method="post"
-						action="/../modules/Asignatura/ControladorAsignatura.php">
+						action="<!--{Root Site}-->/modules/Asignatura/ControladorAsignatura.php">
 						<div class="divTituloModulo">
 							<h1>
 								<a href="#collapseCrearGrupo" data-toggle="collapse"
@@ -97,6 +97,8 @@
 								type='checkbox' style="display: inline;"
 								name='porcentajesIguales'> <br /> <input type="hidden"
 								name="idAsignatura" value="<!--{Id Asignatura}-->" /> <input
+								type="hidden" name="indiceAsignatura"
+								value="<!--{Indice Asignatura}-->" /> <input
 								class="btn btn-primary" type="submit" name="action"
 								value="Crear Grupo" />
 						</div>
@@ -106,3 +108,8 @@
 		</div>
 	</div>
 </div>
+<br />
+<div class="row-fluid">
+	<hr class="separador" />
+</div>
+<br />

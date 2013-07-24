@@ -8,6 +8,8 @@ use Dominio\ObjetosDeNegocio\BoLogicaNotas;
 use Dominio\Clases\Usuario;
 use Dominio\ObjetosDeNegocio\BoUsuarios;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
 
@@ -52,10 +54,10 @@ class ModeloHome
 		return $this->_boUsuarios->obtenerUsuarioPorEmail($email);
 	}
 
-	public function obtenerNotasFuturas()
+	public function obtenerNotasFuturas($nick)
 	{
 		$fecha = Date('Y-m-d');
-		return $this->_boLogicaNotas->obtenerNotasFuturas($fecha);
+		return $this->_boLogicaNotas->obtenerNotasFuturas($fecha,$nick);
 	}
 
 	public function crearFoto(Foto $foto, $configuracion)

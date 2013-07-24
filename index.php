@@ -1,15 +1,11 @@
 <?php
-
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/ProjectPHP';
+$root = "/Qualify";
+//$root = "http://qualify.hol.es";
 session_start();
-
-//$_SESSION["root"] = "C:/xampp/htdocs/ProjectPHP";
-
-//$root = dirname($_SERVER['SCRIPT_NAME']);
-
 if (!isset($_SESSION["usuario"])) {
 	$_SESSION["usuario"] = "Visitante";
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,26 +15,25 @@ if (!isset($_SESSION["usuario"])) {
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title>Qualify.com</title>
 <link rel="shortcut icon"
-	href="http://qualify.hol.es/media/img/favicon.png">
-<link href='http://fonts.googleapis.com/css?family=Coda&subset=latin'
-	rel='stylesheet' type='text/css'>
+	href="<?php echo $root; ?>/media/img/favicon.png">
+
 <link rel="stylesheet"
-	href="http://qualify.hol.es/media/css/reset-layout.css" type="text/css" />
+	href="<?php echo $root; ?>/media/css/reset-layout.css" type="text/css" />
 <link rel="stylesheet"
-	href="http://qualify.hol.es/media/css/bootstrap.css" type="text/css" />
+	href="<?php echo $root; ?>/media/css/bootstrap.css" type="text/css" />
 <link rel="stylesheet"
-	href="http://qualify.hol.es/media/css/bootstrap-responsive.css"
+	href="<?php echo $root; ?>/media/css/bootstrap-responsive.css"
 	type="text/css" />
 <link rel="stylesheet"
-	href="http://qualify.hol.es/media/css/datepicker.css">
+	href="<?php echo $root; ?>/media/css/datepicker.css">
 <link rel="stylesheet"
-	href="http://qualify.hol.es/media/css/template.css" type="text/css" />
+	href="<?php echo $root; ?>/media/css/template.css" type="text/css" />
 
-<script src="http://qualify.hol.es/media/js/jquery.js"></script>
-<script src="http://qualify.hol.es/media/js/bootstrap.js"></script>
-<script src="http://qualify.hol.es/media/js/bootstrap-datepicker.js"></script>
-<script	src="http://qualify.hol.es/media/js/validation/validate.js"></script>
-<script src="http://qualify.hol.es/media/js/script.js"></script>
+<script src="<?php echo $root; ?>/media/js/jquery.js"></script>
+<script src="<?php echo $root; ?>/media/js/bootstrap.js"></script>
+<script src="<?php echo $root; ?>/media/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo $root; ?>/media/js/validation/validate.js"></script>
+<script src="<?php echo $root; ?>/media/js/script.js"></script>
 
 </head>
 
@@ -100,6 +95,7 @@ if (!isset($_SESSION["usuario"])) {
 									case 'periodo':
 										if(isset ($_GET['id'])){
 											require_once 'modules/Periodo/ControladorPeriodo.php';
+											echo $_SESSION["script"];
 										}else{
 											require_once 'error404.html';
 										}
@@ -125,6 +121,7 @@ if (!isset($_SESSION["usuario"])) {
 							echo $_SESSION["mensajes"];
 						}
 						$_SESSION["mensajes"] = '';
+						$_SESSION["script"] = '';
 
 						?>
 

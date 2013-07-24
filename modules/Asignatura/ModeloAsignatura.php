@@ -8,6 +8,8 @@ use Dominio\Clases\Asignatura;
 use Dominio\ObjetosDeNegocio\BoLogicaNotas;
 use Dominio\Clases\Usuario;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
 
 class ModeloAsignatura

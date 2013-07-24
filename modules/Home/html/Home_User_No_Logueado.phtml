@@ -3,10 +3,10 @@
 		<div class="span12">
 			<div class="divFormularios moduloApp">
 				<form id="formRegistro" enctype="multipart/form-data" method="post"
-					action="modules/Home/ControladorHome.php">
+					action="<!--{Root Site}-->/modules/Home/ControladorHome.php">
 					<div class="descripcionFormularios">
 						<h2>Registro</h2>
-						<p>Registrese aqu&iacute; gratis</p>
+						<!--<p>Registrese aqu&iacute; gratis</p>  -->
 					</div>
 					<div class="divInputsFormularios">
 						<label>Nombre </label>
@@ -29,10 +29,10 @@
 						<div>
 							<input name="password" type="password" maxlength="10" required />
 						</div>
-						<label>Foto </label>
+						<!-- <label>Foto </label>
 						<div>
 							<input name="foto" type="file" />
-						</div>
+						</div> -->
 
 						<input class="btn btn-primary" id="submitRegistro" type="submit"
 							name="action" value="Registrar" />
@@ -52,7 +52,8 @@
 					<p>Inicie sesi&oacute;n</p>
 				</div>
 				<form id="formLogin" enctype="multipart/form-data" method="post"
-					class="well form-inline" action="modules/Home/ControladorHome.php">
+					class="well form-inline"
+					action="<!--{Root Site}-->/modules/Home/ControladorHome.php">
 					<div class="divInputsFormularios" id="divFormLogin">
 						<input type="text" class="input-small" placeholder="Email"
 							maxlength="50" name="email" /> <input type="password"

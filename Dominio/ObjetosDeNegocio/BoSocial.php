@@ -17,6 +17,8 @@ use Dominio\Clases\RelacionEntreUsuarios;
 use Dominio\Clases\Notificacion;
 use Dominio\Clases\Comentario;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoRelacionEntreUsuarios.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoComentario.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoNotificacion.php';

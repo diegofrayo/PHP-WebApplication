@@ -7,6 +7,8 @@ use modules\Asignatura\VistaAsignatura;
 use modules\HelperModules;
 use Dominio\Clases\Periodo;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Asignatura/VistaAsignatura.php';
 
 class VistaPeriodo
@@ -27,6 +29,7 @@ class VistaPeriodo
 		$html = str_replace("<!--{Editar Periodo}-->", $editarPeriodoHTML, $html);
 		$html = str_replace("<!--{Lista de asignaturas}-->", $listaAsignaturasHTML, $html);
 		$html = str_replace("<!--{Id Periodo}-->", $dtoPeriodo->getPeriodo()->getId(), $html);
+		$html = str_replace("<!--{Root Site}-->", HelperModules::$ROOT_SITE, $html);
 
 
 		if(count($listaDeAsignaturas)){
@@ -117,7 +120,7 @@ class VistaPeriodo
 				"</div>	<div class='modal-footer'>".
 				"<form class='form-inline'".
 				" enctype='multipart/form-data' method='post'".
-				" action='modules/Periodo/ControladorPeriodo.php'>".
+				" action='<!--{Root Site}-->/modules/Periodo/ControladorPeriodo.php'>".
 				"<input type='hidden' value='".$idPeriodo."' name='id'> <input".
 				" class='btn btn-primary' type='submit' name='action'".
 				" value='Borrar Periodo' />".

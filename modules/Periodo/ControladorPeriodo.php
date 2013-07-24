@@ -18,6 +18,8 @@ use modules\Periodo\VistaPeriodo;
 use Dominio\Clases\Usuario;
 use modules\Periodo\ModeloPeriodo;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Periodo/VistaPeriodo.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Periodo/ModeloPeriodo.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Usuario.php';

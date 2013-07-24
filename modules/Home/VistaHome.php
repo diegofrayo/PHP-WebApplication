@@ -15,19 +15,19 @@ class VistaHome
 		$html= HelperModules::leerPlantillaHTML("Home","Home_User_Logueado");
 
 		$listaDePeriodos = $this->crearListaDePeriodos($dtoHome->getListaDePeriodosDeUnUsuario());
-		//$listaDeNoticias = $this->crearFeedDeNoticias($datos[2]);
-		$listaDeNoticias = "";
 		$listaNotasFuturas= $this->crearNotasFuturas($dtoHome->getListaNotasFuturo());
 
 		$html = str_replace("<!--{Lista De Periodos}-->", $listaDePeriodos, $html);
 		$html = str_replace("<!--{Notas Proximas}-->", $listaNotasFuturas, $html);
-		//$html = str_replace("<!--{Feed de noticias}-->", $listaDeNoticias, $html);
+		$html = str_replace("<!--{Root Site}-->", HelperModules::$ROOT_SITE, $html);
 
 		echo $html;
 	}
 
 	public function imprimirHTML_UsuarioNoLogueado(){
-		echo HelperModules::leerPlantillaHTML("Home","Home_User_No_Logueado");
+		$html= HelperModules::leerPlantillaHTML("Home","Home_User_No_Logueado");
+		$html = str_replace("<!--{Root Site}-->", HelperModules::$ROOT_SITE, $html);
+		echo $html;
 	}
 
 	private function crearListaDePeriodos($listaDePeriodos){
@@ -59,7 +59,7 @@ class VistaHome
 			$html.="<ul>";
 			foreach ($listaDeNotas as $nota){
 				$itemLista = "<li>".$nota->getGrupo()->getAsignatura()->getNombre()." | ". $nota->getNombre()
-				." -> ".$nota->getFecha()."</li>";
+				." > ".$nota->getFecha()."</li>";
 				$html.=$itemLista;
 			}
 			$html.="</ul>";

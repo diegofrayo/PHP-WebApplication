@@ -9,6 +9,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoNota;
 use Dominio\DTO\DTOCrud;
 
+//$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoNota.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Nota.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';
@@ -20,9 +22,10 @@ class DaoNota implements IDaoNota
 	public function crear(Nota $nota)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "insert into nota (id, nombre, valor, porcentaje, grupo, fecha)
-				" . " values (?,?,?,?,?,?)";
-		$arrayDatos = array($nota -> getId(),$nota -> getNombre(), $nota -> getValor(), $nota->getPorcentaje(), $nota -> getGrupo()->getId(), $nota->getFecha());
+		$consultaSQL = "insert into nota (id, nombre, valor, porcentaje, grupo, fecha, nick_usuario)
+				" . " values (?,?,?,?,?,?,?)";
+		$arrayDatos = array($nota -> getId(),$nota -> getNombre(), $nota -> getValor(),
+				$nota->getPorcentaje(), $nota -> getGrupo()->getId(), $nota->getFecha(), $nota->getUsuario()->getNick());
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -100,11 +103,33 @@ class DaoNota implements IDaoNota
 
 	}
 
-	public function obtenerNotasFuturas($fecha)
+	public function obtenerNotasFuturas($fecha ,$nickUsuario)
 	{
+
+		// 		$consultaSQL = "select nota.id,nota.nombre,nota.valor,nota.porcentaje,nota.fecha,nota.grupo ".
+		// 				"from nota,grupo_de_notas,asignatura,periodo,usuario where periodo.usuario = ? and ".
+		// 				"periodo.id = asignatura.periodo and asignatura.id = grupo_de_notas.asignatura ".
+		// 				"grupo_de_notas.id = nota.grupo";
+		// 		$consultaSQL = "select * from nota inner join grupo_de_notas on nota.grupo_de_notas = grupo_de_notas.id ".
+		// 				"inner join asignatura on grupo_de_notas.asignatura = asignatura.id inner join periodo on asignatura.periodo = periodo.id"
+		// 				."inner join usuario on periodo.usuario = ? where nota.fecha  >= ?";
+			
+		// 		$consultaSQL = "select nota.id,nota.nombre,nota.valor,nota.porcentaje,nota.fecha,nota.grupo_de_notas ".
+		// 				"from nota,grupo_de_notas,asignatura,periodo,usuario where nota.grupo_de_notas = grupo_de_notas.id and ".
+		// 				"grupo_de_notas.asignatura = asignatura.id and asignatura.periodo = periodo.id and ".
+		// 				"periodo.usuario = ? and nota.fecha  >= ?";
+		// 		$consultaSQL = "select n.id,n.nombre,n.valor,n.porcentaje,n.fecha,n.grupo_de_notas ".
+		// 				"from nota AS n INNER JOIN grupo_de_notas AS g ON n.grupo_de_notas = g.id ".
+		// 				"INNER JOIN asignatura AS a ON g.asignatura = a.id ".
+		// 				"INNER JOIN periodo AS p ON a.periodo = p.id ".
+		// 				"INNER JOIN usuario AS u ON p.usuario = u.email ".
+		// 				"where u.email = ?";
+		//"where p.usuario = ? and n.fecha >= ?";
+		//$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($emailUsuario,$fecha));
+
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "select * from nota where fecha  >= ?";
-		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($fecha));
+		$consultaSQL = "select * from nota where nick_usuario = ? and fecha >= ? ";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($nickUsuario, $fecha));
 		$numeroResultados = count($resultados);
 		$listaNotas = array();
 

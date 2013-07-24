@@ -3,7 +3,7 @@
 namespace Dominio\Clases;
 //require_once 'GrupoDeNotas.php';
 
-class Nota 
+class Nota
 {
 
 	private $_id;
@@ -29,6 +29,8 @@ class Nota
 	 */
 	private $_fecha;
 
+	private $_usuario;
+
 	public function __construct($id, $nombre, $valor, $porcentaje, $fecha)
 	{
 		$this->_id = $id;
@@ -42,7 +44,7 @@ class Nota
 	{
 		return $this->_id;
 	}
-	public function setId($id) 
+	public function setId($id)
 	{
 		$this -> _id = $id;
 	}
@@ -69,6 +71,15 @@ class Nota
 	public function setGrupo(GrupoDeNotas $grupo)
 	{
 		$this->_grupo = $grupo;
+	}
+
+	public function getUsuario()
+	{
+		return $this->_usuario;
+	}
+	public function setUsuario(Usuario $usuario)
+	{
+		$this->_usuario = $usuario;
 	}
 
 	public function __toString()

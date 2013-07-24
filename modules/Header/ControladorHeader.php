@@ -11,6 +11,8 @@ use modules\Header\VistaHeader;
 use Dominio\Clases\Usuario;
 use modules\Header\ModeloHeader;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Header/VistaHeader.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Header/ModeloHeader.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/HelperModules.php';
@@ -26,13 +28,14 @@ $usuarioApp = $_SESSION["usuario"];
 if(isset($_POST["action"])){
 
 	$action = $_POST["action"];
-
-	$usuarioApp = $_SESSION["usuario"];
+	session_start();
 
 	switch ($action){
 		case 'Cerrar Sesion':
-			$_SESSION["usuario"] =  "Visitante";
-			$_SESSION["mensajes"] = "";
+			session_unset();
+			session_destroy();
+			session_start();
+			session_regenerate_id(true);
 			HelperModules::redireccionarAlInicio();
 			break;
 
@@ -52,8 +55,8 @@ if(isset($_POST["action"])){
 		try{
 			$dtoHeader = new DTOModuloHeader();
 			$dtoHeader->setNickUsuario($usuarioApp['nick']);
-			$dtoHeader->setFotoUsuario( $usuarioApp['foto']['ubicacion']);
-			$dtoHeader->setListaNotificacionesUsuario($modeloHeader->obtenerNotificacionesDelUsuario(Usuario::arrayToUser($usuarioApp)));
+			$dtoHeader->setFotoUsuario($usuarioApp['foto']['ubicacion']);
+			//$dtoHeader->setListaNotificacionesUsuario($modeloHeader->obtenerNotificacionesDelUsuario(Usuario::arrayToUser($usuarioApp)));
 			$vistaHeader->imprimirHTML_UsuarioLogueado($dtoHeader);
 		}catch (BusinessLogicException $e1){
 			$_SESSION["mensajes"] = $e1->__toString();

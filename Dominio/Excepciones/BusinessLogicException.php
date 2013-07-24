@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Esta excepcion se lanza en los objetos de negocio, cuando por ejemplo se 
+ * Esta excepcion se lanza en los objetos de negocio, cuando por ejemplo se
  * intenta crear una entidad que ya existe, o editar una entidad que no existe
  */
 
@@ -14,8 +14,10 @@ class BusinessLogicException extends \Exception
 
 	public function __construct($mensaje)
 	{
-		$this->_mensaje = "<div class='divTextoMensajesError'><strong>".$this->obtenerClase($this).
-		"</strong><br />".$mensaje."</div>";
+		$this->_mensaje = "<div class='divTextoMensajesError alert'>".
+				"<button type='button' class='close' data-dismiss='alert'>&times;</button>".
+				"<strong>".$this->obtenerClase($this).
+				"</strong><br />".$mensaje."</div>";
 	}
 
 	public function __toString()

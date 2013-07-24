@@ -6,6 +6,8 @@ use Dominio\ObjetosDeNegocio\BoSocial;
 use Dominio\Clases\Usuario;
 use Dominio\ObjetosDeNegocio\BoUsuarios;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoSocial.php';
 

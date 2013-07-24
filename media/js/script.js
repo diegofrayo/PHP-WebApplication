@@ -2,6 +2,8 @@
 var idNota = 0;
 var filaSeleccionada = "";
 var tablaSeleccionada = "";
+var rootSite = '/Qualify';
+// var rootSite = 'http://qualify.hol.es';
 
 $(document).ready(function() {
 
@@ -20,9 +22,6 @@ $(document).ready(function() {
 		format : 'yyyy-mm-dd'
 	});
 
-	// Inicio collapse
-	// $(".collapse").collapse();
-
 	// Validar formularios
 	$("#formRegistro").validate();
 	$("#formEditarAsignatura").validate();
@@ -34,6 +33,12 @@ $(document).ready(function() {
 	// Desactivar el boton de registro
 	document.getElementById("submitRegistro").disabled = true;
 
+	// Desactivar el autocompletado
+	$(":text").attr("autocomplete", "off");
+	$(":email").attr("autocomplete", "off");
+	$(":number").attr("autocomplete", "off");
+	$(":date").attr("autocomplete", "off");
+
 });
 
 function desplazarCarousel(indice) {
@@ -42,7 +47,7 @@ function desplazarCarousel(indice) {
 }
 
 function modificarTituloApp(titulo) {
-	document.title = "@" + titulo + " - Qualify";
+	document.title = titulo + " - Qualify";
 }
 
 function ajax(filaPHP, idElementoSalida, parametros, funcionRespuesta) {
@@ -73,7 +78,7 @@ function calcularPromedioPeriodo(idPeriodo) {
 		$(idElementoSalida).html(response);
 	};
 
-	ajax('http://qualify.hol.es/modules/Periodo/ControladorPeriodo.php',
+	ajax(rootSite + '/modules/Periodo/ControladorPeriodo.php',
 			'#divPromedioPeriodo', parametrosMetodo, funcion);
 }
 
@@ -104,7 +109,7 @@ function comprobarNickDisponible() {
 			}
 		};
 
-		ajax('http://qualify.hol.es/modules/Home/ControladorHome.php',
+		ajax(rootSite + '/modules/Home/ControladorHome.php',
 				'#divNickDisponible', parametros, funcion);
 
 	} else {
@@ -141,7 +146,7 @@ function comprobarEmailDisponible() {
 			}
 		};
 
-		ajax('http://qualify.hol.es/modules/Home/ControladorHome.php',
+		ajax(rootSite + '/modules/Home/ControladorHome.php',
 				'#divEmailDisponible', parametros, funcion);
 
 	} else {
@@ -155,7 +160,6 @@ function dialogBorrarNota(botonPresionado, idDeLaNota) {
 	idNota = idDeLaNota;
 	tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
 	filaSeleccionada = botonPresionado.parentNode.parentNode;
-	// $('#divModalBorrarNota').modal('show');
 }
 
 function borrarNota() {
@@ -182,13 +186,14 @@ function borrarNota() {
 
 	};
 
-	ajax('http://qualify.hol.es/modules/Asignatura/ControladorAsignatura.php',
+	ajax(rootSite + '/modules/Asignatura/ControladorAsignatura.php',
 			'#divNavMensajes', parametrosMetodo, funcion);
 
 }
 
-function dialogBorrarGrupo(idGrupoNotas) {
+function dialogBorrarGrupo(idGrupoNotas, indiceAsignatura) {
 	document.formBorrarGrupo.idGrupo.value = idGrupoNotas;
+	document.formBorrarGrupo.indiceAsignatura.value = indiceAsignatura;
 	$('#divModalBorrarGrupo').modal('show');
 }
 
@@ -199,7 +204,7 @@ function borrarGrupo() {
 
 function dialogBorrarAsignatura(idAsignaturaNota) {
 	document.formBorrarAsignatura.idAsignatura.value = idAsignaturaNota;
-	$('#divModalBorrarAsignatura').modal('show');
+	// $('#divModalBorrarAsignatura').modal('show');
 }
 
 function borrarAsignatura() {
@@ -245,6 +250,10 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 		});
 	}
 	$(divSalidaPromedio).html("El promedio es de: " + promedio);
+}
+
+function cerrarSesion() {
+	document.formCerrarSesion.submit();
 }
 
 function dialogEditarNota(botonPresionado, idDeLaNota) {

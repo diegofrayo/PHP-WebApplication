@@ -8,6 +8,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\Clases\GrupoDeNotas;
 use Dominio\IDaos\IDaoGrupoDeNotas;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoGrupoDeNotas.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/GrupoDeNotas.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';

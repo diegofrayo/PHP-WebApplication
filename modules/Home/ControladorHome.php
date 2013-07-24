@@ -12,6 +12,8 @@ use modules\Home\VistaHome;
 use Dominio\Clases\Usuario;
 use modules\Home\ModeloHome;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Home/VistaHome.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/modules/Home/ModeloHome.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Usuario.php';
@@ -75,6 +77,7 @@ if(isset($_POST["action"])){
 				}
 
 				break;
+
 		}
 
 	}else{
@@ -83,7 +86,7 @@ if(isset($_POST["action"])){
 
 			case 'Registrar':
 				try{
-					$usuarioRegistrado = new Usuario($_POST["email"],$_POST["nombre"], $_POST["nick"], $_POST["password"]);
+					$usuarioRegistrado = new Usuario($_POST["email"],$_POST["nick"], $_POST["nombre"], $_POST["password"]);
 
 					//Se genera el id unico para la foto
 					$tiempoEnMili = microtime();
@@ -169,7 +172,7 @@ if(isset($_POST["action"])){
 			$dtoHome = new DTOModuloHome();
 			//$dtoHome->setFeedNoticias($feedNoticias);
 			$dtoHome->setListaDePeriodosDeUnUsuario($modeloHome->obtenerListaDePeriodosDeUnUsuario(Usuario::arrayToUser($usuarioApp)));
-			$dtoHome->setListaNotasFuturo($modeloHome->obtenerNotasFuturas());
+			$dtoHome->setListaNotasFuturo($modeloHome->obtenerNotasFuturas($usuarioApp['nick']));
 			$vistaHome->imprimirHTML_UsuarioLogueado($dtoHome);
 		}catch (BusinessLogicException $e1){
 			$_SESSION["mensajes"] = $e1->__toString();

@@ -17,15 +17,17 @@ class VistaAsignatura
 		$html= HelperModules::leerPlantillaHTML("Asignatura","Asignatura");
 
 		//Imprime la parte inicial de la asignatura
+		$indiceAsignatura = $dtoAsignatura->getIndice();
 		$informacionAsignaturaHTML = $this->crearInformacionAsignatura($dtoAsignatura->getAsignatura());
-		$editarAsignaturaHTML = $this->crearEditarAsignatura($dtoAsignatura->getAsignatura() , $dtoAsignatura->getListaDePeriodosDeUnUsuario());
-		$formCrearNota = $this->crearFormCrearNota($dtoAsignatura->getListaDeGrupos(), $dtoAsignatura->getAsignatura());
+		$editarAsignaturaHTML = $this->crearEditarAsignatura($dtoAsignatura->getAsignatura() , $dtoAsignatura->getListaDePeriodosDeUnUsuario(), $indiceAsignatura);
+		$formCrearNota = $this->crearFormCrearNota($dtoAsignatura->getListaDeGrupos(), $dtoAsignatura->getAsignatura(), $indiceAsignatura);
 
 		$html = str_replace("<!--{Informacion de la asignatura}-->", $informacionAsignaturaHTML, $html);
 		$html = str_replace("<!--{Editar Asignatura}-->", $editarAsignaturaHTML, $html);
-		$html = str_replace("<!--{Indice Asignatura}-->", $dtoAsignatura->getIndice(), $html);
+		$html = str_replace("<!--{Indice Asignatura}-->",$indiceAsignatura , $html);
 		$html = str_replace("<!--{Crear Nota}-->", $formCrearNota, $html);
 		$html = str_replace("<!--{Id Asignatura}-->", $dtoAsignatura->getAsignatura()->getId(), $html);
+		$html = str_replace("<!--{Root Site}-->", HelperModules::$ROOT_SITE, $html);
 
 		echo $html;
 
@@ -38,7 +40,7 @@ class VistaAsignatura
 		$listaDeGrupos = $dtoAsignatura->getListaDeGrupos();
 		$i = 0;
 		foreach ($listaDeGruposDeNotas as $grupo){
-			echo $this->crearGrupoDeNotas($grupo, $listaDeGrupos[$i]);
+			echo $this->crearGrupoDeNotas($grupo, $listaDeGrupos[$i], $indiceAsignatura);
 			$i = $i + 1;
 		}
 
@@ -54,7 +56,7 @@ class VistaAsignatura
 				"<tr><td>Periodo:</td>".
 				"<td>".$asignatura->getPeriodo()->getNombre()."</td></tr>".
 				"<tr><td>Eliminar:</td>".
-				"<td><a onclick='dialogBorrarAsignatura(".$asignatura->getId().")'>".
+				"<td><a onclick='dialogBorrarAsignatura(".$asignatura->getId().")' href='#divModalBorrarAsignatura' role='button' data-toggle='modal'>".
 				"<span id='button-remove' class='sprite'></span></a>".
 				"</td></tr></tbody></table>";
 
@@ -62,7 +64,7 @@ class VistaAsignatura
 		return $html;
 	}
 
-	private function crearEditarAsignatura(Asignatura $asignatura, $listaDePeriodos)
+	private function crearEditarAsignatura(Asignatura $asignatura, $listaDePeriodos, $indiceAsignatura)
 	{
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='20' value = '".$asignatura->getNombre()."' required />".
@@ -75,6 +77,7 @@ class VistaAsignatura
 		}
 		$htmlPeriodos.= "</select></div>";
 		$html.=	$htmlPeriodos."<input type='hidden' name='idAsignatura' value='".$asignatura->getId()."' />";
+		$html.= "<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />";
 		return $html;
 	}
 
@@ -89,7 +92,7 @@ class VistaAsignatura
 		return $htmlGruposNotas;
 	}
 
-	private function crearFormCrearNota($listaDeGruposDeNotas , $asignatura)
+	private function crearFormCrearNota($listaDeGruposDeNotas , $asignatura, $indiceAsignatura)
 	{
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='10' required />".
@@ -105,31 +108,35 @@ class VistaAsignatura
 				"<input type='text' class='inputCalendars' name='fecha' required />".
 				"</div><input type='hidden' name='idAsignatura'".
 				" value='".$asignatura->getId()."' />".
+				"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
 				"<input class='btn btn-primary' type='submit' name='action' value='Crear Nota' />";
 
 		return $html;
 	}
 
-	private function crearGrupoDeNotas($listaDeNotas , $grupo)
+	private function crearGrupoDeNotas($listaDeNotas , $grupo, $indiceAsignatura)
 	{
 
 		$botonBorrar = "";
 
 		$aux =  "";
+		$tituloModulo = "";
+
 		//Si es grupo defecto
 		if($grupo->getEsGrupoDefecto() == true){
 			$aux ="<div class='row-fluid'><div class='span12'><div class='moduloApp divGrupoDefecto'>";
+			$tituloModulo = "Calificaciones";
 		}else{
-			$botonBorrar = "<a class='btn btn-danger' onclick='dialogBorrarGrupo(".$grupo->getId().")'>Borrar Grupo</a>";
 			$aux = "<div class='row-fluid'><div class='span12'><div class='moduloApp'>";
+			$tituloModulo = $grupo->getNombre();
 		}
 
-		$html .= $aux;
+		$html = $aux;
 
 		//Creo el titulo
 		$html .= "<div class='divTituloModulo'>".
 				"<h1><a data-toggle='collapse' href='#collapseGrupo".$grupo->getId()."'".
-				" class='linkCollapse'>".$grupo->getNombre().
+				" class='linkCollapse'>".$tituloModulo.
 				"<i class='icon-chevron-down'></i></a></h1></div>";
 
 		//Creo el contenido
@@ -160,7 +167,7 @@ class VistaAsignatura
 					//	" onclick='dialogEditarNota(this, ".$nota->getId().")' href='javascript:void(0)'>".
 					//	"<span id='button-editar' class='sprite'></span></a></td>".
 					"<td><a ".
-					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='javascript:void(0)'><span".
+					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='#divModalBorrarNota' role='button' data-toggle='modal'><span".
 					" id='button-remove' class='sprite'></span> </a></td>".
 					"</tr>";
 				}
@@ -192,11 +199,11 @@ class VistaAsignatura
 
 			$html.="</tbody></table><br/>";
 
-			$html.="<table class='table' style='text-align: center'>".
-					"<tbody><tr><td>".
+			$html.="<table class='' style='text-align: center; width: 98%;'>".
+					"<tbody><tr><td style='width:50%;'>".
 					"<a class='btn' onclick='calcularPromedioGrupo(&#39;#tablaNotas".$grupo->getId()."&#39; ,&#39;#divPromedioGrupo".$grupo->getId()."&#39;, ".$grupo->getPorcentajesIguales().");'>".
 					"Calcular Promedio </a></td>".
-					"<td><div id='divPromedioGrupo".$grupo->getId()."'></div></td>".
+					"<td style='width:50%;'><div id='divPromedioGrupo".$grupo->getId()."'></div></td>".
 					"</tr></tbody></table>";
 
 			//Cierra la columna 1
@@ -211,30 +218,59 @@ class VistaAsignatura
 		//Creo la info del grupo (columna 2)
 		$html.=	"<div class='span6'>";
 
-		$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
-				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
-				"<div class='divFormularios moduloApp'>".
-				"<div class='descripcionFormularios'>".
-				"<h1>Configuraci&oacute;n</h1>".
-				"</div><div class='divInputsFormularios'>".
-				"<label>Nombre </label><div>".
-				"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='18' value='".$grupo->getNombre()."' required />".
-				"</div><label style='display:inline;'>Porcentajes Iguales</label>";
+		if($grupo->getEsGrupoDefecto() == true){
 
-		if($grupo->getPorcentajesIguales() ==true){
-			$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' checked />";
+			$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
+					" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+					"<div class='divFormularios moduloApp'>".
+					"<div class='descripcionFormularios'>".
+					"<h1>Configuraci&oacute;n</h1>".
+					"</div><div class='divInputsFormularios'>".
+					"<label style='display:inline;'>Porcentajes Iguales</label>";
+
+			if($grupo->getPorcentajesIguales() ==true){
+				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' checked />";
+			}else{
+				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' />";
+			}
+
+			$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
+					"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
+					"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
+					"<br/><input type='submit' class='btn btn-primary' name='action'".
+					" value='Editar Grupo' />";
+
+			$html.="</div></div></form>";
+
 		}else{
-			$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' />";
+
+			$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
+					" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+					"<div class='divFormularios moduloApp'>".
+					"<div class='descripcionFormularios'>".
+					"<h1>Configuraci&oacute;n</h1>".
+					"</div><div class='divInputsFormularios'>".
+					"<label>Nombre </label><div>".
+					"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='18' value='".$grupo->getNombre()."' required />".
+					"</div><label style='display:inline;'>Porcentajes Iguales</label>";
+
+			if($grupo->getPorcentajesIguales() ==true){
+				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' checked />";
+			}else{
+				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' />";
+			}
+
+			$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
+					"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
+					"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
+					"<br/><input type='submit' class='btn btn-primary' name='action'".
+					" value='Editar Grupo' />";
+
+			$html.="<a class='btn btn-danger' onclick='dialogBorrarGrupo(".$grupo->getId().",".$indiceAsignatura.")'>Borrar Grupo</a>";
+
+			$html.="</div></div></form>";
+
 		}
-
-		$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
-				"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
-				"<br/><input type='submit' class='btn btn-primary' name='action'".
-				" value='Editar Grupo' />";
-
-		$html.=$botonBorrar;
-
-		$html.="</div></div></form>";
 
 		//Cierra la columna 2
 		$html.="</div>";
@@ -256,7 +292,7 @@ class VistaAsignatura
 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div>	<div class='modal-body'>".
 				"<form name='formBorrarAsignatura' id='formBorrarAsignatura' enctype='multipart/form-data'".
-				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
 				"<p>Borrar&iacute;a la asignatura, con todas sus notas</p>".
 				"<input type='hidden' name='idAsignatura' />".
 				"<input type='hidden' name='action' value='Borrar Asignatura' />".
@@ -276,10 +312,11 @@ class VistaAsignatura
 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div><div class='modal-body'>".
 				"<form name='formBorrarGrupo' id='formBorrarGrupo' enctype='multipart/form-data'".
-				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
 				"<p>Borrar&iacute;a el grupo seleccionado</p>".
 				"<input type='hidden' name='idGrupo' id='hiddenGrupoBorrar' />".
 				"<input type='hidden' name='action' value='Borrar Grupo' />".
+				"<input type='hidden' name='indiceAsignatura' />".
 				"</form></div><div class='modal-footer'>".
 				"<button class='btn btn-primary' onclick='borrarGrupo()' >".
 				"Borrar</button>".
@@ -312,7 +349,7 @@ class VistaAsignatura
 	// 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Editar Nota</h3></div>".
 	// 				"<div class='modal-body'>".
 	// 				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
-	// 				" method='post' action='/../modules/Asignatura/ControladorAsignatura.php'>".
+	// 				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
 	// 				"<label>Nombre</label>".
 	// 				"<div><input name='nombre' type='text' maxlength='10' required />".
 	// 				"</div><label>Valor </label><div>".

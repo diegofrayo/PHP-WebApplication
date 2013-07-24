@@ -9,6 +9,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoAsignatura;
 use Dominio\DTO\DTOCrud;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoAsignatura.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Asignatura.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';

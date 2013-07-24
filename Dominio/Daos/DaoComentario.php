@@ -10,6 +10,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoComentario;
 use Dominio\DTO\DTOCrud;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once  $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoComentario.php';
 require_once  $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Comentario.php';
 require_once  $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';

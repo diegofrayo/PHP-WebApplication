@@ -8,6 +8,8 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoFoto;
 use Dominio\DTO\DTOCrud;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoFoto.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Foto.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/BaseDeDatos/BDFactory.php';

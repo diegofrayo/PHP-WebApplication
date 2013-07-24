@@ -13,6 +13,8 @@ use Dominio\Clases\Periodo;
 use Dominio\Clases\Asignatura;
 use Dominio\Clases\Nota;
 
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoPeriodo.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoAsignatura.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Daos/DaoNota.php';
@@ -56,7 +58,7 @@ class BoLogicaNotas
 	{
 		if($this->obtenerAsignaturaPorId($asignatura->getId()) == null ){
 			$asignatura = $this->_asignaturaDao->crear($asignatura);
-			$grupoNotasDefecto = new GrupoDeNotas(0, "GD: ". $asignatura->getNombre(), false, true);
+			$grupoNotasDefecto = new GrupoDeNotas(0, "Calificaciones", false, true);
 			$grupoNotasDefecto->setAsignatura($asignatura);
 			$this->crearGrupoDeNotas($grupoNotasDefecto);
 			return $asignatura;
@@ -194,9 +196,9 @@ class BoLogicaNotas
 		//throw new BusinessLogicException("El grupo de notas no existe");
 	}
 
-	public function obtenerNotasFuturas($fecha)
+	public function obtenerNotasFuturas($fecha,$nickUsuario)
 	{
-		return $this->_notasDao->obtenerNotasFuturas($fecha);
+		return $this->_notasDao->obtenerNotasFuturas($fecha,$nickUsuario);
 	}
 
 	/**
