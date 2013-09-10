@@ -84,18 +84,18 @@ if(isset($_POST["action"])){
 				header("Location: " . $_SERVER['HTTP_REFERER']);
 				break;
 
-				// 			case 'Editar Nota':
-				// 				try{
-				// 					$notaEditada = new Nota($_POST['idNota'], $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
-				// 					$modeloAsignatura->editarNota($notaEditada);
-				// 					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha editado la nota");
-				// 				}catch (BusinessLogicException $e1){
-				// 					$_SESSION["mensajes"] = $e1->__toString();
-				// 				}catch (DBTransactionException $e2){
-				// 					$_SESSION["mensajes"] = $e2->__toString();
-				// 				}
-				// 				header("Location: " . $_SERVER['HTTP_REFERER']);
-				// 				break;
+			case 'Editar Nota':
+				try{
+					$notaEditada = new Nota($_POST['idNota'], $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
+					$modeloAsignatura->editarNota($notaEditada);
+					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha editado la nota");
+				}catch (BusinessLogicException $e1){
+					$_SESSION["mensajes"] = $e1->__toString();
+				}catch (DBTransactionException $e2){
+					$_SESSION["mensajes"] = $e2->__toString();
+				}
+				header("Location: " . $_SERVER['HTTP_REFERER']);
+				break;
 
 			case 'Editar Asignatura':
 				try{
@@ -171,6 +171,10 @@ if(isset($_POST["action"])){
 						$porcentajesIguales = true;
 					}else{
 						$porcentajesIguales = false;
+					}
+
+					if(	isset($_POST['nombre']) == false){
+						$_POST['nombre'] = 'Calificaciones';
 					}
 
 					$grupoAEditar= new GrupoDeNotas($_POST['idGrupo'], $_POST['nombre'], $porcentajesIguales, $_POST['grupo_defecto']);

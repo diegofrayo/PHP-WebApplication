@@ -10,6 +10,8 @@ use Dominio\Clases\Asignatura;
 
 class VistaAsignatura
 {
+	private $selectGrupoDeNotas;
+
 	public function imprimirHTML_Asignatura(DTOModuloAsignatura $dtoAsignatura){
 
 		echo "<div class='item'><div class='row-fluid'><div class='span12'>";
@@ -84,6 +86,11 @@ class VistaAsignatura
 	private function crearSelectGrupoNotas($listaDeGruposDeNotas)
 	{
 		$htmlGruposNotas = "<select name = 'grupo'>";
+		// 		for ($i = 0; $i < count($listaDeGruposDeNotas); $i++){
+		// 			$grupo = $listaDeGruposDeNotas[$i];
+		// 			$option = "<option value= '".$grupo->getId()."'>".$grupo->getNombre()."</option>";
+		// 			$htmlGruposNotas.=$option;
+		// 		}
 		foreach ($listaDeGruposDeNotas as $grupo){
 			$option = "<option value= '".$grupo->getId()."'>".$grupo->getNombre()."</option>";
 			$htmlGruposNotas.=$option;
@@ -102,7 +109,8 @@ class VistaAsignatura
 				"<input name='porcentaje' type='number' maxlength='3' required />".
 				"</div><label>Grupo </label><div>";
 
-		$html.= $this->crearSelectGrupoNotas($listaDeGruposDeNotas);
+		$this->selectGrupoDeNotas = $this->crearSelectGrupoNotas($listaDeGruposDeNotas);
+		$html.= $this->selectGrupoDeNotas;
 
 		$html .="</div><label>Fecha </label><div>".
 				"<input type='text' class='inputCalendars' name='fecha' required />".
@@ -154,18 +162,20 @@ class VistaAsignatura
 						"<thead><tr><th>Nombre</th>".
 						"<th>Valor</th>".
 						"<th>Fecha</th>".
-						//"<th>Editar</th>".
-				"<th>Borrar</th></tr></thead><tbody>";
+						"<th>Editar</th>".
+						"<th>Borrar</th></tr></thead><tbody>";
 
 				foreach ($listaDeNotas as $nota){
 					$html.=
 					"<tr><td>".$nota->getNombre()."</td>".
 					"<td>".$nota->getValor()."</td>".
 					"<td>".$nota->getFecha()."</td>".
-					//	"<td><a href='#divModalEditarNota' role='button'".
-					//	" data-toggle='modal'".
-					//	" onclick='dialogEditarNota(this, ".$nota->getId().")' href='javascript:void(0)'>".
-					//	"<span id='button-editar' class='sprite'></span></a></td>".
+
+					"<td><a href='#divModalEditarNota' role='button'".
+					" data-toggle='modal'".
+					" onclick='dialogEditarNota(this, ".$nota->getId().")'>".
+					"<span id='button-editar' class='sprite'></span></a></td>".
+
 					"<td><a ".
 					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='#divModalBorrarNota' role='button' data-toggle='modal'><span".
 					" id='button-remove' class='sprite'></span> </a></td>".
@@ -177,8 +187,10 @@ class VistaAsignatura
 						"<thead><tr><th>Nombre</th>".
 						"<th>Valor</th><th>Porcentaje</th>".
 						"<th>Fecha</th>".
-						//"<th>Editar</th>".
-				"<th>Borrar</th></tr></thead><tbody>";
+
+						"<th>Editar</th>".
+
+						"<th>Borrar</th></tr></thead><tbody>";
 
 				foreach ($listaDeNotas as $nota){
 					$html.=
@@ -186,10 +198,12 @@ class VistaAsignatura
 					"<td>".$nota->getValor()."</td>".
 					"<td>".$nota->getPorcentaje()."</td>".
 					"<td>".$nota->getFecha()."</td>".
-					//	"<td><a href='#divModalEditarNota' role='button'".
-					//	" data-toggle='modal'".
-					//	" onclick='dialogEditarNota(this, ".$nota->getId().")'>".
-					//	"<span id='button-editar' class='sprite'></span></a></td>".
+
+					"<td><a href='#divModalEditarNota' role='button'".
+					" data-toggle='modal'".
+					" onclick='dialogEditarNota(this, ".$nota->getId().")'>".
+					"<span id='button-editar' class='sprite'></span></a></td>".
+
 					"<td><a ".
 					" onclick='dialogBorrarNota(this,".$nota->getId().")' href='#divModalBorrarNota' role='button' data-toggle='modal'><span".
 					" id='button-remove' class='sprite'></span> </a></td>".
@@ -341,30 +355,32 @@ class VistaAsignatura
 		return $html;
 	}
 
-	// 	private function crearModalParaEditarNota(){
-	// 		$html = "<div id='divModalEditarNota' class='modal hide fade' tabindex='-1'".
-	// 				" role='dialog'  aria-hidden='true'>".
-	// 				"<div class='modal-header'>".
-	// 				"<button type='button' class='close' data-dismiss='modal'".
-	// 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Editar Nota</h3></div>".
-	// 				"<div class='modal-body'>".
-	// 				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
-	// 				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
-	// 				"<label>Nombre</label>".
-	// 				"<div><input name='nombre' type='text' maxlength='10' required />".
-	// 				"</div><label>Valor </label><div>".
-	// 				"<input name='valor' type='number' required maxlength='4' />".
-	// 				"</div><label id='labelPorcentaje'>Porcentaje </label><div>".
-	// 				"<input name='porcentaje' type='number' maxlength='3' required />".
-	// 				"</div><label>Fecha </label><div>".
-	// 				"<input type='text' class='inputCalendars' name='fecha' required />".
-	// 				"</div><input type='hidden' name='idNota' /><input type='hidden' value='Editar Nota' name='action' /></form></div>".
-	// 				"<div class='modal-footer'>".
-	// 				"<button class='btn btn-primary' onclick='editarNota();' >".
-	// 				"Editar Nota</button>".
-	// 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
-	// 				"Cancelar</button></div></div>";
-	// 		return $html;
-	//}
+	public function crearModalParaEditarNota(){
+		$html = "<div id='divModalEditarNota' class='modal hide fade' tabindex='-1'".
+				" role='dialog'  aria-hidden='true'>".
+				"<div class='modal-header'>".
+				"<button type='button' class='close' data-dismiss='modal'".
+				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Editar Nota</h3></div>".
+				"<div class='modal-body'>".
+				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+				"<label>Nombre</label>".
+				"<div><input name='nombre' type='text' maxlength='10' required />".
+				"</div><label>Valor </label><div>".
+				"<input name='valor' type='number' required maxlength='4' />".
+				"</div><label id='labelPorcentaje'>Porcentaje </label><div>".
+				"<input name='porcentaje' type='number' maxlength='3' required />".
+				"</div><label>Fecha </label><div>".
+				"<input type='text' class='inputCalendars' name='fecha' required /></div>".
+				"<label>Grupo </label><div>".
+				$this->selectGrupoDeNotas.
+				"</div><input type='hidden' name='idNota' /><input type='hidden' value='Editar Nota' name='action' /></form></div>".
+				"<div class='modal-footer'>".
+				"<button class='btn btn-primary' onclick='editarNota();' >".
+				"Editar Nota</button>".
+				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
+				"Cancelar</button></div></div>";
+		return $html;
+	}
 
 }

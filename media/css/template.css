@@ -422,5 +422,8 @@ textarea {
     float: none;
   }
 }
+#divModalEditarNota {
+  display: none;
+}
 /*-----------------------*/
 

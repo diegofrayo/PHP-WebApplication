@@ -3,7 +3,16 @@ var idNota = 0;
 var filaSeleccionada = "";
 var tablaSeleccionada = "";
 var rootSite = '/Qualify';
+var notaSeleccionada;
 // var rootSite = 'http://qualify.hol.es';
+
+function Nota(id, nombre, valor) {
+	this.nombre = nombre;
+	this.id = id;
+	this.valor = valor;
+	this.porcentaje = 0;
+	this.fecha = "";
+}
 
 $(document).ready(function() {
 
@@ -38,6 +47,8 @@ $(document).ready(function() {
 	$(":email").attr("autocomplete", "off");
 	$(":number").attr("autocomplete", "off");
 	$(":date").attr("autocomplete", "off");
+
+	$('#divModalEditarNota').modal('hide');
 
 });
 
@@ -204,7 +215,6 @@ function borrarGrupo() {
 
 function dialogBorrarAsignatura(idAsignaturaNota) {
 	document.formBorrarAsignatura.idAsignatura.value = idAsignaturaNota;
-	// $('#divModalBorrarAsignatura').modal('show');
 }
 
 function borrarAsignatura() {
@@ -257,31 +267,38 @@ function cerrarSesion() {
 }
 
 function dialogEditarNota(botonPresionado, idDeLaNota) {
-	// tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
-	// filaSeleccionada = botonPresionado.parentNode.parentNode.cells;
-	// var numeroColumnas = filaSeleccionada.length;
-	//
-	// document.formEditarNota.nombre.value = filaSeleccionada[0].innerHTML;
-	// document.formEditarNota.valor.value = filaSeleccionada[1].innerHTML;
-	//
-	// // Hay porcentaje
-	// if (numeroColumnas == 6) {
-	// document.formEditarNota.porcentaje.value = filaSeleccionada[2].innerHTML;
-	// } else {
-	// document.formEditarNota.porcentaje.value = 0;
-	// document.getElementById('labelPorcentaje').innerHTML = "No requiere
-	// porcentaje";
-	// }
-	//
-	// document.formEditarNota.idNota.value = idDeLaNota;
+
+	tablaSeleccionada = botonPresionado.parentNode.parentNode.parentNode;
+	filaSeleccionada = botonPresionado.parentNode.parentNode.cells;
+	var numeroColumnas = filaSeleccionada.length;
+
+	notaSeleccionada = new Nota(idDeLaNota, filaSeleccionada[0].innerHTML,
+			filaSeleccionada[1].innerHTML);
+
+	// Hay porcentaje
+	if (numeroColumnas == 6) {
+		notaSeleccionada.porcentaje = filaSeleccionada[2].innerHTML;
+		notaSeleccionada.fecha = filaSeleccionada[3].innerHTML;
+	} else {
+		notaSeleccionada.porcentaje = 0;
+		notaSeleccionada.fecha = filaSeleccionada[2].innerHTML;
+		document.getElementById('labelPorcentaje').innerHTML = "No requiere porcentaje";
+	}
+
+	document.formEditarNota.idNota.value = idDeLaNota;
+	document.formEditarNota.nombre.value = notaSeleccionada.nombre;
+	document.formEditarNota.valor.value = notaSeleccionada.valor;
+	document.formEditarNota.porcentaje.value = notaSeleccionada.porcentaje;
+	document.formEditarNota.fecha.value = notaSeleccionada.fecha;
+
 }
 
 function editarNota() {
-	// var form = $("#formEditarNota").validate();
-	// form.form();
-	// var isValido = form.valid();
-	// if (isValido == true) {
-	// document.formEditarNota.submit();
-	// $('#divModalEditarNota').modal('hide');
-	// }
+	var form = $("#formEditarNota").validate();
+	form.form();
+	var isValido = form.valid();
+	if (isValido == true) {
+		document.formEditarNota.submit();
+		$('#divModalEditarNota').modal('hide');
+	}
 }

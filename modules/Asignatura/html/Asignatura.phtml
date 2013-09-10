@@ -76,19 +76,20 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<div class="divFormularios moduloApp" id="divCrearGrupo">
-					<form id="formCrearNota" enctype="multipart/form-data"
+					<form id="formCrearGrupo" enctype="multipart/form-data"
 						method="post"
 						action="<!--{Root Site}-->/modules/Asignatura/ControladorAsignatura.php">
 						<div class="divTituloModulo">
 							<h1>
-								<a href="#collapseCrearGrupo" data-toggle="collapse"
-									class="linkCollapse">Crear grupo de notas <i
-									class="icon-chevron-down"></i>
+								<a href="#collapseCrearGrupo<!--{Id Asignatura}-->"
+									data-toggle="collapse" class="linkCollapse">Crear grupo de
+									notas <i class="icon-chevron-down"></i>
 								</a>
 							</h1>
 							<p></p>
 						</div>
-						<div class="divInputsFormularios collapse" id="collapseCrearGrupo">
+						<div class="divInputsFormularios collapse"
+							id="collapseCrearGrupo<!--{Id Asignatura}-->">
 							<label>Nombre </label>
 							<div>
 								<input name="nombre" type="text" maxlength="18" required />
