@@ -9,7 +9,7 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoNota;
 use Dominio\DTO\DTOCrud;
 
-//$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoNota.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Nota.php';
@@ -52,8 +52,8 @@ class DaoNota implements IDaoNota
 	public function editar(Nota $nota)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "update nota set nombre=?, valor=?, porcentaje=?, fecha=? where id = ?" ;
-		$arrayDatos = array($nota -> getNombre(), $nota -> getValor(), $nota->getPorcentaje(), $nota->getFecha(),$nota -> getId());
+		$consultaSQL = "update nota set nombre=?, grupo=?, valor=?, porcentaje=?, fecha=? where id = ?" ;
+		$arrayDatos = array($nota -> getNombre(), $nota->getGrupo()->getId(), $nota -> getValor(), $nota->getPorcentaje(), $nota->getFecha(),$nota -> getId());
 		$exitoConsulta = $manejadorBD ->editar($consultaSQL, $arrayDatos );
 
 		if ($exitoConsulta ==true){
@@ -66,7 +66,7 @@ class DaoNota implements IDaoNota
 	public function obtenerListaDeNotasDeUnGrupo(GrupoDeNotas $grupo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "select * from nota where grupo = ?";
+		$consultaSQL = "select * from nota where grupo = ? order by fecha";
 		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($grupo->getId()));
 		$numeroResultados = count($resultados);
 		$listaNotas = array();
@@ -128,7 +128,7 @@ class DaoNota implements IDaoNota
 		//$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($emailUsuario,$fecha));
 
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "select * from nota where nick_usuario = ? and fecha >= ? ";
+		$consultaSQL = "select * from nota where nick_usuario = ? and fecha >= ? order by fecha ";
 		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($nickUsuario, $fecha));
 		$numeroResultados = count($resultados);
 		$listaNotas = array();

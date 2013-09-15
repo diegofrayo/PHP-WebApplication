@@ -57,9 +57,26 @@ class VistaHome
 		$numeroNotas= count($listaDeNotas);
 		if($numeroNotas>0){
 			$html.="<ul>";
+			$fechaActual = date ('Y-m-d');
+			$textoFechas = "";
 			foreach ($listaDeNotas as $nota){
+				$fechaNota = $nota->getFecha();
+				$diasDeDiferencias = $this->diferenciaDiasEntreFechas($fechaActual, $fechaNota);
+				switch ($diasDeDiferencias){
+					case 0:
+						$textoFechas = "<u>&#33;Es hoy&#161;</u>";
+						break;
+					case 1:
+						$textoFechas = "<strong>Es ma&ntilde;ana</strong>";
+						break;
+
+					default:
+						$textoFechas = "<strong>Faltan ".$diasDeDiferencias." d&#237;as</strong>";
+						break;
+				}
+
 				$itemLista = "<li>".$nota->getGrupo()->getAsignatura()->getNombre()." | ". $nota->getNombre()
-				." > ".$nota->getFecha()."</li>";
+				." | ".$fechaNota." | ".$textoFechas."</li>";
 				$html.=$itemLista;
 			}
 			$html.="</ul>";
@@ -67,6 +84,13 @@ class VistaHome
 			$html = "<p style='margin:5px'>No hay eventos futuros</p>";
 		}
 		return $html;
+	}
+
+	function diferenciaDiasEntreFechas($start, $end) {
+		$start_ts = strtotime($start);
+		$end_ts = strtotime($end);
+		$diff = $end_ts - $start_ts;
+		return round($diff / 86400);
 	}
 
 }

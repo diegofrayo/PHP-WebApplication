@@ -10,8 +10,6 @@ use Dominio\Clases\Asignatura;
 
 class VistaAsignatura
 {
-	private $selectGrupoDeNotas;
-
 	public function imprimirHTML_Asignatura(DTOModuloAsignatura $dtoAsignatura){
 
 		echo "<div class='item'><div class='row-fluid'><div class='span12'>";
@@ -86,11 +84,6 @@ class VistaAsignatura
 	private function crearSelectGrupoNotas($listaDeGruposDeNotas)
 	{
 		$htmlGruposNotas = "<select name = 'grupo'>";
-		// 		for ($i = 0; $i < count($listaDeGruposDeNotas); $i++){
-		// 			$grupo = $listaDeGruposDeNotas[$i];
-		// 			$option = "<option value= '".$grupo->getId()."'>".$grupo->getNombre()."</option>";
-		// 			$htmlGruposNotas.=$option;
-		// 		}
 		foreach ($listaDeGruposDeNotas as $grupo){
 			$option = "<option value= '".$grupo->getId()."'>".$grupo->getNombre()."</option>";
 			$htmlGruposNotas.=$option;
@@ -102,15 +95,14 @@ class VistaAsignatura
 	private function crearFormCrearNota($listaDeGruposDeNotas , $asignatura, $indiceAsignatura)
 	{
 		$html = "<label>Nombre</label><div>".
-				"<input name='nombre' type='text' maxlength='10' required />".
+				"<input name='nombre' type='text' maxlength='25' required />".
 				"</div><label>Valor </label><div>".
 				"<input name='valor' type='number' required maxlength='4' />".
 				"</div><label>Porcentaje </label><div>".
 				"<input name='porcentaje' type='number' maxlength='3' required />".
 				"</div><label>Grupo </label><div>";
 
-		$this->selectGrupoDeNotas = $this->crearSelectGrupoNotas($listaDeGruposDeNotas);
-		$html.= $this->selectGrupoDeNotas;
+		$html.= $this->crearSelectGrupoNotas($listaDeGruposDeNotas);
 
 		$html .="</div><label>Fecha </label><div>".
 				"<input type='text' class='inputCalendars' name='fecha' required />".
@@ -133,10 +125,10 @@ class VistaAsignatura
 		//Si es grupo defecto
 		if($grupo->getEsGrupoDefecto() == true){
 			$aux ="<div class='row-fluid'><div class='span12'><div class='moduloApp divGrupoDefecto'>";
-			$tituloModulo = "Calificaciones";
+			$tituloModulo = $grupo->getId().". Calificaciones";
 		}else{
 			$aux = "<div class='row-fluid'><div class='span12'><div class='moduloApp'>";
-			$tituloModulo = $grupo->getNombre();
+			$tituloModulo =  $grupo->getId().". ".$grupo->getNombre();
 		}
 
 		$html = $aux;
@@ -265,7 +257,7 @@ class VistaAsignatura
 					"<h1>Configuraci&oacute;n</h1>".
 					"</div><div class='divInputsFormularios'>".
 					"<label>Nombre </label><div>".
-					"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='18' value='".$grupo->getNombre()."' required />".
+					"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='25' value='".$grupo->getNombre()."' required />".
 					"</div><label style='display:inline;'>Porcentajes Iguales</label>";
 
 			if($grupo->getPorcentajesIguales() ==true){
@@ -365,7 +357,7 @@ class VistaAsignatura
 				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
 				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
 				"<label>Nombre</label>".
-				"<div><input name='nombre' type='text' maxlength='10' required />".
+				"<div><input name='nombre' type='text' maxlength='25' required />".
 				"</div><label>Valor </label><div>".
 				"<input name='valor' type='number' required maxlength='4' />".
 				"</div><label id='labelPorcentaje'>Porcentaje </label><div>".
@@ -373,8 +365,9 @@ class VistaAsignatura
 				"</div><label>Fecha </label><div>".
 				"<input type='text' class='inputCalendars' name='fecha' required /></div>".
 				"<label>Grupo </label><div>".
-				$this->selectGrupoDeNotas.
-				"</div><input type='hidden' name='idNota' /><input type='hidden' value='Editar Nota' name='action' /></form></div>".
+				"<input name='grupoEditar' type='number' required maxlength='3' /></div>".
+				"<input type='hidden' name='idNota' />".
+				"<input type='hidden' value='Editar Nota' name='action' /></form></div>".
 				"<div class='modal-footer'>".
 				"<button class='btn btn-primary' onclick='editarNota();' >".
 				"Editar Nota</button>".

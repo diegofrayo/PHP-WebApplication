@@ -53,7 +53,7 @@ class VistaPeriodo
 		echo $vistaAsignatura->crearModalParaBorrarAsignatura();
 		echo $vistaAsignatura->crearModalParaBorrarNota();
 		echo $vistaAsignatura->crearModalParaBorrarGrupo();
-		echo $vistaAsignatura->crearModalParaEditarNota();
+ 		echo $vistaAsignatura->crearModalParaEditarNota();
 
 	}
 

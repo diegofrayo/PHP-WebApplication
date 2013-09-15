@@ -64,6 +64,7 @@ if (!isset($_SESSION["usuario"])) {
 						<!-- Aqui va el contenido generado por php -->
 
 						<?php
+
 						$controlador = "";
 						$usuarioApp = $_SESSION["usuario"];
 

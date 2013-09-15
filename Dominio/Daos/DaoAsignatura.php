@@ -66,7 +66,7 @@ class DaoAsignatura implements IDaoAsignatura
 	public function obtenerListaDeAsignaturasDeUnPeriodo(Periodo $periodo)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "select * from asignatura where periodo = ?";
+		$consultaSQL = "select * from asignatura where periodo = ? order by nombre";
 		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($periodo->getId()));
 		$numeroResultados = count($resultados);
 		$listaAsignatura = array();

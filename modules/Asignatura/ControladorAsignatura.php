@@ -86,7 +86,9 @@ if(isset($_POST["action"])){
 
 			case 'Editar Nota':
 				try{
+					$grupo = $modeloAsignatura->obtenerGrupoDeNotasPorId($_POST['grupoEditar']);
 					$notaEditada = new Nota($_POST['idNota'], $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
+					$notaEditada->setGrupo($grupo);
 					$modeloAsignatura->editarNota($notaEditada);
 					$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha editado la nota");
 				}catch (BusinessLogicException $e1){
