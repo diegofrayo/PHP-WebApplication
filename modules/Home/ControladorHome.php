@@ -86,7 +86,7 @@ if(isset($_POST["action"])){
 
 			case 'Registrar':
 				try{
-					$usuarioRegistrado = new Usuario($_POST["email"],$_POST["nick"], $_POST["nombre"], $_POST["password"]);
+					$usuarioRegistrado = new Usuario($_POST["email"],$_POST["nick-registro"], $_POST["nombre"], $_POST["password-registro"]);
 
 					//Se genera el id unico para la foto
 					$tiempoEnMili = microtime();
@@ -129,9 +129,9 @@ if(isset($_POST["action"])){
 				break;
 
 			case 'Login':
-				if($_POST["email"] != '' && $_POST["password"]!=''){
+				if($_POST["nick"] != '' && $_POST["password"]!=''){
 					try{
-						$usuarioLogueado = $modeloHome->iniciarSesionUsuario($_POST["email"], $_POST["password"]);
+						$usuarioLogueado = $modeloHome->iniciarSesionUsuario($_POST["nick"], $_POST["password"]);
 						$_SESSION["usuario"] = Usuario::userToArray($usuarioLogueado);
 					}catch (BusinessLogicException $e1){
 						$_SESSION["mensajes"] = $e1->__toString();
@@ -172,7 +172,7 @@ if(isset($_POST["action"])){
 			$dtoHome = new DTOModuloHome();
 			//$dtoHome->setFeedNoticias($feedNoticias);
 			$dtoHome->setListaDePeriodosDeUnUsuario($modeloHome->obtenerListaDePeriodosDeUnUsuario(Usuario::arrayToUser($usuarioApp)));
-			$dtoHome->setListaNotasFuturo($modeloHome->obtenerNotasFuturas($usuarioApp['nick']));
+			$dtoHome->setListaNotasFuturo($modeloHome->obtenerNotasFuturas($usuarioApp['email']));
 			$vistaHome->imprimirHTML_UsuarioLogueado($dtoHome);
 		}catch (BusinessLogicException $e1){
 			$_SESSION["mensajes"] = $e1->__toString();

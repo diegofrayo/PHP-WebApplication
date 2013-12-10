@@ -68,7 +68,6 @@ if(isset($_POST["action"])){
 						$grupo = $modeloAsignatura->obtenerGrupoDeNotasPorId($_POST['grupo']);
 						$nuevaNota = new Nota(0, $_POST['nombre'], $_POST['valor'], $_POST['porcentaje'],$_POST['fecha']);
 						$nuevaNota->setGrupo($grupo);
-						$nuevaNota->setUsuario(Usuario::arrayToUser($usuarioApp));
 						$modeloAsignatura->crearNota($nuevaNota);
 						$_SESSION["mensajes"] = HelperModules::crearMensajeExito("Se ha creado la nota");
 						$_SESSION["script"] = HelperModules::crearScriptAsignatura($_POST['indiceAsignatura']);

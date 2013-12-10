@@ -196,9 +196,9 @@ class BoLogicaNotas
 		//throw new BusinessLogicException("El grupo de notas no existe");
 	}
 
-	public function obtenerNotasFuturas($fecha,$nickUsuario)
+	public function obtenerNotasFuturas($fecha,$emailUsuario)
 	{
-		return $this->_notasDao->obtenerNotasFuturas($fecha,$nickUsuario);
+		return $this->_notasDao->obtenerNotasFuturas($fecha,$emailUsuario);
 	}
 
 	/**
@@ -281,7 +281,7 @@ class BoLogicaNotas
 				}
 				$promedioFinal = $promedioFinal / $numeroAsignaturas;
 			}
-			return $promedioFinal;
+			return number_format($promedioFinal, 4);
 		}
 		throw new BusinessLogicException("El periodo no existe");
 	}
@@ -396,32 +396,6 @@ class BoLogicaNotas
 		}
 		throw new BusinessLogicException("El grupo no existe");
 	}
-
-	// 	/**
-	// 	 * Metodo para calcular la nota que hace falta para aprobar una asignatura.
-	// 	 * @param GrupoDeNotas $grupo
-	// 	 * @param unknown_type $porcentajeNotaFaltante
-	// 	 * @param unknown_type $valorMinimoParaAprobar
-	// 	 * @return number|string
-	// 	 */
-	// 	public function calcularNotaRestanteParaAprobar(GrupoDeNotas $grupo, $porcentajeNotaFaltante, $valorMinimoParaAprobar)
-	// 	{
-	// 		if($this->obtenerGrupoDeNotasPorId($grupoDeNotas->getId()) != null ){
-	// 			$numeroNotasAsignatura = $grupo->getAsignatura()->getNumeroDeNotas();
-	// 			if($grupo->getEsGrupoDefecto() == true){
-	// 				$listaNotas = $this->obtenerListaDeNotasDeUnGrupo($grupo);
-	// 				$numeroNotasGrupo = count($listaNotas);
-
-	// 				if(($numeroNotasAsignatura - $numeroNotasGrupo) == 1){
-	// 					$promedioActual = $this->calcularPromedioDeNotasDeUnGrupo($grupo);
-	// 					$notaRestante = ($valorMinimoParaAprobar - $promedioActual)*(100/$porcentajeNotaFaltante);
-	// 					return $notaRestante;
-	// 				}
-	// 			}
-	// 			return "No se puede efectuar el calculo, para este grupo";
-	// 		}
-	// 		throw new BusinessLogicException("El grupo no existe");
-	// 	}
 
 	public function obtenerListaDeGruposDeUnaAsignatura(Asignatura $asignatura)
 	{

@@ -29,8 +29,6 @@ class Nota
 	 */
 	private $_fecha;
 
-	private $_usuario;
-
 	public function __construct($id, $nombre, $valor, $porcentaje, $fecha)
 	{
 		$this->_id = $id;
@@ -71,15 +69,6 @@ class Nota
 	public function setGrupo(GrupoDeNotas $grupo)
 	{
 		$this->_grupo = $grupo;
-	}
-
-	public function getUsuario()
-	{
-		return $this->_usuario;
-	}
-	public function setUsuario(Usuario $usuario)
-	{
-		$this->_usuario = $usuario;
 	}
 
 	public function __toString()

@@ -91,10 +91,10 @@ class VistaPeriodo
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='15' value = '".$periodo->getNombre()."' required />".
 				"</div><label>Fecha de inicio </label><div>".
-				"<input type='text' class='inputCalendars' value = '".
+				"<input type='text' class='inputCalendars' value = '".$periodo->getFechaInicio().
 				"' name='fechaInicio' required />".
 				"</div><label>Fecha de finalizacion </label><div>".
-				"<input type='text' class='inputCalendars' value = '".
+				"<input type='text' class='inputCalendars' value = '".$periodo->getFechaFinal().
 				"' name='fechaFinal' required />".
 				"</div>"."<input type='hidden' name='id' value='".$periodo->getId()."' />";
 		return $html;

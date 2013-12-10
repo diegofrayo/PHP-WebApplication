@@ -66,6 +66,24 @@ class DaoUsuario implements IDaoUsuario
 
 		return null;
 	}
+	
+	public function obtenerUsuarioPorNick($nick)
+	{
+		$manejadorBD = BDFactory::crearManejadorBD();
+		$consultaSQL = "select * from usuario where nick = ?";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($nick));
+	
+		if(count($resultados)==1){
+			$daoFoto = new DaoFoto();
+			$nuevoUsuario = $resultados[0];
+			$usuario =new Usuario($nuevoUsuario['email'],$nuevoUsuario['nick'],
+					$nuevoUsuario['nombre'],$nuevoUsuario['password']);
+			$usuario->setFoto($daoFoto->obtenerFotoPorId($nuevoUsuario['foto']));
+			return $usuario;
+		}
+	
+		return null;
+	}
 
 	public function buscarUsuariosPorNombre($nombre)
 	{

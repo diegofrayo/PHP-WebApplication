@@ -23,7 +23,8 @@
 				<div class="span12">
 					<div class="divFormularios moduloApp" id="divEditarPeriodo">
 						<form id="formEditarPeriodo" enctype="multipart/form-data"
-							method="post" action="<!--{Root Site}-->/modules/Periodo/ControladorPeriodo.php">
+							method="post"
+							action="<!--{Root Site}-->/modules/Periodo/ControladorPeriodo.php">
 
 							<div class="divTituloModulo">
 								<h1>
@@ -38,8 +39,10 @@
 								id="collapseEditarPeriodo">
 								<!--{Editar Periodo}-->
 
-								<input class="btn btn-primary" type="submit" name="action"
-									value="Editar Periodo" />
+								<div class="divButtonSubmitCenter">
+									<input class="btn btn-primary" type="submit" name="action"
+										value="Editar Periodo" />
+								</div>
 							</div>
 						</form>
 					</div>
@@ -98,7 +101,8 @@
 				<div class="span12">
 					<div class="divFormularios moduloApp" id="divCrearAsignatura">
 						<form id="formCrearAsignatura" enctype="multipart/form-data"
-							method="post" action="<!--{Root Site}-->/modules/Periodo/ControladorPeriodo.php">
+							method="post"
+							action="<!--{Root Site}-->/modules/Periodo/ControladorPeriodo.php">
 							<div class="divTituloModulo">
 								<h1>
 									<a data-toggle="collapse" href="#collapseCrearAsignatura"
@@ -112,11 +116,14 @@
 								id="collapseCrearAsignatura">
 								<label>Nombre</label>
 								<div>
-									<input name="nombre" type="text" maxlength="20" required />
+									<input name="nombre" type="text" maxlength="30" required />
 								</div>
-								<input type='hidden' name='id' value='<!--{Id Periodo}-->' /> <input
-									class="btn btn-primary" type="submit" name="action"
-									value="Crear Asignatura" />
+
+								<input type='hidden' name='id' value='<!--{Id Periodo}-->' />
+								<div class="divButtonSubmitCenter">
+									<input class="btn btn-primary" type="submit" name="action"
+										value="Crear Asignatura" />
+								</div>
 							</div>
 						</form>
 					</div>

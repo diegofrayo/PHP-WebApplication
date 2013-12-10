@@ -64,7 +64,7 @@ class VistaHome
 				$diasDeDiferencias = $this->diferenciaDiasEntreFechas($fechaActual, $fechaNota);
 				switch ($diasDeDiferencias){
 					case 0:
-						$textoFechas = "<u>&#33;Es hoy&#161;</u>";
+						$textoFechas = "<u>&#33; Es hoy &#161;</u>";
 						break;
 					case 1:
 						$textoFechas = "<strong>Es ma&ntilde;ana</strong>";

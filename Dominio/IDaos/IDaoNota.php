@@ -17,5 +17,5 @@ interface IDaoNota
 	 * Metodo para obtener las notas que todavia no se han realizado.
 	 * @param unknown_type $fecha - Es la fecha actual
 	*/
-	public function obtenerNotasFuturas($fecha, $nickUsuario);
+	public function obtenerNotasFuturas($fecha, $emailUsuario);
 }

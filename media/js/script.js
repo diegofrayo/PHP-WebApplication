@@ -4,7 +4,7 @@ var filaSeleccionada = "";
 var tablaSeleccionada = "";
 var rootSite = '/Qualify';
 var notaSeleccionada;
-// var rootSite = 'http://qualify.hol.es';
+//var rootSite = 'http://qualify.hol.es';
 
 function Nota(id, nombre, valor) {
 	this.nombre = nombre;
@@ -259,7 +259,7 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 			promedio += ((notaActual / 100) * porcentajeActual);
 		});
 	}
-	$(divSalidaPromedio).html("El promedio es de: " + promedio);
+	$(divSalidaPromedio).html("El promedio es de: " + promedio.toFixed(4));
 }
 
 function cerrarSesion() {
@@ -290,6 +290,7 @@ function dialogEditarNota(botonPresionado, idDeLaNota) {
 	document.formEditarNota.valor.value = notaSeleccionada.valor;
 	document.formEditarNota.porcentaje.value = notaSeleccionada.porcentaje;
 	document.formEditarNota.fecha.value = notaSeleccionada.fecha;
+	document.formEditarNota.grupoEditar.value = tablaSeleccionada.id;
 
 }
 

@@ -19,7 +19,8 @@
 		<div class="span12">
 			<div class="divFormularios moduloApp" id="divCrearPeriodo">
 				<form id="formCrearPeriodo" enctype="multipart/form-data"
-					method="post" action="<!--{Root Site}-->/modules/Home/ControladorHome.php">
+					method="post"
+					action="<!--{Root Site}-->/modules/Home/ControladorHome.php">
 
 					<div class="divTituloModulo">
 						<h1>
@@ -44,8 +45,10 @@
 							<input type="text" class="inputCalendars" name="fechaFinal"
 								required />
 						</div>
-						<input class="btn btn-primary" type="submit" name="action"
-							value="Crear Periodo" />
+						<div class="divButtonSubmitCenter">
+							<input class="btn btn-primary" type="submit" name="action"
+								value="Crear Periodo" />
+						</div>
 					</div>
 				</form>
 			</div>
@@ -69,12 +72,4 @@
 	</div>
 </div>
 
-<div class="span6">
-	<div class="row-fluid">
-		<div class="span12">
-			<div id="divFeed" class="moduloApp">
-				<!--{Feed de noticias}-->
-			</div>
-		</div>
-	</div>
-</div>
+<div class="span6"></div>

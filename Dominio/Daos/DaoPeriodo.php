@@ -9,7 +9,7 @@ use Dominio\BaseDeDatos\BDFactory;
 use Dominio\IDaos\IDaoPeriodo;
 use Dominio\DTO\DTOCrud;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
+//$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/IDaos/IDaoPeriodo.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/Clases/Periodo.php';
@@ -74,8 +74,10 @@ class DaoPeriodo implements IDaoPeriodo
 
 		if(count($resultados)==1){
 			$nuevoPeriodo = $resultados[0];
-			return new Periodo($nuevoPeriodo['id'],date("d-m-Y",strtotime($nuevoPeriodo['fecha_inicio'])),
-					date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
+			// 			return new Periodo($nuevoPeriodo['id'],date("d-m-Y",strtotime($nuevoPeriodo['fecha_inicio'])),
+			// 					date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
+			return new Periodo($nuevoPeriodo['id'],$nuevoPeriodo['fecha_inicio'],
+					$nuevoPeriodo['fecha_final'],$nuevoPeriodo['nombre']);
 		}
 
 		return null;
@@ -93,7 +95,7 @@ class DaoPeriodo implements IDaoPeriodo
 			for ($i = 0; $i<$numeroResultados; $i++){
 				$nuevoPeriodo = $resultados[$i];
 				$periodoLeido = new Periodo($nuevoPeriodo['id'],date("d-m-Y",strtotime($nuevoPeriodo['fecha_inicio'])),
-							date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
+						date("d-m-Y",strtotime($nuevoPeriodo['fecha_final'])),$nuevoPeriodo['nombre']);
 				$periodoLeido->setUsuario($usuario);
 				$listaPeriodos[] = $periodoLeido;
 			}

@@ -2,7 +2,7 @@
 /*1*/
 /*5*/
 /*4*/
-/*2#FF1919*/
+/*2*/
 /*3*/
 /*Negro*/
 /*-----------------------*/
@@ -48,19 +48,22 @@
 /*Contiene la info generado por PHP*/
 
 #contenedorInformacion {
-  border-right: 1px solid #444444;
-  border-bottom: 1px solid #444444;
-  background-color: #333333;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  background-color: #eeeeee;
   padding: 5px 10px;
 }
 #nav-excepciones-buttons {
-  border-top: 1px solid #444444;
-  border-bottom: 1px solid #444444;
-  background-color: #333333;
+  border: 1px solid #cccccc;
+  border-left: 0;
+  background-color: #eeeeee;
 }
 #divNavButtons {
-  border-right: 1px solid #444444;
-  border-left: 1px solid #444444;
+  border-left: 1px solid #cccccc;
+}
+#divNavMensajes {
+  border-left: 1px solid #cccccc;
+  height: 100%;
 }
 #divNavMensajes a {
   color: white;
@@ -135,7 +138,7 @@ body {
   margin: 0;
   font-size: 100%;
   line-height: 20px;
-  color: white;
+  color: #111111;
   font-weight: bold;
   font-family: 'Droid Sans', sans-serif;
   background-image: url('../img/bg.png');
@@ -144,21 +147,21 @@ p {
   margin: 5px;
 }
 a {
-  color: white;
+  color: #222222;
   text-decoration: none;
 }
 a:visited {
-  color: #eeeeee;
+  color: black;
   text-decoration: underline;
 }
 a:hover,
 a:focus {
-  color: #0077ff;
+  color: #033ba1;
 }
 h1,
 h2,
 h3 {
-  color: #00a6ff;
+  color: #0244be;
   font-size: 2rem;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 5px;
@@ -167,7 +170,7 @@ h3 {
 h1 a,
 h2 a,
 h3 a {
-  color: #00a6ff;
+  color: #0244be;
 }
 h2 {
   font-size: 1.5rem;
@@ -179,7 +182,7 @@ ul li {
   margin: 5px;
 }
 ul li a:hover {
-  color: #bbbbbb;
+  color: black;
   text-decoration: underline;
 }
 input[type="text"],
@@ -187,9 +190,8 @@ input[type="number"],
 input[type="password"],
 input[type="email"],
 textarea {
-  border: none;
-  background: #555555;
-  color: white;
+  background: white;
+  color: #111111;
 }
 /*-----------------------*/
 
@@ -197,14 +199,15 @@ textarea {
 
 .divFormularios .descripcionFormularios {
   margin-bottom: 15px;
-  border-bottom: 1px solid #444444;
+  border-bottom: 1px solid #cccccc;
 }
 .divFormularios .descripcionFormularios h1,
 .divFormularios .descripcionFormularios h2 {
-  color: #00a6ff;
+  color: #111111;
 }
 .divFormularios .divInputsFormularios * {
   margin: 5px;
+  text-align: center;
 }
 .divFormularios .divInputsFormularios div {
   margin-top: 0;
@@ -265,7 +268,7 @@ textarea {
   vertical-align: middle;
 }
 #divHijoNavProfile a {
-  color: white;
+  color: #eeeeee;
 }
 #divHijoNavProfile p {
   display: inline;
@@ -273,14 +276,14 @@ textarea {
 /*Es un div, con informacion generada por php. Es una seccion con contenido*/
 
 .moduloApp {
-  border: 1px solid #444444;
+  border: 1px solid #cccccc;
   border-radius: 5px;
   width: 96%;
   margin: 5px;
 }
 .moduloApp .divTituloModulo {
-  border-bottom: 1px solid #444444;
-  background-color: #222222;
+  border-bottom: 1px solid #cccccc;
+  background-color: #dddddd;
   padding: 5px;
 }
 .moduloApp .divTituloModulo h1 {
@@ -292,6 +295,10 @@ textarea {
 .moduloApp .linkCollapse {
   width: 100%;
   display: block;
+  text-align: center;
+}
+.moduloApp .row-fluid {
+  padding-bottom: 10px;
 }
 #divError404 {
   text-align: center;
@@ -299,16 +306,18 @@ textarea {
 #divError404 img {
   display: block;
   margin: 0 auto;
-  border: 5px solid #444444;
+  border: 5px solid #cccccc;
 }
 .divGrupoDefecto {
-  -moz-box-shadow: 0px 0px 5px 1px white;
-  -webkit-box-shadow: 0px 0px 5px 1px white;
-  box-shadow: 0px 0px 5px 1px white;
-  background-color: #222222;
+  -moz-box-shadow: 0px 0px 5px 1px #555555;
+  -webkit-box-shadow: 0px 0px 5px 1px #555555;
+  box-shadow: 0px 0px 5px 1px #555555;
+  background-color: #333333;
+  border: 1px solid #111111;
 }
 .divGrupoDefecto .divTituloModulo {
-  background-color: #111111;
+  background-color: #222222;
+  border-bottom: 1px solid #333333;
 }
 .divGrupoDefecto .divTituloModulo h1 {
   margin: 0;
@@ -319,6 +328,20 @@ textarea {
 .divGrupoDefecto .divTituloModulo i {
   float: right;
 }
+.divGrupoDefecto .divFormularios {
+  border: 2px solid #444444;
+  text-align: left;
+  color: white;
+}
+.divGrupoDefecto .divFormularios h1 {
+  color: white;
+}
+.divGrupoDefecto .descripcionFormularios {
+  border-bottom: 2px solid #444444;
+}
+.divGrupoDefecto .tablaPromedio td {
+  color: white;
+}
 /*-----------------------*/
 
 /*----------Componentes y elementos particulares-------------*/
@@ -327,8 +350,9 @@ textarea {
   width: 100%;
 }
 .tablaInformacion td {
-  color: white;
+  color: #111111;
   width: 50%;
+  padding: 5px;
 }
 .tablaInformacion td:last-child {
   text-align: center;
@@ -337,24 +361,32 @@ textarea {
   margin: 0 auto;
 }
 .tablaInformacion tr:nth-child(even) {
-  background-color: #444444;
+  background-color: #dddddd;
 }
 .tablaInformacion tr:nth-child(odd) {
-  background-color: #555555;
+  background-color: #cccccc;
 }
 .tablaNotas {
+  margin-top: 10px;
   width: 100%;
+  table-layout: auto;
 }
 .tablaNotas td {
-  color: white;
+  color: #111111;
   text-align: center;
-  background-color: #555555;
+  background-color: #dddddd;
+  margin: 0;
+  border: 0;
+  padding: 5px;
 }
 .tablaNotas td span {
   margin: 0 auto;
 }
 .tablaNotas th {
-  background-color: #444444;
+  background-color: #222222;
+  color: white;
+  margin: 0;
+  padding: 10px;
 }
 #formCerrarSesion {
   display: none;
@@ -364,10 +396,13 @@ textarea {
   width: 99%;
   height: 2px;
   border: none;
-  background-color: #777777;
-  box-shadow: 0px 0px 10px 1px #555555;
+  background-color: #eeeeee;
+  box-shadow: 0px 0px 10px 1px #222222;
   border-radius: 2px;
   margin: 0 auto;
+}
+.modal {
+  display: none;
 }
 /*-----------------------*/
 
@@ -421,9 +456,14 @@ textarea {
     width: 100%;
     float: none;
   }
-}
-#divModalEditarNota {
-  display: none;
+  .moduloApp .row-fluid .span6:last-child {
+    margin-top: 10px;
+    border-top: 2px solid #eeeeee;
+    padding-top: 5px;
+  }
+  .divGrupoDefecto .row-fluid .span6:last-child {
+    border-top: 2px solid #444444;
+  }
 }
 /*-----------------------*/
 

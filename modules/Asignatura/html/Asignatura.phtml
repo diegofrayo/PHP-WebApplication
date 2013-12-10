@@ -38,10 +38,13 @@
 						</div>
 						<div class="divInputsFormularios collapse"
 							id="collapseEditar<!--{Indice Asignatura}-->">
+
 							<!--{Editar Asignatura}-->
 
-							<input class="btn btn-primary" type="submit" name="action"
-								value="Editar Asignatura" />
+							<div class="divButtonSubmitCenter">
+								<input class="btn btn-primary" type="submit" name="action"
+									value="Editar Asignatura" />
+							</div>
 						</div>
 					</form>
 				</div>
@@ -94,14 +97,19 @@
 							<div>
 								<input name="nombre" type="text" maxlength="25" required />
 							</div>
-							<label style="display: inline;">Porcentajes Iguales</label> <input
-								type='checkbox' style="display: inline;"
-								name='porcentajesIguales'> <br /> <input type="hidden"
-								name="idAsignatura" value="<!--{Id Asignatura}-->" /> <input
-								type="hidden" name="indiceAsignatura"
-								value="<!--{Indice Asignatura}-->" /> <input
-								class="btn btn-primary" type="submit" name="action"
-								value="Crear Grupo" />
+							<div class='divButtonSubmitCenter'>
+								<label style="display: inline;">Porcentajes Iguales</label> <input
+									type='checkbox' style="display: inline;"
+									name='porcentajesIguales'>
+							</div>
+							<input type="hidden" name="idAsignatura"
+								value="<!--{Id Asignatura}-->" /> <input type="hidden"
+								name="indiceAsignatura" value="<!--{Indice Asignatura}-->" />
+
+							<div class="divButtonSubmitCenter">
+								<input class="btn btn-primary" type="submit" name="action"
+									value="Crear Grupo" />
+							</div>
 						</div>
 					</form>
 				</div>

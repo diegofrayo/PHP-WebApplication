@@ -50,7 +50,7 @@ class VistaAsignatura
 
 	private function crearInformacionAsignatura(Asignatura $asignatura)
 	{
-		$html="<table class='tablaInformacion'>".
+		$html="<table class='tablaInformacion' table-layout:fixed>".
 				"<tbody><tr><td>Nombre:</td>".
 				"<td>".$asignatura->getNombre()."</td></tr>".
 				"<tr><td>Periodo:</td>".
@@ -67,7 +67,7 @@ class VistaAsignatura
 	private function crearEditarAsignatura(Asignatura $asignatura, $listaDePeriodos, $indiceAsignatura)
 	{
 		$html = "<label>Nombre</label><div>".
-				"<input name='nombre' type='text' maxlength='20' value = '".$asignatura->getNombre()."' required />".
+				"<input name='nombre' type='text' maxlength='30' value = '".$asignatura->getNombre()."' required />".
 				"</div><label>Periodo </label>";
 
 		$htmlPeriodos = "<div><select name = 'periodo'>";
@@ -109,7 +109,7 @@ class VistaAsignatura
 				"</div><input type='hidden' name='idAsignatura'".
 				" value='".$asignatura->getId()."' />".
 				"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
-				"<input class='btn btn-primary' type='submit' name='action' value='Crear Nota' />";
+				"<div class='divButtonSubmitCenter'><input class='btn btn-primary' type='submit' name='action' value='Crear Nota' /></div>";
 
 		return $html;
 	}
@@ -155,7 +155,7 @@ class VistaAsignatura
 						"<th>Valor</th>".
 						"<th>Fecha</th>".
 						"<th>Editar</th>".
-						"<th>Borrar</th></tr></thead><tbody>";
+						"<th>Borrar</th></tr></thead><tbody id ='".$grupo->getId()."'>";
 
 				foreach ($listaDeNotas as $nota){
 					$html.=
@@ -179,10 +179,8 @@ class VistaAsignatura
 						"<thead><tr><th>Nombre</th>".
 						"<th>Valor</th><th>Porcentaje</th>".
 						"<th>Fecha</th>".
-
 						"<th>Editar</th>".
-
-						"<th>Borrar</th></tr></thead><tbody>";
+						"<th>Borrar</th></tr></thead><tbody id ='".$grupo->getId()."' >";
 
 				foreach ($listaDeNotas as $nota){
 					$html.=
@@ -205,7 +203,7 @@ class VistaAsignatura
 
 			$html.="</tbody></table><br/>";
 
-			$html.="<table class='' style='text-align: center; width: 98%;'>".
+			$html.="<table class='tablaPromedio' style='text-align: center; width: 98%;'>".
 					"<tbody><tr><td style='width:50%;'>".
 					"<a class='btn' onclick='calcularPromedioGrupo(&#39;#tablaNotas".$grupo->getId()."&#39; ,&#39;#divPromedioGrupo".$grupo->getId()."&#39;, ".$grupo->getPorcentajesIguales().");'>".
 					"Calcular Promedio </a></td>".
@@ -243,7 +241,7 @@ class VistaAsignatura
 			$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
 					"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
 					"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
-					"<br/><input type='submit' class='btn btn-primary' name='action'".
+					"<input type='submit' class='btn btn-primary' name='action'".
 					" value='Editar Grupo' />";
 
 			$html.="</div></div></form>";
@@ -258,7 +256,7 @@ class VistaAsignatura
 					"</div><div class='divInputsFormularios'>".
 					"<label>Nombre </label><div>".
 					"<input name='nombre' id='nombreEditarGrupo' type='text' maxlength='25' value='".$grupo->getNombre()."' required />".
-					"</div><label style='display:inline;'>Porcentajes Iguales</label>";
+					"</div><div class='divButtonSubmitCenter'><label style='display:inline;'>Porcentajes Iguales</label>";
 
 			if($grupo->getPorcentajesIguales() ==true){
 				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' checked />";
@@ -266,13 +264,13 @@ class VistaAsignatura
 				$html.=	"<input type='checkbox' id='checkEditarGrupo' name='porcentajesIguales' style='display:inline;' />";
 			}
 
-			$html.=	"<input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
+			$html.=	"</div><input type='hidden' value='".$grupo->getEsGrupoDefecto()."' name='grupo_defecto' />".
 					"<input type='hidden' value='".$grupo->getId()."' name='idGrupo' />".
 					"<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />".
-					"<br/><input type='submit' class='btn btn-primary' name='action'".
+					"<div class='divButtonSubmitCenter'><input type='submit' class='btn btn-primary' name='action'".
 					" value='Editar Grupo' />";
 
-			$html.="<a class='btn btn-danger' onclick='dialogBorrarGrupo(".$grupo->getId().",".$indiceAsignatura.")'>Borrar Grupo</a>";
+			$html.="<a class='btn btn-danger' onclick='dialogBorrarGrupo(".$grupo->getId().",".$indiceAsignatura.")'>Borrar Grupo</a></div>";
 
 			$html.="</div></div></form>";
 

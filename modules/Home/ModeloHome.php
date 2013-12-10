@@ -54,10 +54,10 @@ class ModeloHome
 		return $this->_boUsuarios->obtenerUsuarioPorEmail($email);
 	}
 
-	public function obtenerNotasFuturas($nick)
+	public function obtenerNotasFuturas($email)
 	{
 		$fecha = Date('Y-m-d');
-		return $this->_boLogicaNotas->obtenerNotasFuturas($fecha,$nick);
+		return $this->_boLogicaNotas->obtenerNotasFuturas($fecha,$email);
 	}
 
 	public function crearFoto(Foto $foto, $configuracion)

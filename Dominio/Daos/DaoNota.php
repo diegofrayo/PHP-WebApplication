@@ -22,10 +22,10 @@ class DaoNota implements IDaoNota
 	public function crear(Nota $nota)
 	{
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "insert into nota (id, nombre, valor, porcentaje, grupo, fecha, nick_usuario)
-				" . " values (?,?,?,?,?,?,?)";
+		$consultaSQL = "insert into nota (id, nombre, valor, porcentaje, grupo, fecha)
+				" . " values (?,?,?,?,?,?)";
 		$arrayDatos = array($nota -> getId(),$nota -> getNombre(), $nota -> getValor(),
-				$nota->getPorcentaje(), $nota -> getGrupo()->getId(), $nota->getFecha(), $nota->getUsuario()->getNick());
+				$nota->getPorcentaje(), $nota -> getGrupo()->getId(), $nota->getFecha());
 		$DTOConsulta = $manejadorBD -> insertar($consultaSQL, $arrayDatos);
 
 		if ($DTOConsulta->getExitoConsulta() ==true){
@@ -103,7 +103,7 @@ class DaoNota implements IDaoNota
 
 	}
 
-	public function obtenerNotasFuturas($fecha ,$nickUsuario)
+	public function obtenerNotasFuturas($fecha ,$emailUsuario)
 	{
 
 		// 		$consultaSQL = "select nota.id,nota.nombre,nota.valor,nota.porcentaje,nota.fecha,nota.grupo ".
@@ -126,10 +126,15 @@ class DaoNota implements IDaoNota
 		// 				"where u.email = ?";
 		//"where p.usuario = ? and n.fecha >= ?";
 		//$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($emailUsuario,$fecha));
+		//$consultaSQL = "select * from nota where nick_usuario = ? and fecha >= ? order by fecha ";
 
 		$manejadorBD = BDFactory::crearManejadorBD();
-		$consultaSQL = "select * from nota where nick_usuario = ? and fecha >= ? order by fecha ";
-		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($nickUsuario, $fecha));
+
+		$consultaSQL = "select distinct nota.id,nota.nombre,nota.valor,nota.porcentaje,nota.fecha,nota.grupo ".
+				"from nota,grupo_de_notas,asignatura,periodo,usuario where periodo.usuario = ? and ".
+				"periodo.id = asignatura.periodo and asignatura.id = grupo_de_notas.asignatura and ".
+				"grupo_de_notas.id = nota.grupo and nota.fecha >= ? order by fecha";
+		$resultados = $manejadorBD -> obtenerDatos($consultaSQL, array($emailUsuario, $fecha));
 		$numeroResultados = count($resultados);
 		$listaNotas = array();
 

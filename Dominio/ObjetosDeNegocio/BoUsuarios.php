@@ -111,7 +111,8 @@ class BoUsuarios
 	 */
 	public function iniciarSesionUsuario($email, $password)
 	{
-		$usuarioBD = $this->obtenerUsuarioPorEmail($email);
+		// 		$usuarioBD = $this->obtenerUsuarioPorEmail($email);
+		$usuarioBD = $this->_usuarioDao->obtenerUsuarioPorNick($email);
 
 		if($usuarioBD !=null){
 			if($usuarioBD->getPassword() == $password){

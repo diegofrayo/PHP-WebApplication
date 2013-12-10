@@ -1,4 +1,4 @@
-AnalizadorLexico
-================
+ProjectPHP
+==========
 
-Proyecto personal: Desarrollado en PHP
+Proyecto personal desarrollado en PHP
