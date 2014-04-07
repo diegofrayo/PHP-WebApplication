@@ -1,16 +1,16 @@
 <?php
 
-namespace modules\Asignatura;
+namespace modules\asignatura;
 
-use Dominio\Clases\GrupoDeNotas;
-use Dominio\Clases\Nota;
-use Dominio\Clases\Asignatura;
-use Dominio\ObjetosDeNegocio\BoLogicaNotas;
-use Dominio\Clases\Usuario;
+use domain\classes\GrupoDeNotas;
+use domain\classes\Nota;
+use domain\classes\Asignatura;
+use domain\business_objects\BoLogicaNotas;
+use domain\classes\Usuario;
 
 $_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoLogicaNotas.php';
 
 class ModeloAsignatura
 {

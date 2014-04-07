@@ -1,18 +1,18 @@
 <?php
 
-namespace modules\Periodo;
+namespace modules\periodo;
 
-use Dominio\Clases\Asignatura;
+use domain\classes\Asignatura;
 
-use Dominio\Clases\Periodo;
-use Dominio\ObjetosDeNegocio\BoLogicaNotas;
-use Dominio\Clases\Usuario;
-use Dominio\ObjetosDeNegocio\BoUsuarios;
+use domain\classes\Periodo;
+use domain\business_objects\BoLogicaNotas;
+use domain\classes\Usuario;
+use domain\business_objects\BoUsuarios;
 
 $_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoLogicaNotas.php';
 
 class ModeloPeriodo
 {
@@ -49,7 +49,8 @@ class ModeloPeriodo
 		return $this->_boLogicaNotas->crearAsignatura($asignatura);
 	}
 
-	public function obtenerListaDeAsignaturasDeUnPeriodo(Periodo $periodo){
+	public function obtenerListaDeAsignaturasDeUnPeriodo(Periodo $periodo)
+	{
 		return $this->_boLogicaNotas->obtenerListaDeAsignaturasDeUnPeriodo($periodo);
 	}
 

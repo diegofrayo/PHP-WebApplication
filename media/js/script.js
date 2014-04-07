@@ -2,9 +2,10 @@
 var idNota = 0;
 var filaSeleccionada = "";
 var tablaSeleccionada = "";
-var rootSite = '/Qualify';
 var notaSeleccionada;
+
 //var rootSite = 'http://qualify.hol.es';
+var rootSite = '/Qualify';
 
 function Nota(id, nombre, valor) {
 	this.nombre = nombre;
@@ -89,7 +90,7 @@ function calcularPromedioPeriodo(idPeriodo) {
 		$(idElementoSalida).html(response);
 	};
 
-	ajax(rootSite + '/modules/Periodo/ControladorPeriodo.php',
+	ajax(rootSite + '/modules/periodo/ControladorPeriodo.php',
 			'#divPromedioPeriodo', parametrosMetodo, funcion);
 }
 
@@ -99,11 +100,10 @@ function comprobarNickDisponible() {
 
 	if (nick != '') {
 
-		var parametros = {
-			action : 'Comprobar Nick',
-			ajax : "ajax",
-			nick : nick
-		};
+		var parametros = {};
+		parametros.action = 'Comprobar Nick';
+		parametros.ajax = "ajax";
+		parametros.nick = nick;
 
 		var funcion = function(idElementoSalida, response) {
 
@@ -120,7 +120,7 @@ function comprobarNickDisponible() {
 			}
 		};
 
-		ajax(rootSite + '/modules/Home/ControladorHome.php',
+		ajax(rootSite + '/modules/home/ControladorHome.php',
 				'#divNickDisponible', parametros, funcion);
 
 	} else {
@@ -157,7 +157,7 @@ function comprobarEmailDisponible() {
 			}
 		};
 
-		ajax(rootSite + '/modules/Home/ControladorHome.php',
+		ajax(rootSite + '/modules/home/ControladorHome.php',
 				'#divEmailDisponible', parametros, funcion);
 
 	} else {
@@ -197,7 +197,7 @@ function borrarNota() {
 
 	};
 
-	ajax(rootSite + '/modules/Asignatura/ControladorAsignatura.php',
+	ajax(rootSite + '/modules/asignatura/ControladorAsignatura.php',
 			'#divNavMensajes', parametrosMetodo, funcion);
 
 }
@@ -259,7 +259,7 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 			promedio += ((notaActual / 100) * porcentajeActual);
 		});
 	}
-	$(divSalidaPromedio).html("El promedio es de: " + promedio.toFixed(4));
+	$(divSalidaPromedio).html("El promedio es de: " + promedio.toFixed(2));
 }
 
 function cerrarSesion() {

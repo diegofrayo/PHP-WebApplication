@@ -1,20 +1,19 @@
 <?php
 
-namespace modules\Asignatura;
+namespace modules\asignatura;
 
-use Dominio\DTO\DTOModuloAsignatura;
-
+use domain\DTO\DTOModuloAsignatura;
 use modules\HelperModules;
-
-use Dominio\Clases\Asignatura;
+use domain\classes\Asignatura;
 
 class VistaAsignatura
 {
-	public function imprimirHTML_Asignatura(DTOModuloAsignatura $dtoAsignatura){
+	public function imprimirHTML_Asignatura(DTOModuloAsignatura $dtoAsignatura)
+	{
 
 		echo "<div class='item'><div class='row-fluid'><div class='span12'>";
 
-		$html= HelperModules::leerPlantillaHTML("Asignatura","Asignatura");
+		$html= HelperModules::leerPlantillaHTML("asignatura","Asignatura");
 
 		//Imprime la parte inicial de la asignatura
 		$indiceAsignatura = $dtoAsignatura->getIndice();
@@ -39,13 +38,14 @@ class VistaAsignatura
 		//Lista de grupos
 		$listaDeGrupos = $dtoAsignatura->getListaDeGrupos();
 		$i = 0;
+		
 		foreach ($listaDeGruposDeNotas as $grupo){
+			
 			echo $this->crearGrupoDeNotas($grupo, $listaDeGrupos[$i], $indiceAsignatura);
 			$i = $i + 1;
 		}
 
 		echo "</div></div></div>";
-
 	}
 
 	private function crearInformacionAsignatura(Asignatura $asignatura)
@@ -71,23 +71,30 @@ class VistaAsignatura
 				"</div><label>Periodo </label>";
 
 		$htmlPeriodos = "<div><select name = 'periodo'>";
+		
 		foreach ($listaDePeriodos as $periodo){
+			
 			$option = "<option value= '".$periodo->getId()."'>".$periodo->getNombre()."</option>";
 			$htmlPeriodos.=$option;
 		}
+		
 		$htmlPeriodos.= "</select></div>";
 		$html.=	$htmlPeriodos."<input type='hidden' name='idAsignatura' value='".$asignatura->getId()."' />";
 		$html.= "<input type='hidden' name='indiceAsignatura' value='".$indiceAsignatura."' />";
+		
 		return $html;
 	}
 
 	private function crearSelectGrupoNotas($listaDeGruposDeNotas)
 	{
 		$htmlGruposNotas = "<select name = 'grupo'>";
+		
 		foreach ($listaDeGruposDeNotas as $grupo){
+			
 			$option = "<option value= '".$grupo->getId()."'>".$grupo->getNombre()."</option>";
 			$htmlGruposNotas.=$option;
 		}
+		
 		$htmlGruposNotas .= "</select>";
 		return $htmlGruposNotas;
 	}
@@ -225,7 +232,7 @@ class VistaAsignatura
 		if($grupo->getEsGrupoDefecto() == true){
 
 			$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
-					" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+					" method='post' action='".HelperModules::$ROOT_SITE."/modules/asignatura/ControladorAsignatura.php'>".
 					"<div class='divFormularios moduloApp'>".
 					"<div class='descripcionFormularios'>".
 					"<h1>Configuraci&oacute;n</h1>".
@@ -249,7 +256,7 @@ class VistaAsignatura
 		}else{
 
 			$html.=	"<form name='formEditarGrupo' enctype='multipart/form-data'".
-					" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+					" method='post' action='".HelperModules::$ROOT_SITE."/modules/asignatura/ControladorAsignatura.php'>".
 					"<div class='divFormularios moduloApp'>".
 					"<div class='descripcionFormularios'>".
 					"<h1>Configuraci&oacute;n</h1>".
@@ -288,7 +295,8 @@ class VistaAsignatura
 		return $html;
 	}
 
-	public function crearModalParaBorrarAsignatura(){
+	public function crearModalParaBorrarAsignatura()
+	{
 		$html = "<div id='divModalBorrarAsignatura' class='modal hide fade' tabindex='-1'".
 				" role='dialog'  aria-hidden='true'>".
 				"<div class='modal-header'>".
@@ -296,7 +304,7 @@ class VistaAsignatura
 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div>	<div class='modal-body'>".
 				"<form name='formBorrarAsignatura' id='formBorrarAsignatura' enctype='multipart/form-data'".
-				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/asignatura/ControladorAsignatura.php'>".
 				"<p>Borrar&iacute;a la asignatura, con todas sus notas</p>".
 				"<input type='hidden' name='idAsignatura' />".
 				"<input type='hidden' name='action' value='Borrar Asignatura' />".
@@ -305,10 +313,12 @@ class VistaAsignatura
 				"Borrar</button>".
 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
 				"Cancelar</button></div></div>";
+
 		return $html;
 	}
 
-	public function crearModalParaBorrarGrupo(){
+	public function crearModalParaBorrarGrupo()
+	{
 		$html = "<div id='divModalBorrarGrupo' class='modal hide fade' tabindex='-1'".
 				" role='dialog'  aria-hidden='true'>".
 				"<div class='modal-header'>".
@@ -316,7 +326,7 @@ class VistaAsignatura
 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Esta seguro</h3>".
 				"</div><div class='modal-body'>".
 				"<form name='formBorrarGrupo' id='formBorrarGrupo' enctype='multipart/form-data'".
-				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/asignatura/ControladorAsignatura.php'>".
 				"<p>Borrar&iacute;a el grupo seleccionado</p>".
 				"<input type='hidden' name='idGrupo' id='hiddenGrupoBorrar' />".
 				"<input type='hidden' name='action' value='Borrar Grupo' />".
@@ -326,10 +336,12 @@ class VistaAsignatura
 				"Borrar</button>".
 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
 				"Cancelar</button></div></div>";
+		
 		return $html;
 	}
 
-	public function crearModalParaBorrarNota(){
+	public function crearModalParaBorrarNota()
+	{
 		$html = "<div id='divModalBorrarNota' class='modal hide fade' tabindex='-1'".
 				" role='dialog'  aria-hidden='true'>".
 				"<div class='modal-header'>".
@@ -342,10 +354,12 @@ class VistaAsignatura
 				"Borrar</button>".
 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
 				"Cancelar</button></div></div>";
+		
 		return $html;
 	}
 
-	public function crearModalParaEditarNota(){
+	public function crearModalParaEditarNota()
+	{
 		$html = "<div id='divModalEditarNota' class='modal hide fade' tabindex='-1'".
 				" role='dialog'  aria-hidden='true'>".
 				"<div class='modal-header'>".
@@ -353,7 +367,7 @@ class VistaAsignatura
 				" aria-hidden='true'>x</button><h3 id='myModalLabel'>Editar Nota</h3></div>".
 				"<div class='modal-body'>".
 				"<form name='formEditarNota' id='formEditarNota' enctype='multipart/form-data'".
-				" method='post' action='".HelperModules::$ROOT_SITE."/modules/Asignatura/ControladorAsignatura.php'>".
+				" method='post' action='".HelperModules::$ROOT_SITE."/modules/asignatura/ControladorAsignatura.php'>".
 				"<label>Nombre</label>".
 				"<div><input name='nombre' type='text' maxlength='25' required />".
 				"</div><label>Valor </label><div>".
@@ -371,6 +385,7 @@ class VistaAsignatura
 				"Editar Nota</button>".
 				"<button class='btn' data-dismiss='modal' aria-hidden='true'>".
 				"Cancelar</button></div></div>";
+		
 		return $html;
 	}
 

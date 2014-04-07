@@ -1,17 +1,16 @@
 <?php
 
-namespace modules\Home;
+namespace modules\home;
 
-use Dominio\Clases\Foto;
-use Dominio\Clases\Periodo;
-use Dominio\ObjetosDeNegocio\BoLogicaNotas;
-use Dominio\Clases\Usuario;
-use Dominio\ObjetosDeNegocio\BoUsuarios;
+use domain\classes\Periodo;
+use domain\business_objects\BoLogicaNotas;
+use domain\classes\Usuario;
+use domain\business_objects\BoUsuarios;
 
 $_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoUsuarios.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/Dominio/ObjetosDeNegocio/BoLogicaNotas.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoUsuarios.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoLogicaNotas.php';
 
 class ModeloHome
 {
@@ -29,9 +28,9 @@ class ModeloHome
 		return $this->_boUsuarios->registrarUsuario($usuario);
 	}
 
-	public function iniciarSesionUsuario($email, $password)
+	public function iniciarSesionUsuario($nick, $password)
 	{
-		return $this->_boUsuarios->iniciarSesionUsuario($email, $password);
+		return $this->_boUsuarios->iniciarSesionUsuario($nick, $password);
 	}
 
 	public function obtenerListaDePeriodosDeUnUsuario(Usuario $usuario)
@@ -56,17 +55,7 @@ class ModeloHome
 
 	public function obtenerNotasFuturas($email)
 	{
-		$fecha = Date('Y-m-d');
-		return $this->_boLogicaNotas->obtenerNotasFuturas($fecha,$email);
+		return $this->_boLogicaNotas->obtenerNotasFuturas($email);
 	}
 
-	public function crearFoto(Foto $foto, $configuracion)
-	{
-		return $this->_boUsuarios->crearFoto($foto, $configuracion);
-	}
-	
-	public function borrarFoto(Foto $foto)
-	{
-		return $this->_boUsuarios->borrarFoto($foto);
-	}
 }

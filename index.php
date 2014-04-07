@@ -1,9 +1,13 @@
 <?php
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/ProjectPHP';
-$root = "/Qualify";
+
+//$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/ProjectPHP';
 //$root = "http://qualify.hol.es";
+$root = "/Qualify";
+
+
 session_start();
 if (!isset($_SESSION["usuario"])) {
+	
 	$_SESSION["usuario"] = "Visitante";
 }
 ?>
@@ -12,7 +16,8 @@ if (!isset($_SESSION["usuario"])) {
 <head>
 <meta name="viewport"
 	content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1 ">
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
+
 <title>Qualify.com</title>
 <link rel="shortcut icon"
 	href="<?php echo $root; ?>/media/img/favicon.png">
@@ -51,7 +56,7 @@ if (!isset($_SESSION["usuario"])) {
 			<!-- Header -->
 
 			<?php
-			require_once 'modules/Header/ControladorHeader.php';
+			require_once 'modules/header/ControladorHeader.php';
 			?>
 
 			<!-- Fin header -->
@@ -69,61 +74,74 @@ if (!isset($_SESSION["usuario"])) {
 						$usuarioApp = $_SESSION["usuario"];
 
 						if($usuarioApp == 'Visitante'){
+
 							if(isset ($_GET['section'])){
+
 								$controlador = strtolower($_GET['section']);
+								
 								switch($controlador){
+
 									case 'home':
-										require_once 'modules/Home/ControladorHome.php';
+										
+										require_once 'modules/home/ControladorHome.php';
 										break;
 
 									default:
+										
 										require_once 'error404.html';
 										break;
 								}
+								
 							}else{
-								require_once 'modules/Home/ControladorHome.php';
+
+								require_once 'modules/home/ControladorHome.php';
 							}
+							
 						}else{
+
 							if(isset ($_GET['section'])){
+
 								$controlador = strtolower($_GET['section']);
 
 								switch($controlador){
 
 									case 'home':
-										require_once 'modules/Home/ControladorHome.php';
+										
+										require_once 'modules/home/ControladorHome.php';
 										break;
 
 									case 'periodo':
+										
 										if(isset ($_GET['id'])){
-											require_once 'modules/Periodo/ControladorPeriodo.php';
+											
+											require_once 'modules/periodo/ControladorPeriodo.php';
 											echo $_SESSION["script"];
 										}else{
+
 											require_once 'error404.html';
 										}
 										break;
 
-									case 'perfil':
-										break;
-
-									case 'buscarpersonas':
-										break;
-
 									default:
 										require_once 'error404.html';
 										break;
 								}
+								
 							}else{
-								require_once 'modules/Home/ControladorHome.php';
+
+								require_once 'modules/home/ControladorHome.php';
 							}
+							
 							echo "<script>modificarTituloApp('".$usuarioApp['nick']."');</script>";
 						}
 
 						if (isset($_SESSION["mensajes"])) {
+
 							echo $_SESSION["mensajes"];
 						}
+						
 						$_SESSION["mensajes"] = '';
 						$_SESSION["script"] = '';
-
 						?>
 
 						<!-- Termina el contenido generado por php -->

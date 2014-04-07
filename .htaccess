@@ -1,11 +1,7 @@
 RewriteEngine on
 
 RewriteRule ^([A-Za-z]+)$ ?section=$1
-RewriteRule ^perfil/(.+)$ ?section=perfil&user=$1
 RewriteRule ^periodo/(.+)$ ?section=periodo&id=$1
-RewriteRule ^noticia/(.+)$ ?section=noticia&id=$1
 
 #RewriteRule ^home$ ?section=home
-#RewriteRule ^buscar-personas$ ?section=buscarpersonas
-#RewriteRule ^perfil$ ?section=perfil
 #RewriteRule ^(.+)/(.+)$ ?section=$1&id=$2
