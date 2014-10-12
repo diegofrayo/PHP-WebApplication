@@ -303,7 +303,7 @@ class BoLogicaNotas
 				$promedioFinal = $promedioFinal / $numeroAsignaturas;
 			}
 			
-			return number_format($promedioFinal, 2);
+			return number_format($promedioFinal, 1);
 		}
 		
 		throw new BusinessLogicException("El periodo no existe");
@@ -435,7 +435,7 @@ class BoLogicaNotas
 				}
 			}
 
-			return number_format($notaFinal, 2);
+			return number_format($notaFinal, 1);
 		}
 		
 		throw new BusinessLogicException("El grupo no existe");

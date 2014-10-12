@@ -80,25 +80,15 @@
   background: url('../img/sprite.png');
   display: block;
 }
-#button-salir {
-  background-position: -486px -12px;
-  width: 43px;
-  height: 69px;
+#button-salir{
+	background-position: -354px -12px;
+	width: 43px;
+	height: 69px;
 }
-#button-home {
-  background-position: -296px -10px;
-  width: 46px;
-  height: 70px;
-}
-#button-alertas {
-  background-position: -422px -10px;
-  width: 54px;
-  height: 71px;
-}
-#button-perfil {
-  background-position: -356px -8px;
-  width: 49px;
-  height: 72px;
+#button-home{
+	background-position: -298px -12px;
+	width: 43px;
+	height: 68px;
 }
 #logo-header {
   background-position: 1px 0;
@@ -348,6 +338,7 @@ textarea {
 
 .tablaInformacion {
   width: 100%;
+  overflow-x: auto;
 }
 .tablaInformacion td {
   color: #111111;
@@ -366,10 +357,13 @@ textarea {
 .tablaInformacion tr:nth-child(odd) {
   background-color: #cccccc;
 }
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
 .tablaNotas {
   margin-top: 10px;
   width: 100%;
-  table-layout: auto;
 }
 .tablaNotas td {
   color: #111111;

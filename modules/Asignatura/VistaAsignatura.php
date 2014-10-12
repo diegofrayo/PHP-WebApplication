@@ -72,10 +72,20 @@ class VistaAsignatura
 
 		$htmlPeriodos = "<div><select name = 'periodo'>";
 		
+		$idPeriodoAsignatura = $asignatura->getPeriodo()->getId();
 		foreach ($listaDePeriodos as $periodo){
 			
-			$option = "<option value= '".$periodo->getId()."'>".$periodo->getNombre()."</option>";
-			$htmlPeriodos.=$option;
+            if ($idPeriodoAsignatura == $periodo->getId()) {
+                
+                $option = "<option value= '" . $idPeriodoAsignatura . "' selected>" .
+                         $periodo->getNombre() . "</option>";
+            } else {
+                
+                $option = "<option value= '" . $periodo->getId() . "'>" .
+                         $periodo->getNombre() . "</option>";
+            }
+            
+            $htmlPeriodos .= $option;
 		}
 		
 		$htmlPeriodos.= "</select></div>";
@@ -104,7 +114,7 @@ class VistaAsignatura
 		$html = "<label>Nombre</label><div>".
 				"<input name='nombre' type='text' maxlength='25' required />".
 				"</div><label>Valor </label><div>".
-				"<input name='valor' type='number' required maxlength='4' />".
+				"<input name='valor' type='number' required maxlength='4' step='any' />".
 				"</div><label>Porcentaje </label><div>".
 				"<input name='porcentaje' type='number' maxlength='3' required />".
 				"</div><label>Grupo </label><div>";
@@ -157,7 +167,7 @@ class VistaAsignatura
 
 			if($grupo->getPorcentajesIguales() ==true){
 
-				$html.=	"<table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
+				$html.=	"<div class='table-responsive'><table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
 						"<thead><tr><th>Nombre</th>".
 						"<th>Valor</th>".
 						"<th>Fecha</th>".
@@ -182,7 +192,7 @@ class VistaAsignatura
 				}
 			}else{
 
-				$html.=	"<table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
+				$html.=	"<div class='table-responsive'><table class='table tablaNotas' id='tablaNotas".$grupo->getId()."' >".
 						"<thead><tr><th>Nombre</th>".
 						"<th>Valor</th><th>Porcentaje</th>".
 						"<th>Fecha</th>".
@@ -208,7 +218,7 @@ class VistaAsignatura
 				}
 			}
 
-			$html.="</tbody></table><br/>";
+			$html.="</tbody></table></div><br/>";
 
 			$html.="<table class='tablaPromedio' style='text-align: center; width: 98%;'>".
 					"<tbody><tr><td style='width:50%;'>".

@@ -259,7 +259,7 @@ function calcularPromedioGrupo(tablaNotasHTML, divSalidaPromedio,
 			promedio += ((notaActual / 100) * porcentajeActual);
 		});
 	}
-	$(divSalidaPromedio).html("El promedio es de: " + promedio.toFixed(2));
+	$(divSalidaPromedio).html("El promedio es de: " + promedio.toFixed(1));
 }
 
 function cerrarSesion() {

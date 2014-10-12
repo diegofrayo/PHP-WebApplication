@@ -10,6 +10,7 @@ if (!isset($_SESSION["usuario"])) {
 	
 	$_SESSION["usuario"] = "Visitante";
 }
+
 ?>
 <!DOCTYPE html>
 <html>
