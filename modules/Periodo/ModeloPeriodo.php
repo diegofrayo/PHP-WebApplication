@@ -9,10 +9,8 @@ use domain\business_objects\BoLogicaNotas;
 use domain\classes\Usuario;
 use domain\business_objects\BoUsuarios;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoUsuarios.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/business_objects/BoLogicaNotas.php';
+require_once '/../../domain/business_objects/BoUsuarios.php';
+require_once '/../../domain/business_objects/BoLogicaNotas.php';
 
 class ModeloPeriodo
 {

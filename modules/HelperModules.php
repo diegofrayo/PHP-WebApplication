@@ -10,7 +10,7 @@ namespace modules;
 class HelperModules
 {
 
-	public static $ROOT_SITE = "/Qualify";
+	public static $ROOT_SITE = "";
 	//public static $ROOT_SITE = "http://qualify.hol.es";
 
 	public static function crearMensajeExito($mensajeExito)

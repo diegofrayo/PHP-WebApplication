@@ -9,12 +9,10 @@ use domain\database\BDFactory;
 use domain\idaos\IDaoNota;
 use domain\dto\DTOCrud;
 
-$_SERVER ['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/idaos/IDaoNota.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/classes/Nota.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/dto/DTOCrud.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/exceptions/DBTransactionException.php';
+require_once '/../idaos/IDaoNota.php';
+require_once '/../classes/Nota.php';
+require_once '/../dto/DTOCrud.php';
+require_once '/../exceptions/DBTransactionException.php';
 
 class DaoNota implements IDaoNota {
 	
@@ -133,6 +131,7 @@ class DaoNota implements IDaoNota {
 				$emailUsuario,
 				Date('Y-m-d')
 		) );
+		
 		$numeroResultados = count ( $resultados );
 		$listaNotas = array ();
 		

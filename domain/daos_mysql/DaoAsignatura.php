@@ -6,14 +6,12 @@ use domain\classes\Asignatura;
 use domain\database\BDFactory;
 use domain\idaos\IDaoAsignatura;
 use domain\dto\DTOCrud;
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/domain/idaos/IDaoAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/domain/classes/Asignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/domain/database/BDFactory.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/domain/dto/DTOCrud.php';
-require_once $_SERVER['DOCUMENT_ROOT'] .
-         '/domain/exceptions/DBTransactionException.php';
+require_once '/../idaos/IDaoAsignatura.php';
+require_once '/../classes/Asignatura.php';
+require_once '/../database/BDFactory.php';
+require_once '/../dto/DTOCrud.php';
+require_once '/../exceptions/DBTransactionException.php';
 
 class DaoAsignatura implements IDaoAsignatura
 {
@@ -26,8 +24,7 @@ class DaoAsignatura implements IDaoAsignatura
         $arrayDatos = array(
                 0,
                 $asignatura->getNombre(),
-                $asignatura->getPeriodo()->getId(),
-                $asignatura->getNumeroNotasPrincipales()
+                $asignatura->getPeriodo()->getId()
         );
         $DTOConsulta = $manejadorBD->insertar($consultaSQL, $arrayDatos);
         

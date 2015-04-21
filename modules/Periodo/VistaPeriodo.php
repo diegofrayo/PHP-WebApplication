@@ -7,9 +7,7 @@ use modules\asignatura\VistaAsignatura;
 use modules\HelperModules;
 use domain\classes\Periodo;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/asignatura/VistaAsignatura.php';
+require_once '/../asignatura/VistaAsignatura.php';
 
 class VistaPeriodo
 {

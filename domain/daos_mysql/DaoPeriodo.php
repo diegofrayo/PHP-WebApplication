@@ -9,13 +9,11 @@ use domain\database\BDFactory;
 use domain\idaos\IDaoPeriodo;
 use domain\dto\DTOCrud;
 
-$_SERVER ['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/idaos/IDaoPeriodo.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/classes/Periodo.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/database/BDFactory.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/dto/DTOCrud.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/exceptions/DBTransactionException.php';
+require_once '/../idaos/IDaoPeriodo.php';
+require_once '/../classes/Periodo.php';
+require_once '/../database/BDFactory.php';
+require_once '/../dto/DTOCrud.php';
+require_once '/../exceptions/DBTransactionException.php';
 
 class DaoPeriodo implements IDaoPeriodo 
 {

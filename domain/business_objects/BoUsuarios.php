@@ -12,8 +12,8 @@ use domain\classes\Usuario;
 use domain\daos\DaoUsuario;
 use domain\factory\DaoFactory;
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/factory/DaoFactory.php';
+require_once '/../exceptions/BusinessLogicException.php';
+require_once '/../factory/DaoFactory.php';
 
 class BoUsuarios {
 	

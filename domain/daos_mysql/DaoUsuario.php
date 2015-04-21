@@ -8,13 +8,11 @@ use domain\database\BDFactory;
 use domain\idaos\IDaoUsuario;
 use domain\dto\DTOCrud;
 
-$_SERVER ['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/idaos/IDaoUsuario.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/classes/Usuario.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/database/BDFactory.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/dto/DTOCrud.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/exceptions/DBTransactionException.php';
+require_once '/../idaos/IDaoUsuario.php';
+require_once '/../classes/Usuario.php';
+require_once '/../database/BDFactory.php';
+require_once '/../dto/DTOCrud.php';
+require_once '/../exceptions/DBTransactionException.php';
 
 class DaoUsuario implements IDaoUsuario 
 {

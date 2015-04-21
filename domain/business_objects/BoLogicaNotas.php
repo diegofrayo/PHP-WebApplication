@@ -14,14 +14,12 @@ use domain\classes\Asignatura;
 use domain\classes\Nota;
 use domain\factory\DaoFactory;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/Periodo.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/Asignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/Nota.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/GrupoDeNotas.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/factory/DaoFactory.php';
+require_once '/../classes/Periodo.php';
+require_once '/../classes/Asignatura.php';
+require_once '/../classes/Nota.php';
+require_once '/../classes/GrupoDeNotas.php';
+require_once '/../exceptions/BusinessLogicException.php';
+require_once '/../factory/DaoFactory.php';
 
 /**
  * Esta clase es un objeto de negocio.

@@ -13,18 +13,16 @@ use modules\periodo\VistaPeriodo;
 use domain\classes\Usuario;
 use modules\periodo\ModeloPeriodo;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/periodo/VistaPeriodo.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/periodo/ModeloPeriodo.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/Usuario.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/DBTransactionException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/HelperModules.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/dto/DTOModuloPeriodo.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/dto/DTOModuloAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/asignatura/ModeloAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/home/ModeloHome.php';
+require_once 'VistaPeriodo.php';
+require_once 'ModeloPeriodo.php';
+require_once '/../../domain/classes/Usuario.php';
+require_once '/../../domain/exceptions/BusinessLogicException.php';
+require_once '/../../domain/exceptions/DBTransactionException.php';
+require_once '/../../domain/dto/DTOModuloPeriodo.php';
+require_once '/../../domain/dto/DTOModuloAsignatura.php';
+require_once '/../HelperModules.php';
+require_once '/../asignatura/ModeloAsignatura.php';
+require_once '/../home/ModeloHome.php';
 
 $modeloPeriodo = new ModeloPeriodo();
 $vistaPeriodo = new VistaPeriodo();
@@ -94,7 +92,7 @@ if(isset($_POST["action"])){
 
 				try{
 					
-					$nuevaAsignatura= new Asignatura(0, $_POST['nombre'],$_POST['notas']);
+					$nuevaAsignatura= new Asignatura(0, $_POST['nombre']);
 					$nuevaAsignatura->setPeriodo($periodoRequerido);
 					$modeloPeriodo->crearAsignatura($nuevaAsignatura);
 					

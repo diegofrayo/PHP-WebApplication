@@ -38,7 +38,7 @@ class VistaHome
 		foreach ($listaDePeriodos as $periodoLeido){
 			
 			$itemPeriodo = "<li><a href = 'periodo/".$periodoLeido->getId()."'>".$periodoLeido->getNombre().
-			" [" . $periodoLeido->getFechaInicio()." / ".$periodoLeido->getFechaFinal()." ]</a></li>";
+			" [" . $periodoLeido->getFechaInicio()." / ".$periodoLeido->getFechaFinal()."]</a></li>";
 			$html.=$itemPeriodo;
 		}
 		

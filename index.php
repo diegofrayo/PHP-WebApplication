@@ -1,9 +1,8 @@
 <?php
 
-//$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/ProjectPHP';
 //$root = "http://qualify.hol.es";
-$root = "/Qualify";
-
+// $root = "/Qualify";
+$root = "";
 
 session_start();
 if (!isset($_SESSION["usuario"])) {

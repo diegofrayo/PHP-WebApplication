@@ -11,13 +11,11 @@ use modules\header\VistaHeader;
 use domain\classes\Usuario;
 use modules\header\ModeloHeader;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/header/VistaHeader.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/HelperModules.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/DBTransactionException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/dto/DTOModuloHeader.php';
+require_once 'VistaHeader.php';
+require_once '/../HelperModules.php';
+require_once '/../../domain/exceptions/BusinessLogicException.php';
+require_once '/../../domain/exceptions/DBTransactionException.php';
+require_once '/../../domain/dto/DTOModuloHeader.php';
 
 $vistaHeader = new VistaHeader();
 $usuarioApp = $_SESSION["usuario"];

@@ -9,15 +9,13 @@ use modules\home\VistaHome;
 use domain\classes\Usuario;
 use modules\home\ModeloHome;
 
-$_SERVER ['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/modules/home/VistaHome.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/modules/home/ModeloHome.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/classes/Usuario.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/exceptions/DBTransactionException.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/modules/HelperModules.php';
-require_once $_SERVER ['DOCUMENT_ROOT'] . '/domain/dto/DTOModuloHome.php';
+require_once 'VistaHome.php';
+require_once 'ModeloHome.php';
+require_once '/../HelperModules.php';
+require_once '/../../domain/classes/Usuario.php';
+require_once '/../../domain/exceptions/BusinessLogicException.php';
+require_once '/../../domain/exceptions/DBTransactionException.php';
+require_once '/../../domain/dto/DTOModuloHome.php';
 
 $modeloHome = new ModeloHome ();
 $vistaHome = new VistaHome ();

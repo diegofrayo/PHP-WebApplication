@@ -9,10 +9,8 @@ use domain\database\BDFactory;
 use domain\idaos\IDaoGrupoDeNotas;
 use domain\dto\DTOCrud;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/idaos/IDaoGrupoDeNotas.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/GrupoDeNotas.php';
+require_once '/../idaos/IDaoGrupoDeNotas.php';
+require_once '/../classes/GrupoDeNotas.php';
 
 class DaoGrupoDeNotas implements IDaoGrupoDeNotas
 {

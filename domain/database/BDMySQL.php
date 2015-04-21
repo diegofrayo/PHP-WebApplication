@@ -1,9 +1,8 @@
 <?php
 namespace domain\database;
 use domain\dto\DTOCrud;
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/domain/database/IBaseDeDatos.php';
+require_once 'IBaseDeDatos.php';
 
 class BDMySQL implements IBaseDeDatos
 {
@@ -15,6 +14,11 @@ class BDMySQL implements IBaseDeDatos
     const BD = 'u942880924_php';
 
     const SERVIDOR = 'localhost';
+
+        // const USUARIO = 'u942880924_php';
+    // const CLAVE = 'qlify123';
+    // const BD = 'u942880924_php';
+    // const SERVIDOR = 'mysql.hostinger.co';
 
     
     /**

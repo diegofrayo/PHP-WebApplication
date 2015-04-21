@@ -2,9 +2,7 @@
 
 namespace domain\database;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/database/BDMySQL.php';
+require_once 'BDMySQL.php';
 
 class BDFactory {
 	

@@ -12,15 +12,13 @@ use modules\asignatura\VistaAsignatura;
 use domain\classes\Usuario;
 use modules\asignatura\ModeloAsignatura;
 
-$_SERVER['DOCUMENT_ROOT'] = 'C:/xampp/htdocs/Qualify';
-
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/asignatura/VistaAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/asignatura/ModeloAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/classes/Asignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/BusinessLogicException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/exceptions/DBTransactionException.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/HelperModules.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/modules/periodo/ModeloPeriodo.php';
+require_once 'VistaAsignatura.php';
+require_once 'ModeloAsignatura.php';
+require_once '/../../domain/classes/Asignatura.php';
+require_once '/../../domain/exceptions/BusinessLogicException.php';
+require_once '/../../domain/exceptions/DBTransactionException.php';
+require_once '/../HelperModules.php';
+require_once '/../periodo/ModeloPeriodo.php';
 
 $modeloAsignatura = new ModeloAsignatura();
 $vistaAsignatura = new VistaAsignatura();

@@ -8,11 +8,11 @@ use domain\daos_mysql\DaoUsuario;
 use domain\daos_mysql\DaoNota;
 use domain\daos_mysql\DaoGrupoDeNotas;
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/daos_mysql/DaoUsuario.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/daos_mysql/DaoPeriodo.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/daos_mysql/DaoAsignatura.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/daos_mysql/DaoNota.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/domain/daos_mysql/DaoGrupoDeNotas.php';
+require_once '/../daos_mysql/DaoUsuario.php';
+require_once '/../daos_mysql/DaoPeriodo.php';
+require_once '/../daos_mysql/DaoAsignatura.php';
+require_once '/../daos_mysql/DaoNota.php';
+require_once '/../daos_mysql/DaoGrupoDeNotas.php';
 
 class DaoFactory {
 	
