@@ -1,5 +1,6 @@
-Qualify
+Qualify PHP
 ==========
 
-Proyecto personal desarrollado en PHP. No utilizo ningun framework backend de desarrollo.
-El framework frontend utilizado es Bootstrap 2
+Proyecto personal desarrollado en PHP. No utilizo ningun framework backend.
+El framework frontend utilizado es [Bootstrap 2](http://getbootstrap.com/2.3.2/)
+
