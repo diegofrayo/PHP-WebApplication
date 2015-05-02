@@ -5,7 +5,8 @@ var tablaSeleccionada = "";
 var notaSeleccionada;
 
 //var rootSite = 'http://qualify.hol.es';
-var rootSite = '/Qualify';
+//var rootSite = '/Qualify';
+var rootSite = '';
 
 function Nota(id, nombre, valor) {
 	this.nombre = nombre;
