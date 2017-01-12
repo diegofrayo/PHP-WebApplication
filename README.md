@@ -1,4 +1,4 @@
-PHP-WebApplication
+webapp
 =======================
 
 Personal project developed in PHP
