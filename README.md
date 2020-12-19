@@ -1,6 +1,5 @@
-webapp
-=======================
+# webapp
 
 Personal project developed in PHP
 
-![preview](https://www.dropbox.com/s/vnsumpave88kin7/Notas.png?raw=1)
+![preview](https://raw.githubusercontent.com/diegofrayo/webapp/master/media/screenshot.png)
